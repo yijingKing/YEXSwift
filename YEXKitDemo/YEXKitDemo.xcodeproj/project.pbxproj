@@ -15,9 +15,13 @@
 		7FD9289828954A6D007EA3AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FD9289628954A6D007EA3AA /* LaunchScreen.storyboard */; };
 		7FD928A628954B64007EA3AA /* YEXImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD928A528954B64007EA3AA /* YEXImage.swift */; };
 		7FD928A928955D05007EA3AA /* YEXLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD928A828955D05007EA3AA /* YEXLabel.swift */; };
+		7FF37D02E1629A127B3FCFFE /* Pods_YEXKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D37229C7B2F7654CFEFD1B8 /* Pods_YEXKitDemo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		32252977CE581D75BF5CB885 /* Pods-YEXKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YEXKitDemo.debug.xcconfig"; path = "Target Support Files/Pods-YEXKitDemo/Pods-YEXKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		4329B881F55755592126B8F2 /* Pods-YEXKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YEXKitDemo.release.xcconfig"; path = "Target Support Files/Pods-YEXKitDemo/Pods-YEXKitDemo.release.xcconfig"; sourceTree = "<group>"; };
+		7D37229C7B2F7654CFEFD1B8 /* Pods_YEXKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YEXKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FD9288828954A6A007EA3AA /* YEXKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YEXKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FD9288B28954A6A007EA3AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FD9288D28954A6A007EA3AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -36,18 +40,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FF37D02E1629A127B3FCFFE /* Pods_YEXKitDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1557490C93DA05BED3733ACA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7D37229C7B2F7654CFEFD1B8 /* Pods_YEXKitDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5A1C63BF9011139A8FA528B4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				32252977CE581D75BF5CB885 /* Pods-YEXKitDemo.debug.xcconfig */,
+				4329B881F55755592126B8F2 /* Pods-YEXKitDemo.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		7FD9287F28954A6A007EA3AA = {
 			isa = PBXGroup;
 			children = (
 				7FD928A728954BDD007EA3AA /* YEXKit.podspec */,
 				7FD9288A28954A6A007EA3AA /* YEXKitDemo */,
 				7FD9288928954A6A007EA3AA /* Products */,
+				5A1C63BF9011139A8FA528B4 /* Pods */,
+				1557490C93DA05BED3733ACA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,9 +116,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7FD9289C28954A6D007EA3AA /* Build configuration list for PBXNativeTarget "YEXKitDemo" */;
 			buildPhases = (
+				10AFD2DD398D9563AC302257 /* [CP] Check Pods Manifest.lock */,
 				7FD9288428954A6A007EA3AA /* Sources */,
 				7FD9288528954A6A007EA3AA /* Frameworks */,
 				7FD9288628954A6A007EA3AA /* Resources */,
+				8C627CBFF60E5D5FD4483E0D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -149,6 +176,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		10AFD2DD398D9563AC302257 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YEXKitDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C627CBFF60E5D5FD4483E0D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YEXKitDemo/Pods-YEXKitDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-YEXKitDemo/Pods-YEXKitDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-YEXKitDemo/Pods-YEXKitDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7FD9288428954A6A007EA3AA /* Sources */ = {
@@ -301,6 +370,7 @@
 		};
 		7FD9289D28954A6D007EA3AA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32252977CE581D75BF5CB885 /* Pods-YEXKitDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -329,6 +399,7 @@
 		};
 		7FD9289E28954A6D007EA3AA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4329B881F55755592126B8F2 /* Pods-YEXKitDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
