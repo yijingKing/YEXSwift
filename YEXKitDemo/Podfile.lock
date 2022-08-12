@@ -1,26 +1,45 @@
 PODS:
+  - DZNEmptyDataSet (1.8.1)
+  - MJRefresh (3.7.5)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
   - RxRelay (6.5.0):
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
+  - SnapKit (5.6.0)
+  - YEXSwift (0.0.1):
+    - DZNEmptyDataSet
+    - MJRefresh
+    - RxCocoa
+    - RxSwift
+    - SnapKit
 
 DEPENDENCIES:
-  - RxCocoa
-  - RxSwift
+  - YEXSwift (from `./YEXSwift`)
 
 SPEC REPOS:
   trunk:
+    - DZNEmptyDataSet
+    - MJRefresh
     - RxCocoa
     - RxRelay
     - RxSwift
+    - SnapKit
+
+EXTERNAL SOURCES:
+  YEXSwift:
+    :path: "./YEXSwift"
 
 SPEC CHECKSUMS:
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  MJRefresh: fdf5e979eb406a0341468932d1dfc8b7f9fce961
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  YEXSwift: dfa6976770ce3a7cd9854716d6369fdea50e4caf
 
-PODFILE CHECKSUM: 8434686e6012faadf9616a3b9a6bedb49f6f4161
+PODFILE CHECKSUM: 54583846a119f391d942f90469a3abfcbef1a7fc
 
 COCOAPODS: 1.11.3

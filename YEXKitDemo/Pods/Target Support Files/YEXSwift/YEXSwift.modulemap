@@ -1,0 +1,6 @@
+framework module YEXSwift {
+  umbrella header "YEXSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+import YEXSwift
 
 class ViewController: UIViewController {
 
@@ -19,7 +20,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        _ image = UIImage(color: .red, size: .init(width: 100, height: 100))
+        let _ = UIImage()
         let imgaeView = UILabel(text: "sadasdasd", textColor: .red, font: nil)
         imgaeView.frame = CGRect.init(x: 0, y: 0, width: 100, height: 100)
         imgaeView.center = self.view.center
@@ -29,12 +30,11 @@ class ViewController: UIViewController {
         view.addSubview(backButton)
         self.backButton.isSelected = true
         
-        self.backButton.rx.isHidden.onnex
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print(self.backButton.isSelected)
-        self.backButton.isSelected = !self.backButton.isSelected
+        present(MallMessageViewController(), animated: true)
+        
     }
 }
 

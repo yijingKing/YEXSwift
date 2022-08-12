@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7FCEAEFA28A66E0700507A42 /* MallMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCEAEF128A66E0700507A42 /* MallMessageViewModel.swift */; };
+		7FCEAEFB28A66E0700507A42 /* MallMessageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCEAEF228A66E0700507A42 /* MallMessageAPI.swift */; };
+		7FCEAEFC28A66E0700507A42 /* MallMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCEAEF428A66E0700507A42 /* MallMessageViewController.swift */; };
+		7FCEAEFD28A66E0700507A42 /* MallMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCEAEF628A66E0700507A42 /* MallMessageModel.swift */; };
+		7FCEAEFF28A66E0700507A42 /* MallMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCEAEF928A66E0700507A42 /* MallMessageTableViewCell.swift */; };
 		7FD9288C28954A6A007EA3AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD9288B28954A6A007EA3AA /* AppDelegate.swift */; };
 		7FD9288E28954A6A007EA3AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD9288D28954A6A007EA3AA /* SceneDelegate.swift */; };
 		7FD9289028954A6A007EA3AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD9288F28954A6A007EA3AA /* ViewController.swift */; };
 		7FD9289328954A6A007EA3AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FD9289128954A6A007EA3AA /* Main.storyboard */; };
 		7FD9289528954A6D007EA3AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FD9289428954A6D007EA3AA /* Assets.xcassets */; };
 		7FD9289828954A6D007EA3AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FD9289628954A6D007EA3AA /* LaunchScreen.storyboard */; };
-		7FD928A628954B64007EA3AA /* YEXImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD928A528954B64007EA3AA /* YEXImage.swift */; };
-		7FD928A928955D05007EA3AA /* YEXLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD928A828955D05007EA3AA /* YEXLabel.swift */; };
 		7FF37D02E1629A127B3FCFFE /* Pods_YEXKitDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D37229C7B2F7654CFEFD1B8 /* Pods_YEXKitDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -22,6 +25,11 @@
 		32252977CE581D75BF5CB885 /* Pods-YEXKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YEXKitDemo.debug.xcconfig"; path = "Target Support Files/Pods-YEXKitDemo/Pods-YEXKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		4329B881F55755592126B8F2 /* Pods-YEXKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YEXKitDemo.release.xcconfig"; path = "Target Support Files/Pods-YEXKitDemo/Pods-YEXKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		7D37229C7B2F7654CFEFD1B8 /* Pods_YEXKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YEXKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FCEAEF128A66E0700507A42 /* MallMessageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MallMessageViewModel.swift; sourceTree = "<group>"; };
+		7FCEAEF228A66E0700507A42 /* MallMessageAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MallMessageAPI.swift; sourceTree = "<group>"; };
+		7FCEAEF428A66E0700507A42 /* MallMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MallMessageViewController.swift; sourceTree = "<group>"; };
+		7FCEAEF628A66E0700507A42 /* MallMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MallMessageModel.swift; sourceTree = "<group>"; };
+		7FCEAEF928A66E0700507A42 /* MallMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MallMessageTableViewCell.swift; sourceTree = "<group>"; };
 		7FD9288828954A6A007EA3AA /* YEXKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YEXKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FD9288B28954A6A007EA3AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FD9288D28954A6A007EA3AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,9 +38,6 @@
 		7FD9289428954A6D007EA3AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7FD9289728954A6D007EA3AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7FD9289928954A6D007EA3AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7FD928A528954B64007EA3AA /* YEXImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YEXImage.swift; sourceTree = "<group>"; };
-		7FD928A728954BDD007EA3AA /* YEXKit.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = YEXKit.podspec; path = ../YEXKit.podspec; sourceTree = "<group>"; };
-		7FD928A828955D05007EA3AA /* YEXLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YEXLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,10 +69,53 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		7FCEAEEF28A66E0700507A42 /* MallMessage */ = {
+			isa = PBXGroup;
+			children = (
+				7FCEAEF028A66E0700507A42 /* ViewModel */,
+				7FCEAEF328A66E0700507A42 /* Controller */,
+				7FCEAEF528A66E0700507A42 /* Model */,
+				7FCEAEF728A66E0700507A42 /* View */,
+			);
+			path = MallMessage;
+			sourceTree = "<group>";
+		};
+		7FCEAEF028A66E0700507A42 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7FCEAEF128A66E0700507A42 /* MallMessageViewModel.swift */,
+				7FCEAEF228A66E0700507A42 /* MallMessageAPI.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7FCEAEF328A66E0700507A42 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7FCEAEF428A66E0700507A42 /* MallMessageViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7FCEAEF528A66E0700507A42 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7FCEAEF628A66E0700507A42 /* MallMessageModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7FCEAEF728A66E0700507A42 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7FCEAEF928A66E0700507A42 /* MallMessageTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		7FD9287F28954A6A007EA3AA = {
 			isa = PBXGroup;
 			children = (
-				7FD928A728954BDD007EA3AA /* YEXKit.podspec */,
 				7FD9288A28954A6A007EA3AA /* YEXKitDemo */,
 				7FD9288928954A6A007EA3AA /* Products */,
 				5A1C63BF9011139A8FA528B4 /* Pods */,
@@ -86,7 +134,7 @@
 		7FD9288A28954A6A007EA3AA /* YEXKitDemo */ = {
 			isa = PBXGroup;
 			children = (
-				7FD928A228954AC8007EA3AA /* YEXKit */,
+				7FCEAEEF28A66E0700507A42 /* MallMessage */,
 				7FD9288B28954A6A007EA3AA /* AppDelegate.swift */,
 				7FD9288D28954A6A007EA3AA /* SceneDelegate.swift */,
 				7FD9288F28954A6A007EA3AA /* ViewController.swift */,
@@ -96,16 +144,6 @@
 				7FD9289928954A6D007EA3AA /* Info.plist */,
 			);
 			path = YEXKitDemo;
-			sourceTree = "<group>";
-		};
-		7FD928A228954AC8007EA3AA /* YEXKit */ = {
-			isa = PBXGroup;
-			children = (
-				7FD928A528954B64007EA3AA /* YEXImage.swift */,
-				7FD928A828955D05007EA3AA /* YEXLabel.swift */,
-			);
-			name = YEXKit;
-			path = ../../YEXKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,10 +261,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FCEAEFD28A66E0700507A42 /* MallMessageModel.swift in Sources */,
+				7FCEAEFA28A66E0700507A42 /* MallMessageViewModel.swift in Sources */,
 				7FD9289028954A6A007EA3AA /* ViewController.swift in Sources */,
-				7FD928A928955D05007EA3AA /* YEXLabel.swift in Sources */,
+				7FCEAEFB28A66E0700507A42 /* MallMessageAPI.swift in Sources */,
 				7FD9288C28954A6A007EA3AA /* AppDelegate.swift in Sources */,
-				7FD928A628954B64007EA3AA /* YEXImage.swift in Sources */,
+				7FCEAEFC28A66E0700507A42 /* MallMessageViewController.swift in Sources */,
+				7FCEAEFF28A66E0700507A42 /* MallMessageTableViewCell.swift in Sources */,
 				7FD9288E28954A6A007EA3AA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,7 +424,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -413,7 +454,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
