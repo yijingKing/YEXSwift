@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        var image = UIImage(color: .red, size: .init(width: 100, height: 100))
+        _ image = UIImage(color: .red, size: .init(width: 100, height: 100))
         let imgaeView = UILabel(text: "sadasdasd", textColor: .red, font: nil)
         imgaeView.frame = CGRect.init(x: 0, y: 0, width: 100, height: 100)
         imgaeView.center = self.view.center
@@ -29,23 +29,19 @@ class ViewController: UIViewController {
         view.addSubview(backButton)
         self.backButton.isSelected = true
         
-        
-        
-        
-        var iss = false
-        
-//        self.backButton.rx.tap.asObservable().map { _ -> Bool in
-//            return self.backButton.isSelected
-//        }.subscribe(onNext: {
-//
-//        }).disposed(by: disposeBag)
-        
+        self.backButton.rx.isHidden.onnex
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print(self.backButton.isSelected)
         self.backButton.isSelected = !self.backButton.isSelected
     }
-
 }
 
+extension Reactive where Base: UIButton {
+    var isHidden: Binder<Bool> {
+        return Binder(self.base) { button, hidden in
+            button.isHidden = hidden
+        }
+    }
+}
