@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   
   #s.resource_bundles = { 'YEXResources' => 'YEXSwift/Resource/*' }
   
-  s.source_files = 'YEXKit/**/*.swift'
+  s.source_files = 'YEXSwift/**/*.swift'
 
 s.requires_arc = true
 end
