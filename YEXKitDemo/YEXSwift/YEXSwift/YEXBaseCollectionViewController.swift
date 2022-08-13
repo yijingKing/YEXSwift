@@ -162,7 +162,6 @@ public extension YEXBaseCollectionViewController {
     func reloadDataOrMore(now: Int, total: Int) {
         self.page = now
         self.totalPage = total
-        self.collectionView.isLoading = false
         reloadDataAndEndRefreshing()
     }
     
@@ -171,6 +170,7 @@ public extension YEXBaseCollectionViewController {
         reloadDataOrMore(now: 0, total: 0)
     }
     private func reloadDataAndEndRefreshing() {
+        self.collectionView.isLoading = false
         self.collectionView.reloadEmptyDataSet()
         self.collectionView.mj_header?.endRefreshing()
         self.collectionView.reloadData()

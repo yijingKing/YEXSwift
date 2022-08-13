@@ -48,10 +48,10 @@ open class YEXBaseCollectionView: UICollectionView {
         }
     }
     ///图文间距
-    var empty_spaceHeight             : CGFloat   = YEXRatio(10)
+    var empty_spaceHeight       : CGFloat   = YEXRatio(10)
     ///偏移
-    var empty_verticalOffset          : CGFloat   = 0
-    var empty_backgroundColor         : UIColor   = .black
+    var empty_verticalOffset    : CGFloat   = 0
+    var empty_backgroundColor   : UIColor   = .black
     var isscrollEnabled         : Bool?
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
@@ -73,7 +73,6 @@ open class YEXBaseCollectionView: UICollectionView {
         if let enabled = isscrollEnabled {
             isScrollEnabled = enabled
         }
-        endRefreshing()
     }
     open override func reloadEmptyDataSet() {
         super.reloadEmptyDataSet()
