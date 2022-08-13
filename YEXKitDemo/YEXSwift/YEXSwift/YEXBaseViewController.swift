@@ -46,8 +46,6 @@ open class YEXBaseViewController: UIViewController {
         
         extendedLayoutIncludesOpaqueBars = true
         
-//        openPopGecognizer = true
-        
         view.backgroundColor = UIColor.white
         configureInterface()
         
