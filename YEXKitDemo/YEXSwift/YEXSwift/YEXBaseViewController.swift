@@ -47,7 +47,6 @@ open class YEXBaseViewController: UIViewController {
         extendedLayoutIncludesOpaqueBars = true
         
         view.backgroundColor = UIColor.white
-        configureInterface()
         
         
 #if DEBUG
@@ -59,6 +58,7 @@ open class YEXBaseViewController: UIViewController {
     @objc func injectionNotifications () {
         viewDidLoad()
     }
+    
     @objc func injected() {
 //        viewDidLoad()
     }
@@ -66,8 +66,6 @@ open class YEXBaseViewController: UIViewController {
     open func willMode() { }
     ///侧滑结束
     open func didMove() { }
-    ///界面布局
-    open func configureInterface() { }
     
 }
 
