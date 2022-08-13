@@ -18,6 +18,9 @@ Pod::Spec.new do |s|
   s.dependency 'MJRefresh'
   s.dependency 'DZNEmptyDataSet'
   s.dependency 'SnapKit'
+  s.dependency 'RxSwift'
+  
+  
   #s.resource_bundles = { 'YEXResources' => 'YEXSwift/Resource/*' }
   
   s.source_files = 'YEXSwift/**/*.swift'
