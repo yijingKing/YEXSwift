@@ -27,6 +27,18 @@ open class YEXBaseViewController: UIViewController {
     
     public var mainTableView: YEXBaseTableView?
     public var mainCollection: YEXBaseCollectionView?
+    
+    
+    open init() {
+        super.init(nibName: nil, bundle: nil)
+        self.modalTransitionStyle = .crossDissolve
+        self.modalPresentationStyle = .overFullScreen
+    }
+    
+    open required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: --- viewDidLoad
     open override func viewDidLoad() {
         super.viewDidLoad()

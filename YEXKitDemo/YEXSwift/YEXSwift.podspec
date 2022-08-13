@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'YEXSwift'
-  s.version          = '0.0.1'
+  s.version          = '0.0.3'
   s.summary          = 'YEXKit 扩展,功能集合'
   s.description      = <<-DESC
                             ...
@@ -17,9 +17,10 @@ Pod::Spec.new do |s|
   s.frameworks       = 'UIKit','Foundation','Photos'
   s.dependency 'MJRefresh'
   s.dependency 'DZNEmptyDataSet'
-  s.dependency 'RxSwift'
-  s.dependency 'RxCocoa'
   s.dependency 'SnapKit'
+  s.dependency 'RxSwift'
+  
+  
   #s.resource_bundles = { 'YEXResources' => 'YEXSwift/Resource/*' }
   
   s.source_files = 'YEXSwift/**/*.swift'
