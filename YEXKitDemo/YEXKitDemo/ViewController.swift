@@ -11,11 +11,22 @@ import RxCocoa
 
 import YEXSwift
 
-class ViewController: UIViewController {
+class ViewController: YEXBaseViewController {
 
     var backButton: UIButton!
     
     var disposeBag = DisposeBag()
+    
+    
+    override init () {
+        super.init()
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

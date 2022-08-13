@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.dependency 'DZNEmptyDataSet'
   s.dependency 'SnapKit'
   s.dependency 'RxSwift'
-  
+  s.dependency 'RxCocoa'
   
   #s.resource_bundles = { 'YEXResources' => 'YEXSwift/Resource/*' }
   

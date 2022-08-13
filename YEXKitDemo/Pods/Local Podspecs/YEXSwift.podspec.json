@@ -1,6 +1,6 @@
 {
   "name": "YEXSwift",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "summary": "YEXKit 扩展,功能集合",
   "description": "...",
   "homepage": "https://github.com/yijingKing/YEXSwift.git",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/yijingKing/YEXSwift.git",
-    "tag": "0.0.1"
+    "tag": "0.0.3"
   },
   "swift_versions": "5.0",
   "platforms": {
@@ -28,13 +28,13 @@
     "DZNEmptyDataSet": [
 
     ],
+    "SnapKit": [
+
+    ],
     "RxSwift": [
 
     ],
     "RxCocoa": [
-
-    ],
-    "SnapKit": [
 
     ]
   },
