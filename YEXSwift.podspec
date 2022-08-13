@@ -15,8 +15,8 @@ Pod::Spec.new do |s|
   s.swift_versions   = '5.0'
   s.platform         = :ios, "11.0"
   s.frameworks       = 'UIKit','Foundation','Photos'
-  #s.dependency 'MJRefresh'
-  #s.dependency 'DZNEmptyDataSet'
+  s.dependency 'MJRefresh'
+  s.dependency 'DZNEmptyDataSet'
   
   #s.resource_bundles = { 'YEXResources' => 'YEXSwift/Resource/*' }
   
