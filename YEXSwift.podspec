@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.frameworks       = 'UIKit','Foundation','Photos'
   s.dependency 'MJRefresh'
   s.dependency 'DZNEmptyDataSet'
-  
+  s.dependency 'SnapKit'
   #s.resource_bundles = { 'YEXResources' => 'YEXSwift/Resource/*' }
   
   s.source_files = 'YEXSwift/**/*.swift'
