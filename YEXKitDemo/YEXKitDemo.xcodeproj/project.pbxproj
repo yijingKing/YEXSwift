@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F9996D928AA1992005A6D0B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9996D828AA1992005A6D0B /* SceneDelegate.swift */; };
 		7FCEAEFA28A66E0700507A42 /* MallMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCEAEF128A66E0700507A42 /* MallMessageViewModel.swift */; };
 		7FCEAEFB28A66E0700507A42 /* MallMessageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCEAEF228A66E0700507A42 /* MallMessageAPI.swift */; };
 		7FCEAEFC28A66E0700507A42 /* MallMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCEAEF428A66E0700507A42 /* MallMessageViewController.swift */; };
 		7FCEAEFD28A66E0700507A42 /* MallMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCEAEF628A66E0700507A42 /* MallMessageModel.swift */; };
 		7FCEAEFF28A66E0700507A42 /* MallMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCEAEF928A66E0700507A42 /* MallMessageTableViewCell.swift */; };
 		7FD9288C28954A6A007EA3AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD9288B28954A6A007EA3AA /* AppDelegate.swift */; };
-		7FD9288E28954A6A007EA3AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD9288D28954A6A007EA3AA /* SceneDelegate.swift */; };
-		7FD9289028954A6A007EA3AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD9288F28954A6A007EA3AA /* ViewController.swift */; };
+		7FD9289028954A6A007EA3AA /* YEXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD9288F28954A6A007EA3AA /* YEXViewController.swift */; };
 		7FD9289328954A6A007EA3AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FD9289128954A6A007EA3AA /* Main.storyboard */; };
 		7FD9289528954A6D007EA3AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FD9289428954A6D007EA3AA /* Assets.xcassets */; };
 		7FD9289828954A6D007EA3AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FD9289628954A6D007EA3AA /* LaunchScreen.storyboard */; };
@@ -25,6 +25,7 @@
 		32252977CE581D75BF5CB885 /* Pods-YEXKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YEXKitDemo.debug.xcconfig"; path = "Target Support Files/Pods-YEXKitDemo/Pods-YEXKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		4329B881F55755592126B8F2 /* Pods-YEXKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YEXKitDemo.release.xcconfig"; path = "Target Support Files/Pods-YEXKitDemo/Pods-YEXKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		7D37229C7B2F7654CFEFD1B8 /* Pods_YEXKitDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YEXKitDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F9996D828AA1992005A6D0B /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7FCEAEF128A66E0700507A42 /* MallMessageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MallMessageViewModel.swift; sourceTree = "<group>"; };
 		7FCEAEF228A66E0700507A42 /* MallMessageAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MallMessageAPI.swift; sourceTree = "<group>"; };
 		7FCEAEF428A66E0700507A42 /* MallMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MallMessageViewController.swift; sourceTree = "<group>"; };
@@ -32,8 +33,7 @@
 		7FCEAEF928A66E0700507A42 /* MallMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MallMessageTableViewCell.swift; sourceTree = "<group>"; };
 		7FD9288828954A6A007EA3AA /* YEXKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YEXKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FD9288B28954A6A007EA3AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7FD9288D28954A6A007EA3AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7FD9288F28954A6A007EA3AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7FD9288F28954A6A007EA3AA /* YEXViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YEXViewController.swift; sourceTree = "<group>"; };
 		7FD9289228954A6A007EA3AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7FD9289428954A6D007EA3AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7FD9289728954A6D007EA3AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -136,8 +136,8 @@
 			children = (
 				7FCEAEEF28A66E0700507A42 /* MallMessage */,
 				7FD9288B28954A6A007EA3AA /* AppDelegate.swift */,
-				7FD9288D28954A6A007EA3AA /* SceneDelegate.swift */,
-				7FD9288F28954A6A007EA3AA /* ViewController.swift */,
+				7FD9288F28954A6A007EA3AA /* YEXViewController.swift */,
+				7F9996D828AA1992005A6D0B /* SceneDelegate.swift */,
 				7FD9289128954A6A007EA3AA /* Main.storyboard */,
 				7FD9289428954A6D007EA3AA /* Assets.xcassets */,
 				7FD9289628954A6D007EA3AA /* LaunchScreen.storyboard */,
@@ -263,12 +263,12 @@
 			files = (
 				7FCEAEFD28A66E0700507A42 /* MallMessageModel.swift in Sources */,
 				7FCEAEFA28A66E0700507A42 /* MallMessageViewModel.swift in Sources */,
-				7FD9289028954A6A007EA3AA /* ViewController.swift in Sources */,
+				7FD9289028954A6A007EA3AA /* YEXViewController.swift in Sources */,
 				7FCEAEFB28A66E0700507A42 /* MallMessageAPI.swift in Sources */,
 				7FD9288C28954A6A007EA3AA /* AppDelegate.swift in Sources */,
 				7FCEAEFC28A66E0700507A42 /* MallMessageViewController.swift in Sources */,
 				7FCEAEFF28A66E0700507A42 /* MallMessageTableViewCell.swift in Sources */,
-				7FD9288E28954A6A007EA3AA /* SceneDelegate.swift in Sources */,
+				7F9996D928AA1992005A6D0B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +422,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -452,6 +453,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

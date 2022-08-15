@@ -125,10 +125,10 @@ public extension YEXProtocol where T == String {
     }
     
     /// UUID
-    static func UUID() -> String? {
+    var UUID: String {
         let uuid = CFUUIDCreate(kCFAllocatorDefault)
         let cfString = CFUUIDCreateString(kCFAllocatorDefault, uuid)
-        return cfString as String?
+        return cfString as? String ?? ""
     }
     /// 复制
     func copy() {
@@ -356,7 +356,7 @@ public extension YEXProtocol where T == String {
     //MARK: --- 数据类型
     /// Int
     func toInt() -> Int? {
-        guard !obj.isEmpty else { return nil }
+        guard obj.yex.isNotEmpty else { return nil }
         
         return NSDecimalNumber.init(string: String(format: "%@", obj)).intValue
     }

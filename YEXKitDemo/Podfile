@@ -6,5 +6,4 @@ target 'YEXKitDemo' do
   use_frameworks!
 
   pod 'YEXSwift', :path => './YEXSwift'
-  
 end

@@ -158,19 +158,19 @@ public extension YEXBaseCollectionViewController {
         collectionView.mj_footer?.endRefreshing()
     }
     
-    ///刷新并判断是否是最后一页,是最后一页显示最后一页的数据(当前页   总页数)
+    ///刷新并判断是否是最后一页,是最后一页显示无更多数据(当前页   总页数)
     func reloadDataOrMore(now: Int, total: Int) {
         self.page = now
         self.totalPage = total
-        self.collectionView.isLoading = false
         reloadDataAndEndRefreshing()
     }
     
-    ///刷新并判断是否是最后一页,是最后一页显示最后一页的数据(当前页   总页数)
+    ///刷新并显示无更多数据(当前页   总页数)
     func reloadDataOrNotMore() {
         reloadDataOrMore(now: 0, total: 0)
     }
     private func reloadDataAndEndRefreshing() {
+        self.collectionView.isLoading = false
         self.collectionView.reloadEmptyDataSet()
         self.collectionView.mj_header?.endRefreshing()
         self.collectionView.reloadData()

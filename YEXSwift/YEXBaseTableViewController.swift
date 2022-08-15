@@ -149,17 +149,16 @@ public extension YEXBaseTableViewController {
     ///下拉
     private func refreshHeaderAction() {
         self.tableView.mj_footer?.isHidden = false
-        self.tableView.isLoading = true
         refreshData()
     }
     ///上拉
     private func refreshFootAction() {
         self.tableView.mj_footer?.isHidden = false
-        self.tableView.isLoading = true
         getMoreData()
     }
     
     private func reloadDataAndEndRefreshing() {
+        self.tableView.isLoading = true
         self.tableView.reloadEmptyDataSet()
         self.tableView.mj_header?.endRefreshing()
         self.tableView.reloadData()

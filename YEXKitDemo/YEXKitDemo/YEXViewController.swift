@@ -11,7 +11,7 @@ import RxCocoa
 
 import YEXSwift
 
-class ViewController: YEXBaseViewController {
+class YEXViewController: YEXBaseViewController {
 
     var backButton: UIButton!
     
@@ -40,6 +40,8 @@ class ViewController: YEXBaseViewController {
         
         view.addSubview(backButton)
         self.backButton.isSelected = true
+        
+        
         
     }
     

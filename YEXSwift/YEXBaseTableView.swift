@@ -13,7 +13,7 @@ import DZNEmptyDataSet
 
 open class YEXBaseTableView: UITableView {
     public var isLoading               : Bool = true
-    public var isscrollEnabled         : Bool = true
+    public var isscrollEnabled         : Bool?
     public var empty_title             : String?   = "暂无数据"
     public var empty_titleFont         : UIFont    = YEXFont(15)
     public var empty_titleColor        : UIColor   = .black
@@ -80,8 +80,9 @@ open class YEXBaseTableView: UITableView {
     }
     open override func reloadData() {
         super.reloadData()
-        isScrollEnabled = isscrollEnabled
-        endRefreshing()
+        if let isscrollEnabled = isscrollEnabled {
+            isScrollEnabled = isscrollEnabled
+        }
     }
     public func empty_button(title:String , _ bl: (() -> Void)?) {
         self.isLoading = false
