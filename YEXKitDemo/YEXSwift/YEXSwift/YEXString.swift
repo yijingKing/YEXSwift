@@ -64,8 +64,8 @@ public extension YEXProtocol where T == String {
     ///为空
     var isEmpty: Bool {
         get {
-            if obj.count > 0 {
-                return false
+            if obj.count == 0 || obj == "null" || obj == " " {
+                return true
             }
             return true
         }
