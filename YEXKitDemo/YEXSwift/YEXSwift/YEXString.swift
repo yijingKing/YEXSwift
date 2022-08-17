@@ -1599,3 +1599,26 @@ public extension YEXProtocol where T ==  String {
         return returnStr.replacingOccurrences(of: "\\r\\n", with: "\n")
     }
 }
+
+// MARK: - 效果
+public extension YEXProtocol where T == String {
+    /// 给字体添加描边效果 : strokeWidth为正数为空心文字描边 strokeWidth为负数为实心文字描边
+    func setOutline(font: UIFont, alignment: NSTextAlignment, textColor: UIColor, strokeWidth: CGFloat, widthColor: UIColor) -> NSAttributedString {
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = alignment
+        let dic: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.font: font,
+            NSAttributedString.Key.paragraphStyle: paragraph,
+            NSAttributedString.Key.foregroundColor: textColor,
+            NSAttributedString.Key.strokeWidth: strokeWidth,
+            NSAttributedString.Key.strokeColor: widthColor,
+            NSAttributedString.Key.kern: 1
+        ]
+        
+        guard obj.yex.isNotEmpty else {
+            return NSAttributedString()
+        }
+        
+        return NSMutableAttributedString(string: self.obj, attributes: dic)
+    }
+}

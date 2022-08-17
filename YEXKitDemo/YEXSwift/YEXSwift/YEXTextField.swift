@@ -108,7 +108,7 @@ public extension YEXProtocol where T: UITextField {
         button.title = title
         button.color = color
         button.font = font
-        button.yex.addTap(block)
+        button.yex.addTarget(block)
         let rightView = UIView(frame: CGRect(x: 0, y: 0, width: titleWidth, height: 30.auto()))
         button.frame = CGRect(x: 0, y: 0, width: titleWidth, height: 30.auto())
         rightView.addSubview(button)

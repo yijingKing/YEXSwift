@@ -256,6 +256,7 @@ public extension YEXProtocol where T == NSMutableAttributedString {
     func setSpecificTextBliqueness(_ text: String, inclination: Float = 0) -> NSMutableAttributedString {
         return setSpecificTextMoreAttributes(text, attributes: [NSAttributedString.Key.obliqueness : inclination])
     }
+    
 }
 
 // MARK:- Private Func

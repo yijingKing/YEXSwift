@@ -133,7 +133,7 @@ public extension UIButton {
 public extension YEXProtocol where T: UIButton {
     ///点击
     @discardableResult
-    func addTap(_ block:((UIButton)->())?) -> YEXProtocol {
+    func addTarget(_ block:((UIButton)->())?) -> YEXProtocol {
         obj.addTargetAction(block: block, for: .touchUpInside)
         return self
     }
@@ -141,6 +141,18 @@ public extension YEXProtocol where T: UIButton {
     @discardableResult
     func addTarget(_ taget: UIControl.Event = .touchUpInside,_ block:((UIButton)->())?) -> YEXProtocol {
         obj.addTargetAction(block: block, for: taget)
+        return self
+    }
+    ///点击
+    @discardableResult
+    func addTarget(delay: TimeInterval = 0, _ block:((UIButton)->())?) -> YEXProtocol {
+        
+        obj.addTargetAction(block: { btn in
+            
+            
+            
+            
+        }, for: .touchUpInside)
         return self
     }
 }
@@ -214,17 +226,6 @@ public extension YEXProtocol where T: UIButton {
 public extension UIButton {
     struct YEXRuntimeKey {
         static let YEXButtonClick = UnsafeRawPointer.init(bitPattern: "YEXButtonClick".hashValue)
-        static let YEXButtonAction = UnsafeRawPointer.init(bitPattern: "YEXButtonAction".hashValue)
-    }
-    ///点击
-    var clickAction: ((UIButton)->())? {
-        set {
-            objc_setAssociatedObject(self, YEXRuntimeKey.YEXButtonClick!, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-            addTarget(self, action: #selector(buttonClickAction(_:)), for: .touchUpInside)
-        }
-        get {
-            return objc_getAssociatedObject(self, YEXRuntimeKey.YEXButtonClick!) as? (UIButton) -> ()
-        }
     }
     ///点击
     var action: ((UIButton)->())? {
@@ -241,9 +242,6 @@ public extension UIButton {
     }
     @objc private func buttonAction(_ button: UIButton) {
         action?(button)
-    }
-    @objc private func buttonClickAction(_ button: UIButton) {
-        clickAction?(button)
     }
 }
 

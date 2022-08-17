@@ -32,8 +32,8 @@ class YEXViewController: YEXBaseViewController {
         // Do any additional setup after loading the view.
         
         let _ = UIImage()
-        let imgaeView = UILabel(text: "sadasdasd", textColor: .red, font: nil)
-        imgaeView.frame = CGRect.init(x: 0, y: 0, width: 100, height: 100)
+        let imgaeView = UILabel(text: "", textColor: .red, font: nil)
+        imgaeView.frame = CGRect.init(x: 0, y: 0, width: 300, height: 100)
         imgaeView.center = self.view.center
         view.addSubview(imgaeView)
         backButton = UIButton()
@@ -41,14 +41,38 @@ class YEXViewController: YEXBaseViewController {
         view.addSubview(backButton)
         self.backButton.isSelected = true
         
-        
-        
+        imgaeView.attributedText = "思远沙雕".yex.setOutline(font: .systemFont(ofSize: 25), alignment: .center, textColor: .blue, strokeWidth: -4, widthColor: .red)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        present(MallMessageViewController(), animated: true)
+//        present(MallMessageViewController(), animated: true)
         
     }
+    
+    /// 给字体添加描边效果 : strokeWidth为正数为空心文字描边 strokeWidth为负数为实心文字描边
+    private func drawOutlineAttributedString (
+        string: String,
+        fontSize: CGFloat,
+        alignment: NSTextAlignment,
+        textColor: UIColor,
+        strokeWidth: CGFloat,
+        widthColor: UIColor) -> NSAttributedString {
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = alignment
+        paragraph.lineHeightMultiple = 0.93
+        let dic: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize),
+            NSAttributedString.Key.paragraphStyle: paragraph,
+            NSAttributedString.Key.foregroundColor: textColor,
+            NSAttributedString.Key.strokeWidth: strokeWidth,
+            NSAttributedString.Key.strokeColor: widthColor,
+            NSAttributedString.Key.kern: 1
+        ]
+        var attributedText: NSMutableAttributedString!
+        attributedText = NSMutableAttributedString(string: string, attributes: dic)
+        return attributedText
+    }
+    
 }
 
 extension Reactive where Base: UIButton {
