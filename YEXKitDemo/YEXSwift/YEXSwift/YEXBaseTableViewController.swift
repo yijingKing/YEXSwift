@@ -59,8 +59,7 @@ open class YEXBaseTableViewController: YEXBaseViewController,BaseViewProtocol {
             $0.backgroundColor = UIColor.clear
         }
         tableView.keyboardDismissMode = .onDrag
-        tableView.empty_title = "暂无数据"
-        tableView.empty_image = UIImage(named: "img_empty")
+        tableView.empty_title = "这里空空如也~"
         return tableView
     }()
     
@@ -80,7 +79,7 @@ open class YEXBaseTableViewController: YEXBaseViewController,BaseViewProtocol {
     }
     
     public func normalEmpty() {
-        tableView.empty_title = "暂无数据"
+        tableView.empty_title = "这里空空如也~"
         tableView.empty_btn_title = nil
     }
     

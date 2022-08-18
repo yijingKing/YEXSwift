@@ -11,6 +11,7 @@ import Foundation
 import UIKit
 
 public extension YEXProtocol where T == NSMutableAttributedString {
+    // MARK: - 加粗
     /// 加粗
     func bold(_ font: CGFloat = UIFont.systemFontSize) -> NSMutableAttributedString {
         guard let copy = obj.mutableCopy() as? NSMutableAttributedString else { return obj }
@@ -18,6 +19,7 @@ public extension YEXProtocol where T == NSMutableAttributedString {
         copy.addAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: font)], range: range)
         return copy
     }
+    // MARK: - 下划线
     /// 下划线
     func underline() -> NSMutableAttributedString {
         guard let copy = obj.mutableCopy() as? NSMutableAttributedString else { return obj }
@@ -25,6 +27,7 @@ public extension YEXProtocol where T == NSMutableAttributedString {
         copy.addAttributes([NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range)
         return copy
     }
+    // MARK: - 删除线
     /// 删除线
     func strikethrough() -> NSMutableAttributedString {
         guard let copy = obj.mutableCopy() as? NSMutableAttributedString else { return obj }
@@ -34,6 +37,7 @@ public extension YEXProtocol where T == NSMutableAttributedString {
         copy.addAttributes(attributes, range: range)
         return copy
     }
+    // MARK: - 前景色
     /// 前景色
     func color(_ color: UIColor) -> NSMutableAttributedString {
         guard let copy = obj.mutableCopy() as? NSMutableAttributedString else { return obj }
@@ -43,7 +47,7 @@ public extension YEXProtocol where T == NSMutableAttributedString {
     }
 }
 
-// MARK:- 一、文本设置的基本扩展
+// MARK:- 文本设置的基本扩展
 public extension YEXProtocol where T == NSMutableAttributedString {
 
     // MARK: 设置特定区域的字体大小
@@ -261,6 +265,7 @@ public extension YEXProtocol where T == NSMutableAttributedString {
 
 // MARK:- Private Func
 public extension YEXProtocol where T == NSMutableAttributedString {
+    // MARK: - 获取对应字符串的range数组
     /// 获取对应字符串的range数组
     /// - Parameter textArray: 字符串数组
     /// - Returns: range数组

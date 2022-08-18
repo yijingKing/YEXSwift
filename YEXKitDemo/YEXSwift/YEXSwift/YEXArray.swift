@@ -10,7 +10,7 @@ GitHub:        https://github.com/yijingKing
 import Foundation
 
 public extension YEXProtocol where T == Array<Any> {
-    
+    // MARK: - 转data
     /// 转data
     func toData(_ options: JSONSerialization.WritingOptions = []) -> Data? {
         guard JSONSerialization.isValidJSONObject(obj) else {
@@ -23,7 +23,7 @@ public extension YEXProtocol where T == Array<Any> {
         }
         return data
     }
-    
+    // MARK: - 转json
     ///转json
     func toJSONString(_ options: JSONSerialization.WritingOptions = []) -> String? {
         guard JSONSerialization.isValidJSONObject(obj) else {
@@ -41,24 +41,15 @@ public extension YEXProtocol where T == Array<Any> {
 }
 
 public extension YEXProtocol where T == Array<String> {
+    // MARK: - 转字符串
     ///转字符串
     func toString(separator: String = "") -> String {
         return obj.toStrinig(separator: separator)
     }
 }
 
-public extension Array {
-    mutating func append(_ elements: [Element]) {
-        for element in elements {
-            append(element)
-        }
-    }
-    func indexValue(safe index: Index) -> Element? {
-        return indices.contains(index) ? self[index] : nil
-    }
-}
-
 public extension Array where Self.Element == String {
+    // MARK: - 转字符串
     ///转字符串
     func toStrinig(separator: String = "") -> String {
         return joined(separator: separator)
@@ -113,6 +104,7 @@ public extension Array where Element == UInt8 {
             append(b)
         }
     }
+    // MARK: - 转十六进制
     ///转十六进制
     func toHexString() -> String {
         return `lazy`.reduce("") {
@@ -126,6 +118,7 @@ public extension Array where Element == UInt8 {
 }
 //MARK: --- 功能
 public extension Array where Element : Equatable {
+    // MARK: - 去掉重复的元素
     ///去掉重复的元素
     func removedDuplicates() -> [Element] {
         var uniqueValues: [Element] = self
@@ -136,13 +129,14 @@ public extension Array where Element : Equatable {
         }
         return uniqueValues
     }
-    
+    // MARK: - 移除对象
     ///移除对象
     mutating func remove(_ object: Element) {
         if let index = firstIndex(of: object) {
              remove(at: index)
         }
      }
+    // MARK: - 下标获取
     ///下标获取
     subscript(input: [Int]) -> ArraySlice<Element> {
         get {
@@ -158,6 +152,7 @@ public extension Array where Element : Equatable {
             }
         }
     }
+    // MARK: - 多下标获取
     ///多下标获取
     func indexs(_ input: [Int]) -> Array {
         var result = Array()
@@ -166,6 +161,14 @@ public extension Array where Element : Equatable {
         }
         return result
     }
-    
-    
+    // MARK: - 添加元素 (数组)
+    ///添加元素
+    mutating func appends(_ elements: [Element]) {
+        append(contentsOf: elements)
+    }
+    // MARK: - ///安全下标
+    ///安全下标
+    func indexValue(safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
 }

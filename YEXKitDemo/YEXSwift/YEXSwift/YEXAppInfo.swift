@@ -10,7 +10,7 @@ GitHub:        https://github.com/yijingKing
 import Foundation
 
 ///APP 信息
-public class YEXAppInfo: NSObject {
+public struct YEXAppInfo {
     //MARK: --- App 名称
     ///App 名称
     static var displayName: String {

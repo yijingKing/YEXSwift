@@ -43,8 +43,7 @@ open class YEXBaseCollectionViewController: YEXBaseViewController {
         let collectionView = YEXBaseCollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.empty_title = "暂无数据"
-        collectionView.empty_image = UIImage(named: "img_empty")
+        collectionView.empty_title = "这里空空如也~"
         collectionView.backgroundColor = .clear
         collectionView.empty_backgroundColor = .clear
         collectionView.keyboardDismissMode = .onDrag
@@ -100,7 +99,7 @@ public extension YEXBaseCollectionViewController {
 // MARK: - 函数事件
 public extension YEXBaseCollectionViewController {
     private func normalEmpty() {
-        collectionView.empty_title = "暂无数据"
+        collectionView.empty_title = "这里空空如也~"
         collectionView.empty_btn_title = nil
     }
     

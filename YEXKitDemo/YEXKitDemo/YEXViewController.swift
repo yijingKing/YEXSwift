@@ -27,6 +27,9 @@ class YEXViewController: YEXBaseViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    var isSelect = false
+    var dataList = BehaviorSubject(value: false)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -41,37 +44,23 @@ class YEXViewController: YEXBaseViewController {
         view.addSubview(backButton)
         self.backButton.isSelected = true
         
-        imgaeView.attributedText = "思远沙雕".yex.setOutline(font: .systemFont(ofSize: 25), alignment: .center, textColor: .blue, strokeWidth: -4, widthColor: .red)
+        imgaeView.attributedText = "".yex.setOutline(font: .systemFont(ofSize: 25), alignment: .center, textColor: .blue, strokeWidth: -4, widthColor: .red)
+        
+        dataList.asObserver().bind(with: self.backButton) { btn, bool in
+            btn.isSelected = bool
+            print(btn.isSelected)
+            print(bool)
+            
+        }.disposed(by: disposeBag)
+        
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        present(MallMessageViewController(), animated: true)
-        
+        dataList.onNext(!self.backButton.isSelected)
     }
     
-    /// 给字体添加描边效果 : strokeWidth为正数为空心文字描边 strokeWidth为负数为实心文字描边
-    private func drawOutlineAttributedString (
-        string: String,
-        fontSize: CGFloat,
-        alignment: NSTextAlignment,
-        textColor: UIColor,
-        strokeWidth: CGFloat,
-        widthColor: UIColor) -> NSAttributedString {
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.alignment = alignment
-        paragraph.lineHeightMultiple = 0.93
-        let dic: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize),
-            NSAttributedString.Key.paragraphStyle: paragraph,
-            NSAttributedString.Key.foregroundColor: textColor,
-            NSAttributedString.Key.strokeWidth: strokeWidth,
-            NSAttributedString.Key.strokeColor: widthColor,
-            NSAttributedString.Key.kern: 1
-        ]
-        var attributedText: NSMutableAttributedString!
-        attributedText = NSMutableAttributedString(string: string, attributes: dic)
-        return attributedText
-    }
     
 }
 

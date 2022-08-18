@@ -18,7 +18,7 @@ open class YEXBaseCollectionView: UICollectionView {
     private var _empty_btn_image       : UIImage?
     private var emptyClickBlock         : (() -> Void)? = nil
     
-    var empty_title             : String?   = "暂无数据"
+    var empty_title             : String?   = "这里空空如也~"
     var empty_titleFont         : UIFont    = YEXFont(15)
     var empty_titleColor        : UIColor   = .black
     
