@@ -15,11 +15,11 @@ open class YEXBaseTableView: UITableView {
     public var isLoading               : Bool = true
     public var isscrollEnabled         : Bool?
     public var empty_title             : String?   = "暂无数据"
-    public var empty_titleFont         : UIFont    = YEXFont(15)
+    public var empty_titleFont         : UIFont    = UIFont.systemFont(ofSize: 15)
     public var empty_titleColor        : UIColor   = .black
     
     public var empty_description       : String?
-    public var empty_descriptionFont   : UIFont    = YEXFont(15)
+    public var empty_descriptionFont   : UIFont    = UIFont.systemFont(ofSize: 15)
     public var empty_descriptionColor  : UIColor   = .black
     private var _empty_image           : UIImage?
     public var empty_image             : UIImage? {
@@ -33,7 +33,7 @@ open class YEXBaseTableView: UITableView {
     }
     
     public var empty_btn_title         : String?
-    public var empty_btn_titleFont     : UIFont    = YEXFont(15)
+    public var empty_btn_titleFont     : UIFont    = UIFont.systemFont(ofSize: 15)
     public var empty_btn_titleColor    : UIColor   = .black
     private var _empty_btn_image       : UIImage?
     public var empty_btn_image         : UIImage? {
