@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.author           = { '1091676312@qq.com' => '1091676312@qq.com' }
   s.source           = { :git => 'https://github.com/yijingKing/YEXSwift.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
 
   s.source_files = 'YEXSwift/Classes/**/*'
   s.dependency 'MJRefresh'
