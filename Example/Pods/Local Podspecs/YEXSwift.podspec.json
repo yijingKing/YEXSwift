@@ -15,10 +15,10 @@
     "git": "https://github.com/yijingKing/YEXSwift.git",
     "tag": "0.0.8"
   },
+  "swift_versions": "5.0",
   "platforms": {
-    "ios": "9.0"
+    "ios": "11.0"
   },
-  "source_files": "YEXSwift/Classes/**/*",
   "dependencies": {
     "MJRefresh": [
 
@@ -35,5 +35,16 @@
     "RxCocoa": [
 
     ]
-  }
+  },
+  "subspecs": [
+    {
+      "name": "Base",
+      "source_files": "YEXSwift/Classes/Base/**/*"
+    },
+    {
+      "name": "Extension",
+      "source_files": "YEXSwift/Classes/Extension/**/*"
+    }
+  ],
+  "swift_version": "5.0"
 }

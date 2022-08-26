@@ -31,6 +31,20 @@ PODS:
     - RxCocoa
     - RxSwift
     - SnapKit
+    - YEXSwift/Base (= 0.0.8)
+    - YEXSwift/Extension (= 0.0.8)
+  - YEXSwift/Base (0.0.8):
+    - DZNEmptyDataSet
+    - MJRefresh
+    - RxCocoa
+    - RxSwift
+    - SnapKit
+  - YEXSwift/Extension (0.0.8):
+    - DZNEmptyDataSet
+    - MJRefresh
+    - RxCocoa
+    - RxSwift
+    - SnapKit
 
 DEPENDENCIES:
   - FBSnapshotTestCase (~> 2.1.4)
@@ -69,8 +83,8 @@ SPEC CHECKSUMS:
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
-  YEXSwift: d278ae380c3805a961827a25b1cb745e731e2dbe
+  YEXSwift: dea5e04017efc8f053a09964d1ae7cba2e2ab764
 
-PODFILE CHECKSUM: f0d9152a6430d31b9f7b993dea8024313ba995f1
+PODFILE CHECKSUM: 378c8fe0eff783fc48be3a7d8ab0a60c105bf9ab
 
 COCOAPODS: 1.11.3
