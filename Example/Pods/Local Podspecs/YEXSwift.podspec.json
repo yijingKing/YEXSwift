@@ -1,0 +1,39 @@
+{
+  "name": "YEXSwift",
+  "version": "0.0.8",
+  "summary": "A short description of YEXSwift.",
+  "description": "常用扩展,基类",
+  "homepage": "https://github.com/1091676312@qq.com/YEXSwift",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "1091676312@qq.com": "1091676312@qq.com"
+  },
+  "source": {
+    "git": "https://github.com/yijingKing/YEXSwift.git",
+    "tag": "0.0.8"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source_files": "YEXSwift/Classes/**/*",
+  "dependencies": {
+    "MJRefresh": [
+
+    ],
+    "DZNEmptyDataSet": [
+
+    ],
+    "SnapKit": [
+
+    ],
+    "RxSwift": [
+
+    ],
+    "RxCocoa": [
+
+    ]
+  }
+}
