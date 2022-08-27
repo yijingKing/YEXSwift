@@ -25,21 +25,28 @@ PODS:
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
   - SnapKit (5.6.0)
-  - YEXSwift (0.0.8):
+  - YEXSwift (0.0.10):
     - DZNEmptyDataSet
     - MJRefresh
     - RxCocoa
     - RxSwift
     - SnapKit
-    - YEXSwift/Base (= 0.0.8)
-    - YEXSwift/Extension (= 0.0.8)
-  - YEXSwift/Base (0.0.8):
+    - YEXSwift/Base (= 0.0.10)
+    - YEXSwift/Extension (= 0.0.10)
+    - YEXSwift/Othen (= 0.0.10)
+  - YEXSwift/Base (0.0.10):
     - DZNEmptyDataSet
     - MJRefresh
     - RxCocoa
     - RxSwift
     - SnapKit
-  - YEXSwift/Extension (0.0.8):
+  - YEXSwift/Extension (0.0.10):
+    - DZNEmptyDataSet
+    - MJRefresh
+    - RxCocoa
+    - RxSwift
+    - SnapKit
+  - YEXSwift/Othen (0.0.10):
     - DZNEmptyDataSet
     - MJRefresh
     - RxCocoa
@@ -83,7 +90,7 @@ SPEC CHECKSUMS:
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
-  YEXSwift: dea5e04017efc8f053a09964d1ae7cba2e2ab764
+  YEXSwift: 80a22b4adf227ff4b44b2614b6430a850eb055e4
 
 PODFILE CHECKSUM: 378c8fe0eff783fc48be3a7d8ab0a60c105bf9ab
 

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YEXSwift'
-  s.version          = '0.0.9'
+  s.version          = '0.0.10'
   s.summary          = 'A short description of YEXSwift.'
   s.description      = <<-DESC
                         常用扩展,基类
@@ -19,29 +19,25 @@ Pod::Spec.new do |s|
   s.author           = { '1091676312@qq.com' => '1091676312@qq.com' }
   s.source           = { :git => 'https://github.com/yijingKing/YEXSwift.git', :tag => s.version.to_s }
 
-#  s.ios.deployment_target = '11.0'
   s.swift_versions   = '5.0'
   s.platform         = :ios, "11.0"
   
-#  s.source_files = 'YEXSwift/Classes/**/*'
   s.dependency 'MJRefresh'
-  s.dependency 'DZNEmptyDataSet'
   s.dependency 'SnapKit'
   s.dependency 'RxSwift'
   s.dependency 'RxCocoa'
-  # s.resource_bundles = {
-  #   'YEXSwift' => ['YEXSwift/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.resource_bundles = {
+      'YEXSwift' => ['YEXSwift/Assets/*.png']
+  }
   
   s.subspec 'Base' do |sp|
         sp.source_files = 'YEXSwift/Classes/Base/**/*'
     end
   s.subspec 'Extension' do |sp|
         sp.source_files = 'YEXSwift/Classes/Extension/**/*'
+    end
+  s.subspec 'Other' do |sp|
+        sp.source_files = 'YEXSwift/Classes/Other/**/*'
     end
   
 end

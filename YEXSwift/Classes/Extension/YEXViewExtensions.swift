@@ -17,28 +17,17 @@ public extension YEXProtocol where T: UIView {
         obj.layoutIfNeeded()
         switch side {
         case .top:
-            // Add leftOffset to our X to get start X position.
-            // Add topOffset to Y to get start Y position
-            // Subtract left offset from width to negate shifting from leftOffset.
-            // Subtract rightoffset from width to set end X and Width.
             let border: CALayer = obj._getOneSidedBorder(frame: CGRect(x: 0 + leftOffset,
                                                                        y: 0 + topOffset,
                                                                        width: obj.bounds.size.width - leftOffset - rightOffset,
                                                                        height: thickness), color: color)
             obj.layer.addSublayer(border)
         case .right:
-            // Subtract the rightOffset from our width + thickness to get our final x position.
-            // Add topOffset to our y to get our start y position.
-            // Subtract topOffset from our height, so our border doesn't extend past teh view.
-            // Subtract bottomOffset from the height to get our end.
             let border: CALayer = obj._getOneSidedBorder(frame: CGRect(x: obj.frame.size.width-thickness-rightOffset,
                                                                        y: 0 + topOffset, width: thickness,
                                                                        height: obj.bounds.size.height - topOffset - bottomOffset), color: color)
             obj.layer.addSublayer(border)
         case .bottom:
-            // Subtract the bottomOffset from the height and the thickness to get our final y position.
-            // Add a left offset to our x to get our x position.
-            // Minus our rightOffset and negate the leftOffset from the width to get our endpoint for the border.
             let border: CALayer = obj._getOneSidedBorder(frame: CGRect(x: 0 + leftOffset,
                                                                        y: obj.bounds.size.height-thickness-bottomOffset,
                                                                        width: obj.bounds.size.width - leftOffset - rightOffset, height: thickness), color: color)

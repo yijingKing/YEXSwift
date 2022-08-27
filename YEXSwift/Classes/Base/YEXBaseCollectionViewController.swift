@@ -1,52 +1,53 @@
 //
-//  BaseCollectionViewController.swift
+//  YEXBaseCollectionViewController.swift
 //  CXM
 //
-//  Created by 祎 on 2022/8/10.
+//  Created by 祎 on 2022/8/2.
 //
 
 import UIKit
 import RxSwift
 import SnapKit
+import MJRefresh
 
 open class YEXBaseCollectionViewController: YEXBaseViewController {
-
+    private var isLoading  : Bool = true
+    ///数据的类型
     public typealias DataSourceType<T: Any> = T
+    ///数据数组(默认使用二维)
     public var dataSource: [DataSourceType<Any>] = []
-    
     public var dispaseBag = DisposeBag()
-    
+    ///隐藏刷新
     public var hiddenHeaderRefresh = false
+    ///隐藏加载
     public var hiddenFooterRefresh = false
+    ///自定义刷新(需先影藏默认设置)
+    public var headerRefresh: MJRefreshHeader? {
+        didSet {
+            self.collectionView.mj_header = headerRefresh
+        }
+    }
+    ///自定义加载(需先影藏默认设置)
+    public var footerRefresh: MJRefreshFooter? {
+        didSet {
+            self.collectionView.mj_footer = footerRefresh
+        }
+    }
     ///当前页数
     public var page: Int = 1
     ///总共页数
     public var totalPage: Int = 1
-    ///空界面类型
-    public var emptyType: EmptyType? = .normal {
-        didSet {
-            if emptyType == .normal {
-                self.normalEmpty()
-            } else if emptyType == .noNetWork {
-                self.notDataEmpty()
-            }
-        }
-    }
-    
-    public lazy var flowLayout: YEXEqualCellSpaceFlowLayout = {
-        let layout = YEXEqualCellSpaceFlowLayout()
-        layout.scrollDirection = .vertical
-        return layout
-    }()
+    ///自定义flowLayout(初始化前设置)
+    public var flowLayout: UICollectionViewFlowLayout?
     
     public lazy var collectionView: YEXBaseCollectionView = {
-        let collectionView = YEXBaseCollectionView(frame: .zero, collectionViewLayout: self.flowLayout)
+        
+        let layout = self.flowLayout ?? UICollectionViewFlowLayout()
+        
+        let collectionView = YEXBaseCollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.empty_title = "暂无数据"
-        collectionView.empty_image = UIImage(named: "img_empty")
         collectionView.backgroundColor = .clear
-        collectionView.empty_backgroundColor = .clear
         collectionView.keyboardDismissMode = .onDrag
         return collectionView
     }()
@@ -65,51 +66,13 @@ open class YEXBaseCollectionViewController: YEXBaseViewController {
             $0.left.right.bottom.equalTo(0)
             $0.top.equalTo(view.snp.topMargin)
         }
-        registerCollectionCell(withClass: UICollectionViewCell.self)
+//        registerCollectionCell(withClass: UICollectionViewCell.self)
     }
     
-}
-
-public extension YEXBaseCollectionViewController {
-    ///注册CollectionView cell
-    func registerCollectionCell(withClass cell:AnyClass) {
-        mainCollection?.register(cell, forCellWithReuseIdentifier: NSStringFromClass(cell))
-    }
-    
-    func registerCollectionCell(withClass cell:AnyClass,cellName:String) {
-        mainCollection?.register(cell, forCellWithReuseIdentifier: cellName)
-    }
-    ///注册CollectionView cell
-    func registerCollectionCell(withClass cells:[AnyClass]) {
-        for index in 0..<cells.count {
-            mainCollection?.register(cells[index], forCellWithReuseIdentifier: NSStringFromClass(cells[index]))
-        }
-    }
-    ///注册CollectionView nib cell
-    func registerCollectionCell(withClass cellNib:String,cellNameNib:String) {
-        mainCollection?.register(UINib.init(nibName: cellNib, bundle: nil), forCellWithReuseIdentifier: cellNameNib)
-    }
-    ///注册CollectionView nib cell
-    func registerCollectionCell(withClass cellNibs:[String],cellNibName:[String]) {
-        for index in 0 ..< cellNibs.count {
-            mainCollection?.register(UINib.init(nibName: cellNibs[index], bundle: nil), forCellWithReuseIdentifier: cellNibName[index])
-        }
-    }
 }
 
 // MARK: - 函数事件
 public extension YEXBaseCollectionViewController {
-    private func normalEmpty() {
-        collectionView.empty_title = "暂无数据"
-        collectionView.empty_btn_title = nil
-    }
-    
-    private func notDataEmpty() {
-        collectionView.empty_title = nil
-        collectionView.empty_button(title: "重新加载") { [weak self] in
-            self?.refreshData()
-        }
-    }
     
     private func base_bindControlEvent() {
        if !hiddenHeaderRefresh {
@@ -122,11 +85,6 @@ public extension YEXBaseCollectionViewController {
                self?.refreshFootAction()
            }
        }
-       ///监听网络为无网络状态时
-       NoNetworkSubject.subscribe(onNext: { [weak self] isNot in
-           self?.emptyType = isNot ? EmptyType.noNetWork : EmptyType.normal
-       }).disposed(by: dispaseBag)
-       
    }
 }
 
@@ -135,7 +93,7 @@ public extension YEXBaseCollectionViewController {
     ///下拉
     private func refreshHeaderAction() {
         self.collectionView.mj_footer?.isHidden = false
-        self.collectionView.isLoading = true
+        self.isLoading = true
         refreshData()
     }
     ///下拉(用于子类请求数据)
@@ -145,7 +103,7 @@ public extension YEXBaseCollectionViewController {
     ///上拉
     private func refreshFootAction() {
         self.collectionView.mj_footer?.isHidden = false
-        self.collectionView.isLoading = true
+        self.isLoading = true
         getMoreData()
     }
     ///上拉(用于子类请求数据)
@@ -170,8 +128,7 @@ public extension YEXBaseCollectionViewController {
         reloadDataOrMore(now: 0, total: 0)
     }
     private func reloadDataAndEndRefreshing() {
-        self.collectionView.isLoading = false
-        self.collectionView.reloadEmptyDataSet()
+        self.isLoading = false
         self.collectionView.mj_header?.endRefreshing()
         self.collectionView.reloadData()
         if let _ = self.collectionView.mj_footer {
@@ -212,17 +169,7 @@ extension YEXBaseCollectionViewController: UICollectionViewDelegate,UICollection
 }
 
 
-
-
-extension UICollectionViewCell {
-    static var indentifier: String {
-        return NSStringFromClass(self)
-    }
-}
-
-
-
-enum AlignType  {
+public enum AlignType  {
     case left
     case center
     case right

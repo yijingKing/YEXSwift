@@ -8,11 +8,8 @@
 import Foundation
 import UIKit
 import RxSwift
+import MJRefresh
 
-public enum EmptyType {
-    case normal
-    case noNetWork
-}
 protocol BaseViewProtocol {
     typealias DataSourceType<T: Any> = T
 }
@@ -20,28 +17,34 @@ protocol BaseViewProtocol {
 public let NoNetworkSubject = ReplaySubject<Bool>.create(bufferSize: 0)
 
 open class YEXBaseTableViewController: YEXBaseViewController,BaseViewProtocol {
+    private var isLoading  : Bool = true
+    ///数据的类型
     public typealias DataSourceType<T: Any> = T
+    ///数据数组(默认使用二维)
     public var dataSource: [DataSourceType<Any>] = []
-    
     public var dispaseBag = DisposeBag()
     ///设置tableView方式(viewDidLoad前调用)
     public var style: UITableView.Style = .plain
+    ///隐藏刷新
     public var hiddenHeaderRefresh = false
+    ///隐藏加载
     public var hiddenFooterRefresh = false
+    ///自定义刷新(需先影藏默认设置)
+    public var headerRefresh: MJRefreshHeader? {
+        didSet {
+            self.tableView.mj_header = headerRefresh
+        }
+    }
+    ///自定义加载(需先影藏默认设置)
+    public var footerRefresh: MJRefreshFooter? {
+        didSet {
+            self.tableView.mj_footer = footerRefresh
+        }
+    }
     ///当前页数
     public var page: Int = 1
     ///总共页数
     public var totalPage: Int = 1
-    ///空界面类型
-    public var emptyType: EmptyType? = .normal {
-        didSet {
-            if emptyType == .normal {
-                self.normalEmpty()
-            } else if emptyType == .noNetWork {
-                self.notDataEmpty()
-            }
-        }
-    }
     ///懒加载
     public lazy var tableView: YEXBaseTableView = {
         let tableView = YEXBaseTableView(frame: .zero, style: self.style)
@@ -50,7 +53,6 @@ open class YEXBaseTableViewController: YEXBaseViewController,BaseViewProtocol {
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
         tableView.backgroundColor = UIColor.clear
-        tableView.empty_backgroundColor = UIColor.clear
         tableView.estimatedRowHeight = 44
         tableView.estimatedSectionFooterHeight = 0
         tableView.estimatedSectionHeaderHeight = 0
@@ -59,8 +61,6 @@ open class YEXBaseTableViewController: YEXBaseViewController,BaseViewProtocol {
             $0.backgroundColor = UIColor.clear
         }
         tableView.keyboardDismissMode = .onDrag
-        tableView.empty_title = "暂无数据"
-        tableView.empty_image = UIImage(named: "img_empty")
         return tableView
     }()
     
@@ -76,18 +76,6 @@ open class YEXBaseTableViewController: YEXBaseViewController,BaseViewProtocol {
         tableView.snp.makeConstraints {
             $0.left.right.bottom.equalTo(0)
             $0.top.equalTo(view.snp.topMargin)
-        }
-    }
-    
-    public func normalEmpty() {
-        tableView.empty_title = "暂无数据"
-        tableView.empty_btn_title = nil
-    }
-    
-    public func notDataEmpty() {
-        tableView.empty_title = nil
-        tableView.empty_button(title: "重新加载") { [weak self] in
-            self?.refreshData()
         }
     }
     
@@ -111,10 +99,6 @@ extension YEXBaseTableViewController {
                 self?.refreshFootAction()
             }
         }
-        ///监听网络为无网络状态时
-        NoNetworkSubject.subscribe(onNext: { [weak self] isNot in
-            self?.emptyType = isNot ? EmptyType.noNetWork : EmptyType.normal
-        }).disposed(by: dispaseBag)
     }
     
 }
@@ -135,31 +119,30 @@ public extension YEXBaseTableViewController {
     func reloadDataOrMore(now: Int? = 0, total: Int? = 0) {
         self.page = now ?? 0
         self.totalPage = total ?? 0
-        self.tableView.isLoading = false
         reloadDataAndEndRefreshing()
     }
     ///刷新并判断是否是最后一页,是最后一页显示最后一页的数据(当前页   总页数)
     func reloadDataOrNotMore() {
         self.page = 1
         self.totalPage = 1
-        self.tableView.isLoading = false
         reloadDataAndEndRefreshing()
     }
     
     ///下拉
     private func refreshHeaderAction() {
         self.tableView.mj_footer?.isHidden = false
+        self.isLoading = true
         refreshData()
     }
     ///上拉
     private func refreshFootAction() {
         self.tableView.mj_footer?.isHidden = false
+        self.isLoading = true
         getMoreData()
     }
     
     private func reloadDataAndEndRefreshing() {
-        self.tableView.isLoading = true
-        self.tableView.reloadEmptyDataSet()
+        self.isLoading = false
         self.tableView.mj_header?.endRefreshing()
         self.tableView.reloadData()
         if let _ = self.tableView.mj_footer {
