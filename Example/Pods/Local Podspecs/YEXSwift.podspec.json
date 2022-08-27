@@ -1,6 +1,6 @@
 {
   "name": "YEXSwift",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "summary": "A short description of YEXSwift.",
   "description": "常用扩展,基类",
   "homepage": "https://github.com/1091676312@qq.com/YEXSwift",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/yijingKing/YEXSwift.git",
-    "tag": "0.0.10"
+    "tag": "0.0.12"
   },
   "swift_versions": "5.0",
   "platforms": {
@@ -38,7 +38,6 @@
       "YEXSwift/Assets/*.png"
     ]
   },
-  "public_header_files": "YEXSwift/Classes/**/*.h",
   "subspecs": [
     {
       "name": "Base",
@@ -46,6 +45,11 @@
     },
     {
       "name": "Extension",
+      "dependencies": {
+        "YEXSwift/Other": [
+
+        ]
+      },
       "source_files": "YEXSwift/Classes/Extension/**/*"
     },
     {
