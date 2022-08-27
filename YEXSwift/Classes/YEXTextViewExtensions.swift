@@ -10,16 +10,24 @@ import Foundation
 import UIKit
 
 public extension YEXProtocol where T: UITextView {
-    @discardableResult
-    func placeholder(_ string: String?) -> YEXProtocol {
-        obj.placeholder = string
-        return self
+    
+    var placeholder: String? {
+        set {
+            obj.placeholder = newValue
+        }
+        get {
+            return obj.placeholder
+        }
     }
-    @discardableResult
-    func placeholderColor(_ color: UIColor) -> YEXProtocol {
-        obj.placeholderColor = color
-        return self
+    var placeholderColor: UIColor? {
+        set {
+            obj.placeholderColor = newValue
+        }
+        get {
+            return obj.placeholderColor
+        }
     }
+   
 }
 
 //MARK:   -------   属性扩展 ----------
@@ -41,7 +49,7 @@ public extension UITextView {
     }
     //MARK: --- 占位字颜色
     ///占位字颜色
-    var placeholderColor: UIColor {
+    var placeholderColor: UIColor? {
         set {
             objc_setAssociatedObject(self, YEXRuntimeKey.placeholderColorKey!, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }

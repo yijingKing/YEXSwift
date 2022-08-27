@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YEXSwift'
-  s.version          = '0.0.13'
+  s.version          = '0.0.14'
   s.summary          = 'A short description of YEXSwift.'
   s.description      = <<-DESC
                         常用扩展,基类
@@ -31,18 +31,18 @@ Pod::Spec.new do |s|
   }
 
   s.source_files = 'YEXSwift/Classes/**/*'
-  
-  s.subspec 'Base' do |sp|
-        sp.source_files = 'YEXSwift/Classes/Base/**/*'
-        sp.source_files = 'YEXSwift/Classes/Extension/**/*'
-        sp.source_files = 'YEXSwift/Classes/Other/**/*'
-    end
-  s.subspec 'Extension' do |sp|
-        sp.source_files = 'YEXSwift/Classes/Other/**/*'
-        sp.source_files = 'YEXSwift/Classes/Extension/**/*'
-    end
-  s.subspec 'Other' do |sp|
-        sp.source_files = 'YEXSwift/Classes/Other/**/*'
-    end
+#  
+#  s.subspec 'Base' do |sp|
+#        sp.source_files = 'YEXSwift/Classes/Base/**/*'
+#        sp.source_files = 'YEXSwift/Classes/Extension/**/*'
+#        sp.source_files = 'YEXSwift/Classes/Other/**/*'
+#    end
+#  s.subspec 'Extension' do |sp|
+#        sp.source_files = 'YEXSwift/Classes/Other/**/*'
+#        sp.source_files = 'YEXSwift/Classes/Extension/**/*'
+#    end
+#  s.subspec 'Other' do |sp|
+#        sp.source_files = 'YEXSwift/Classes/Other/**/*'
+#    end
   
 end
