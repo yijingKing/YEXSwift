@@ -23,9 +23,6 @@
     "MJRefresh": [
 
     ],
-    "DZNEmptyDataSet": [
-
-    ],
     "SnapKit": [
 
     ],
@@ -36,6 +33,12 @@
 
     ]
   },
+  "resource_bundles": {
+    "YEXSwift": [
+      "YEXSwift/Assets/*.png"
+    ]
+  },
+  "public_header_files": "YEXSwift/Classes/**/*.h",
   "subspecs": [
     {
       "name": "Base",
@@ -46,8 +49,8 @@
       "source_files": "YEXSwift/Classes/Extension/**/*"
     },
     {
-      "name": "Othen",
-      "source_files": "YEXSwift/Classes/Othen/**/*"
+      "name": "Other",
+      "source_files": "YEXSwift/Classes/Other/**/*"
     }
   ],
   "swift_version": "5.0"
