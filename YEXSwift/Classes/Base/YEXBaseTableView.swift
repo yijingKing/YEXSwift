@@ -47,7 +47,7 @@ open class YEXBaseTableView: UITableView {
     }
     
     ///图文间距
-    public var empty_spaceHeight        : CGFloat   = YEXRatio(10)
+    public var empty_spaceHeight        : CGFloat   = 10.auto()
     ///偏移
     public var empty_verticalOffset     : CGFloat   = 0
     public var empty_backgroundColor    : UIColor   = .black

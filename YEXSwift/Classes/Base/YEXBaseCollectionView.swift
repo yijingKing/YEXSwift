@@ -48,7 +48,7 @@ open class YEXBaseCollectionView: UICollectionView {
         }
     }
     ///图文间距
-    var empty_spaceHeight       : CGFloat   = YEXRatio(10)
+    var empty_spaceHeight       : CGFloat   = 10.auto()
     ///偏移
     var empty_verticalOffset    : CGFloat   = 0
     var empty_backgroundColor   : UIColor   = .black
