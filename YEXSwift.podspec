@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YEXSwift'
-  s.version          = '0.0.12'
+  s.version          = '0.0.13'
   s.summary          = 'A short description of YEXSwift.'
   s.description      = <<-DESC
                         常用扩展,基类
@@ -30,9 +30,10 @@ Pod::Spec.new do |s|
       'YEXSwift' => ['YEXSwift/Assets/*.png']
   }
 
-#  s.public_header_files = 'YEXSwift/Classes/**/**/*.h'
+#  s.source_files = 'YEXSwift/Classes/**/*'
   
   s.subspec 'Base' do |sp|
+        sp.dependency 'YEXSwift/Other'
         sp.source_files = 'YEXSwift/Classes/Base/**/*'
     end
   s.subspec 'Extension' do |sp|
