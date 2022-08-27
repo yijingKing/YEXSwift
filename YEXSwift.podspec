@@ -30,14 +30,15 @@ Pod::Spec.new do |s|
       'YEXSwift' => ['YEXSwift/Assets/*.png']
   }
 
-#  s.source_files = 'YEXSwift/Classes/**/*'
+  s.source_files = 'YEXSwift/Classes/**/*'
   
   s.subspec 'Base' do |sp|
-        sp.dependency 'YEXSwift/Other'
         sp.source_files = 'YEXSwift/Classes/Base/**/*'
+        sp.source_files = 'YEXSwift/Classes/Extension/**/*'
+        sp.source_files = 'YEXSwift/Classes/Other/**/*'
     end
   s.subspec 'Extension' do |sp|
-        sp.dependency 'YEXSwift/Other'
+        sp.source_files = 'YEXSwift/Classes/Other/**/*'
         sp.source_files = 'YEXSwift/Classes/Extension/**/*'
     end
   s.subspec 'Other' do |sp|
