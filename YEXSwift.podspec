@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 
   s.homepage         = 'https://github.com/1091676312@qq.com/YEXSwift'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { '1091676312@qq.com' => '1091676312@qq.com' }
+  s.author           = { '╰莪呮想好好宠Nǐつ' => '1091676312@qq.com' }
   s.source           = { :git => 'https://github.com/yijingKing/YEXSwift.git', :tag => s.version.to_s }
 
   s.swift_versions   = '5.0'
@@ -26,9 +26,9 @@ Pod::Spec.new do |s|
   s.dependency 'SnapKit'
   s.dependency 'RxSwift'
   s.dependency 'RxCocoa'
-  s.resource_bundles = {
-      'YEXSwift' => ['YEXSwift/Assets/*.png']
-  }
+#  s.resource_bundles = {
+#      'YEXSwift' => ['YEXSwift/Assets/*.png']
+#  }
 
   s.source_files = 'YEXSwift/Classes/**/*'
 #
