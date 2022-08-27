@@ -29,6 +29,8 @@ Pod::Spec.new do |s|
   s.resource_bundles = {
       'YEXSwift' => ['YEXSwift/Assets/*.png']
   }
+
+  s.public_header_files = 'YEXSwift/Classes/**/*.h'
   
   s.subspec 'Base' do |sp|
         sp.source_files = 'YEXSwift/Classes/Base/**/*'
