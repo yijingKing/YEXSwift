@@ -27,7 +27,14 @@ public extension YEXProtocol where T: UITextView {
             return obj.placeholderColor
         }
     }
-   
+    var placeholderEdgeInsets: UIEdgeInsets? {
+        set {
+            obj.placeholderEdgeInsets = newValue
+        }
+        get {
+            return obj.placeholderEdgeInsets
+        }
+    }
 }
 
 //MARK:   -------   属性扩展 ----------
@@ -35,6 +42,7 @@ public extension UITextView {
     private struct YEXRuntimeKey {
         static let placeholderKey = UnsafeRawPointer.init(bitPattern: "placeholder".hashValue)
         static let placeholderColorKey = UnsafeRawPointer.init(bitPattern: "placeholderColor".hashValue)
+        static let placeholderEdgeKey = UnsafeRawPointer.init(bitPattern: "placeholderEdgeKey".hashValue)
     }
     //MARK: --- 占位字
     ///占位字
@@ -55,6 +63,16 @@ public extension UITextView {
         }
         get {
             return objc_getAssociatedObject(self, YEXRuntimeKey.placeholderColorKey!) as? UIColor ?? UIColor(red: 239, green: 241, blue: 247, alpha: 1)
+        }
+    }
+    //MARK: --- 占位字
+    ///占位字
+    var placeholderEdgeInsets: UIEdgeInsets? {
+        set {
+            objc_setAssociatedObject(self, YEXRuntimeKey.placeholderEdgeKey!, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+        get {
+            return objc_getAssociatedObject(self, YEXRuntimeKey.placeholderEdgeKey!) as? UIEdgeInsets
         }
     }
 }
@@ -78,11 +96,18 @@ public extension UITextView {
         }
         // 属性
         let attrs: [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor: placeholderColor ,NSAttributedString.Key.font: font ?? UIFont.systemFont(ofSize: 16)]
+        
         // 文字
         var rect1 = rect
-        rect1.origin.x = 5
-        rect1.origin.y = 8
-        rect1.size.width = rect1.size.width - 2 * rect1.origin.x
+        if let placeholderEdgeInsets = placeholderEdgeInsets {
+            rect1.origin.x = placeholderEdgeInsets.left
+            rect1.origin.y = placeholderEdgeInsets.top
+            rect1.size.width = rect1.size.width - placeholderEdgeInsets.left - placeholderEdgeInsets.right
+        } else {
+            rect1.origin.x = 5
+            rect1.origin.y = 8
+            rect1.size.width = rect1.size.width - 2 * rect1.origin.x
+        }
         ((placeholder ?? "") as NSString).draw(in: rect1, withAttributes: attrs)
     }
 }

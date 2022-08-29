@@ -1,9 +1,11 @@
-//
-//  YEXCollectionCell.swift
-//  YEXSwift
-//
-//  Created by 祎 on 2022/8/27.
-//
+/*******************************************************************************
+Copyright (K), 2020 - ~, ╰莪呮想好好宠Nǐつ
+
+Author:        ╰莪呮想好好宠Nǐつ
+E-mail:        1091676312@qq.com
+GitHub:        https://github.com/yijingKing
+********************************************************************************/
+
 
 import Foundation
 import UIKit

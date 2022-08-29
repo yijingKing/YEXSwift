@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YEXSwift'
-  s.version          = '0.0.13'
+  s.version          = '0.0.14'
   s.summary          = 'A short description of YEXSwift.'
   s.description      = <<-DESC
                         常用扩展,基类
