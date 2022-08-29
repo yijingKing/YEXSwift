@@ -18,7 +18,7 @@ public extension YEXProtocol where T == Array<Any> {
             #if DEBUG
             fatalError("数组转data失败")
             #else
-            return Date()
+            return Data()
             #endif
 
         }
@@ -26,7 +26,7 @@ public extension YEXProtocol where T == Array<Any> {
             #if DEBUG
             fatalError("数组转data失败")
             #else
-            return Date()
+            return Data()
             #endif
         }
         return data
@@ -38,14 +38,14 @@ public extension YEXProtocol where T == Array<Any> {
             #if DEBUG
             fatalError("数组转data失败")
             #else
-            return Date()
+            return Data()
             #endif
         }
         guard let newData : Data = try? JSONSerialization.data(withJSONObject: obj, options: options) else {
             #if DEBUG
             fatalError("数组转data失败")
             #else
-            return Date()
+            return Data()
             #endif
         }
         let JSONString = NSString(data:newData as Data,encoding: String.Encoding.utf8.rawValue)
