@@ -100,7 +100,6 @@ extension YEXBaseTableViewController {
             }
         }
     }
-    
 }
 
 // MARK: - 刷新
@@ -114,6 +113,7 @@ extension YEXBaseTableViewController {
         
     }
 }
+
 public extension YEXBaseTableViewController {
     ///刷新并判断是否是最后一页,是最后一页显示最后一页的数据(当前页   总页数)
     func reloadDataOrMore(now: Int? = 0, total: Int? = 0) {

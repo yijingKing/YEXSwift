@@ -132,28 +132,12 @@ public extension UIButton {
 
 public extension YEXProtocol where T: UIButton {
     ///点击
-    @discardableResult
-    func addTarget(_ block:((UIButton)->())?) -> YEXProtocol {
+    func addTarget(_ block:((UIButton)->())?) {
         obj.addTargetAction(block: block, for: .touchUpInside)
-        return self
     }
     ///点击
-    @discardableResult
-    func addTarget(_ taget: UIControl.Event = .touchUpInside,_ block:((UIButton)->())?) -> YEXProtocol {
+    func addTarget(_ taget: UIControl.Event = .touchUpInside,_ block:((UIButton)->())?) {
         obj.addTargetAction(block: block, for: taget)
-        return self
-    }
-    ///点击
-    @discardableResult
-    func addTarget(delay: TimeInterval = 0, _ block:((UIButton)->())?) -> YEXProtocol {
-        
-        obj.addTargetAction(block: { btn in
-            
-            
-            
-            
-        }, for: .touchUpInside)
-        return self
     }
 }
 
@@ -171,21 +155,21 @@ public extension YEXProtocol where T: UIButton {
     ///   - type: 图片位置
     ///   - imageWidth: 图片大小
     ///   - space: 间距
-    @discardableResult
-    func imagePosition(_ type: YEXButtonImagePosition,_ space: CGFloat? = nil,_ imageW: CGFloat? = nil,_ imageH: CGFloat? = nil) -> YEXProtocol {
+    func imagePosition(_ type: YEXButtonImagePosition,_ space: CGFloat? = nil,_ imageW: CGFloat? = nil,_ imageH: CGFloat? = nil){
         var image: UIImage?
         if let w = imageW, let h = imageH {
             image = image?.yex.scale(w, h)
             obj.setImage(image, for: .normal)
         }
         guard let imageWidth = obj.imageView?.image?.size.width,
-              let imageHeight = obj.imageView?.image?.size.height else {
-            return self
+              let imageHeight = obj.imageView?.image?.size.height else { return }
+        
+        guard var titleWidth = obj.titleLabel?.text?.yex.getWidth(obj.titleLabel?.font ?? UIFont.systemFont(ofSize: 17)) else { return }
+        
+        if titleWidth >= width {
+            titleWidth = width
         }
-
-        guard let titleWidth = obj.titleLabel?.text?.yex.getWidth(obj.titleLabel?.font ?? UIFont.systemFont(ofSize: 17)) else {
-            return self
-        }
+        
         let titleHeight = obj.titleLabel?.font.pointSize ?? 0
         let insetAmount = (space ?? 0) / 2
         let imageOffWidth = (imageWidth + titleWidth) / 2 - imageWidth / 2
@@ -218,7 +202,6 @@ public extension YEXProtocol where T: UIButton {
                                         bottom: titleOffHeight, right: titleOffWidth)
             obj.contentVerticalAlignment = .center
         }
-        return self
     }
 }
 

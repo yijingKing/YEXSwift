@@ -11,6 +11,7 @@ import Foundation
 import UIKit
 
 public extension YEXProtocol where T: NSAttributedString {
+    // MARK: - 加粗
     /// 加粗
     func bold(_ font: CGFloat = UIFont.systemFontSize) -> NSAttributedString {
         guard let copy = obj.mutableCopy() as? NSMutableAttributedString else { return obj }
@@ -18,6 +19,7 @@ public extension YEXProtocol where T: NSAttributedString {
         copy.addAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: font)], range: range)
         return copy
     }
+    // MARK: - 下划线
     /// 下划线
     func underline() -> NSAttributedString {
         guard let copy = obj.mutableCopy() as? NSMutableAttributedString else { return obj }
@@ -25,6 +27,7 @@ public extension YEXProtocol where T: NSAttributedString {
         copy.addAttributes([NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range)
         return copy
     }
+    // MARK: - 删除线
     /// 删除线
     func strikethrough() -> NSAttributedString {
         guard let copy = obj.mutableCopy() as? NSMutableAttributedString else { return obj }
@@ -34,6 +37,7 @@ public extension YEXProtocol where T: NSAttributedString {
         copy.addAttributes(attributes, range: range)
         return copy
     }
+    // MARK: - 前景色
     /// 前景色
     func color(_ color: UIColor) -> NSAttributedString {
         guard let copy = obj.mutableCopy() as? NSMutableAttributedString else { return obj }
@@ -43,9 +47,7 @@ public extension YEXProtocol where T: NSAttributedString {
     }
 }
 
-// MARK:- 一、文本设置的基本扩展
 public extension YEXProtocol where T: NSAttributedString {
-
     // MARK: 设置特定区域的字体大小
     /// 设置特定区域的字体大小
     /// - Parameters:
@@ -55,7 +57,6 @@ public extension YEXProtocol where T: NSAttributedString {
     func setRangeFontText(font: UIFont, range: NSRange) -> NSAttributedString {
         return setSpecificRangeTextMoreAttributes(attributes: [NSAttributedString.Key.font : font], range: range)
     }
-    
     // MARK: 设置特定文字的字体大小
     /// 设置特定文字的字体大小
     /// - Parameters:
@@ -65,7 +66,6 @@ public extension YEXProtocol where T: NSAttributedString {
     func setSpecificTextFont(_ text: String, font: UIFont) -> NSAttributedString {
         return setSpecificTextMoreAttributes(text, attributes: [NSAttributedString.Key.font : font])
     }
-    
     // MARK: 设置特定区域的字体颜色
     /// 设置特定区域的字体颜色
     /// - Parameters:
@@ -75,7 +75,6 @@ public extension YEXProtocol where T: NSAttributedString {
     func setSpecificRangeTextColor(color: UIColor, range: NSRange) -> NSAttributedString {
         return setSpecificRangeTextMoreAttributes(attributes: [NSAttributedString.Key.foregroundColor : color], range: range)
     }
-    
     // MARK: 设置特定文字的字体颜色
     /// 设置特定文字的字体颜色
     /// - Parameters:
@@ -85,7 +84,6 @@ public extension YEXProtocol where T: NSAttributedString {
     func setSpecificTextColor(_ text: String, color: UIColor) -> NSAttributedString {
         return setSpecificTextMoreAttributes(text, attributes: [NSAttributedString.Key.foregroundColor : color])
     }
-    
     // MARK: 设置特定区域行间距
     /// 设置特定区域行间距
     /// - Parameters:
@@ -100,7 +98,6 @@ public extension YEXProtocol where T: NSAttributedString {
         
         return setSpecificRangeTextMoreAttributes(attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle], range: range)
     }
-    
     // MARK: 设置特定文字行间距
     /// 设置特定文字行间距
     /// - Parameters:
@@ -114,7 +111,6 @@ public extension YEXProtocol where T: NSAttributedString {
         paragraphStyle.alignment = alignment
         return setSpecificTextMoreAttributes(text, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
     }
-    
     // MARK: 设置特定区域的下划线
     /// 设置特定区域的下划线
     /// - Parameters:
@@ -127,7 +123,6 @@ public extension YEXProtocol where T: NSAttributedString {
         let lineStytle = NSNumber(value: Int8(stytle.rawValue))
         return setSpecificRangeTextMoreAttributes(attributes: [NSAttributedString.Key.underlineStyle: lineStytle, NSAttributedString.Key.underlineColor: color], range: range)
     }
-    
     // MARK: 设置特定文字的下划线
     /// 设置特定文字的下划线
     /// - Parameters:
@@ -140,7 +135,6 @@ public extension YEXProtocol where T: NSAttributedString {
         let lineStytle = NSNumber(value: Int8(stytle.rawValue))
         return setSpecificTextMoreAttributes(text, attributes: [NSAttributedString.Key.underlineStyle : lineStytle, NSAttributedString.Key.underlineColor: color])
     }
-    
     // MARK: 设置特定区域的删除线
     /// 设置特定区域的删除线
     /// - Parameters:
@@ -156,7 +150,6 @@ public extension YEXProtocol where T: NSAttributedString {
         attributes[NSAttributedString.Key.baselineOffset] = 0
         return setSpecificRangeTextMoreAttributes(attributes: attributes, range: range)
     }
-    
     // MARK: 设置特定文字的删除线
     /// 设置特定文字的删除线
     /// - Parameters:
@@ -172,7 +165,6 @@ public extension YEXProtocol where T: NSAttributedString {
         attributes[NSAttributedString.Key.baselineOffset] = 0
         return setSpecificTextMoreAttributes(text, attributes: attributes)
     }
-    
     // MARK: 插入图片
     /// 插入图片
     /// - Parameters:
@@ -180,7 +172,7 @@ public extension YEXProtocol where T: NSAttributedString {
     ///   - imgBounds: 图片的大小，默认为.zero，即自动根据图片大小设置，并以底部基线为标准。 y > 0 ：图片向上移动；y < 0 ：图片向下移动
     ///   - imgIndex: 图片的位置，默认放在开头
     /// - Returns: 返回设置后的富文本
-    func insertImage(imgName: String, imgBounds: CGRect = .zero, imgIndex: Int = 0) -> NSAttributedString {
+    func setInsertImage(imgName: String, imgBounds: CGRect = .zero, imgIndex: Int = 0) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(attributedString: obj)
         // NSTextAttachment可以将要插入的图片作为特殊字符处理
         let attch = NSTextAttachment()
@@ -192,17 +184,15 @@ public extension YEXProtocol where T: NSAttributedString {
         attributedString.insert(string, at: imgIndex)
         return attributedString
     }
-    
     // MARK: 首行缩进
     /// 首行缩进
     /// - Parameter edge: 缩进宽度
     /// - Returns: 返回设置后的富文本
-    func firstLineLeftEdge(_ edge: CGFloat) -> NSAttributedString {
+    func setFirstLineLeftEdge(_ edge: CGFloat) -> NSAttributedString {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.firstLineHeadIndent = edge
         return setSpecificRangeTextMoreAttributes(attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle], range: NSRange(location: 0, length: obj.length))
     }
-    
     // MARK: 设置特定区域的多个字体属性
     /// 设置特定区域的多个字体属性
     /// - Parameters:
@@ -216,7 +206,6 @@ public extension YEXProtocol where T: NSAttributedString {
         }
         return mutableAttributedString
     }
-
     // MARK: 设置特定文字的多个字体属性
     /// 设置特定文字的多个字体属性
     /// - Parameters:
@@ -235,7 +224,6 @@ public extension YEXProtocol where T: NSAttributedString {
         }
         return mutableAttributedString
     }
-    
     // MARK: 设置特定区域的倾斜
     /// 设置特定区域的倾斜
     /// - Parameters:
@@ -245,7 +233,6 @@ public extension YEXProtocol where T: NSAttributedString {
     func setSpecificRangeBliqueness(inclination: Float = 0, range: NSRange) -> NSAttributedString {
         return setSpecificRangeTextMoreAttributes(attributes: [NSAttributedString.Key.obliqueness: inclination], range: range)
     }
-    
     // MARK: 设置特定文字的倾斜
     /// 设置特定文字的倾斜
     /// - Parameters:
@@ -257,7 +244,6 @@ public extension YEXProtocol where T: NSAttributedString {
     }
 }
 
-// MARK:- Private Func
 public extension YEXProtocol where T: NSAttributedString {
     /// 获取对应字符串的range数组
     /// - Parameter textArray: 字符串数组
@@ -283,8 +269,6 @@ public extension YEXProtocol where T: NSAttributedString {
         }
         return rangeArray
     }
-
-    // MARK: 加载网络图片
     /// 加载网络图片
     /// - Parameter imageName: 图片名
     /// - Returns: 图片

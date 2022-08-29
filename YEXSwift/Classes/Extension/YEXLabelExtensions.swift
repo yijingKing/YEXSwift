@@ -47,50 +47,41 @@ public extension UILabel {
 // MARK:--- 基本的扩展
 public extension YEXProtocol where T: UILabel {
     ///字体大小
-    @discardableResult
-    func font(_ font: CGFloat,_ weight: UIFont.Weight? = nil) -> YEXProtocol {
+    func font(_ font: CGFloat,_ weight: UIFont.Weight? = nil) {
         obj.font = UIFont.systemFont(ofSize: font, weight: weight ?? .medium)
-        return self
     }
     ///加粗字体大小
-    @discardableResult
-    func boldFont(_ font: CGFloat) -> YEXProtocol {
+    func boldFont(_ font: CGFloat) {
         obj.font = UIFont.boldSystemFont(ofSize: font)
-        return self
     }
     
     ///开启长按复制
-    @discardableResult
-    func isOpenCopy(_ isCopy: Bool) -> YEXProtocol {
+    func isOpenCopy(_ isCopy: Bool) {
         obj.isUserInteractionEnabled = true
         let LongPress = UILongPressGestureRecognizer(target: obj, action: #selector(obj.longPressCopyEvent))
         obj.addGestureRecognizer(LongPress)
-        return self
     }
 
     /// 改变字间距
     ///
     /// - Parameter space: space
-    @discardableResult
-    func wordSpace(_ space: Float) -> YEXProtocol {
+    func wordSpace(_ space: Float) {
         guard let labelText = obj.text else {
-            return self
+            return
         }
         let attStr = NSMutableAttributedString.init(string: labelText)
         attStr.addAttribute(NSAttributedString.Key.kern, value: (space), range: NSMakeRange(0, labelText.count))
         attStr.addAttribute(NSAttributedString.Key.paragraphStyle, value: NSMutableParagraphStyle.init(), range: NSMakeRange(0, labelText.count))
         obj.attributedText = attStr
         obj.sizeToFit()
-        return self
     }
     
     /// 改变行间距
     ///
     /// - Parameter space: space
-    @discardableResult
-    func lineSpace(_ space: Float) -> YEXProtocol {
+    func lineSpace(_ space: Float) {
         guard let labelText = obj.text else {
-            return self
+            return
         }
         let attStr = NSMutableAttributedString.init(string: labelText)
         let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle.init()
@@ -98,7 +89,6 @@ public extension YEXProtocol where T: UILabel {
         attStr.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, labelText.count))
         obj.attributedText = attStr
         obj.sizeToFit()
-        return self
     }
     
     /// 改变行间距和字间距
@@ -106,10 +96,9 @@ public extension YEXProtocol where T: UILabel {
     /// - Parameters:
     ///   - lineSpace: 行间距
     ///   - wordSpace: 字间距
-    @discardableResult
-    func lineSpaceWithWordSpace(_ lineSpace:Float,_ wordSpace:Float) -> YEXProtocol  {
+    func lineSpaceWithWordSpace(_ lineSpace:Float,_ wordSpace:Float) {
         guard let labelText = obj.text else {
-            return self
+            return
         }
         let attStr = NSMutableAttributedString.init(string: labelText)
         let paragraphStyle:NSMutableParagraphStyle = NSMutableParagraphStyle.init()
@@ -118,7 +107,6 @@ public extension YEXProtocol where T: UILabel {
         attStr.addAttribute(NSAttributedString.Key.kern, value: (wordSpace), range: NSMakeRange(0, labelText.count))
         obj.attributedText = attStr
         obj.sizeToFit()
-        return self
     }
 }
 

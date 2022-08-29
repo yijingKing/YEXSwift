@@ -9,7 +9,7 @@ GitHub:        https://github.com/yijingKing
 import Foundation
 import UIKit
 
-open class BlockPan: UIPanGestureRecognizer {
+open class YEXBlockPan: UIPanGestureRecognizer {
     private var panAction: ((UIPanGestureRecognizer) -> Void)?
 
     override init(target: Any?, action: Selector?) {
@@ -19,14 +19,14 @@ open class BlockPan: UIPanGestureRecognizer {
     convenience init (action: ((UIPanGestureRecognizer) -> Void)?) {
         self.init()
         self.panAction = action
-        self.addTarget(self, action: #selector(BlockPan.didPan(_:)))
+        self.addTarget(self, action: #selector(YEXBlockPan.didPan(_:)))
     }
 
     @objc open func didPan (_ pan: UIPanGestureRecognizer) {
         panAction? (pan)
     }
 }
-open class BlockPinch: UIPinchGestureRecognizer {
+open class YEXBlockPinch: UIPinchGestureRecognizer {
     private var pinchAction: ((UIPinchGestureRecognizer) -> Void)?
 
     override init(target: Any?, action: Selector?) {
@@ -36,14 +36,14 @@ open class BlockPinch: UIPinchGestureRecognizer {
     convenience init (action: ((UIPinchGestureRecognizer) -> Void)?) {
         self.init()
         self.pinchAction = action
-        self.addTarget(self, action: #selector(BlockPinch.didPinch(_:)))
+        self.addTarget(self, action: #selector(YEXBlockPinch.didPinch(_:)))
     }
 
     @objc open func didPinch (_ pinch: UIPinchGestureRecognizer) {
         pinchAction? (pinch)
     }
 }
-open class BlockSwipe: UISwipeGestureRecognizer {
+open class YEXBlockSwipe: UISwipeGestureRecognizer {
     private var swipeAction: ((UISwipeGestureRecognizer) -> Void)?
 
     override init(target: Any?, action: Selector?) {
@@ -58,14 +58,14 @@ open class BlockSwipe: UISwipeGestureRecognizer {
             self.direction = direction
             
             swipeAction = action
-            addTarget(self, action: #selector(BlockSwipe.didSwipe(_:)))
+            addTarget(self, action: #selector(YEXBlockSwipe.didSwipe(_:)))
     }
 
     @objc open func didSwipe (_ swipe: UISwipeGestureRecognizer) {
         swipeAction? (swipe)
     }
 }
-open class BlockTap: UITapGestureRecognizer {
+open class YEXBlockTap: UITapGestureRecognizer {
     private var tapAction: ((UITapGestureRecognizer) -> Void)?
 
     override init(target: Any?, action: Selector?) {
@@ -79,14 +79,14 @@ open class BlockTap: UITapGestureRecognizer {
             self.init()
             self.numberOfTapsRequired = tapCount
             self.tapAction = action
-            self.addTarget(self, action: #selector(BlockTap.didTap(_:)))
+            self.addTarget(self, action: #selector(YEXBlockTap.didTap(_:)))
     }
 
     @objc open func didTap (_ tap: UITapGestureRecognizer) {
         tapAction? (tap)
     }
 }
-open class BlockLongPress: UILongPressGestureRecognizer {
+open class YEXBlockLongPress: UILongPressGestureRecognizer {
     private var longPressAction: ((UILongPressGestureRecognizer) -> Void)?
 
     override init(target: Any?, action: Selector?) {
@@ -96,7 +96,7 @@ open class BlockLongPress: UILongPressGestureRecognizer {
     convenience init (action: ((UILongPressGestureRecognizer) -> Void)?) {
         self.init()
         longPressAction = action
-        addTarget(self, action: #selector(BlockLongPress.didLongPressed(_:)))
+        addTarget(self, action: #selector(YEXBlockLongPress.didLongPressed(_:)))
     }
 
     @objc open func didLongPressed(_ longPress: UILongPressGestureRecognizer) {

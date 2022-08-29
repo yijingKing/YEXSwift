@@ -19,7 +19,7 @@ public extension YEXProtocol where T: UITextView {
             return obj.placeholder
         }
     }
-    var placeholderColor: UIColor? {
+    var placeholderColor: UIColor {
         set {
             obj.placeholderColor = newValue
         }
@@ -49,7 +49,7 @@ public extension UITextView {
     }
     //MARK: --- 占位字颜色
     ///占位字颜色
-    var placeholderColor: UIColor? {
+    var placeholderColor: UIColor {
         set {
             objc_setAssociatedObject(self, YEXRuntimeKey.placeholderColorKey!, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
@@ -76,9 +76,8 @@ public extension UITextView {
         if hasText {
             return
         }
-        
         // 属性
-        let attrs: [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor: placeholderColor,NSAttributedString.Key.font: font ?? UIFont.systemFont(ofSize: 16)]
+        let attrs: [NSAttributedString.Key: Any] = [NSAttributedString.Key.foregroundColor: placeholderColor ,NSAttributedString.Key.font: font ?? UIFont.systemFont(ofSize: 16)]
         // 文字
         var rect1 = rect
         rect1.origin.x = 5

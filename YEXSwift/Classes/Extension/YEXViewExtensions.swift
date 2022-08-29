@@ -13,8 +13,7 @@ import QuartzCore
 //MARK: --- 框线
 public extension YEXProtocol where T: UIView {
     /// 单边边框线
-    @discardableResult
-    func addBorder(side: UIView.ViewSide, thickness: CGFloat, color: UIColor, leftOffset: CGFloat = 0, rightOffset: CGFloat = 0, topOffset: CGFloat = 0, bottomOffset: CGFloat = 0) -> YEXProtocol {
+    func addBorder(side: UIView.ViewSide, thickness: CGFloat, color: UIColor, leftOffset: CGFloat = 0, rightOffset: CGFloat = 0, topOffset: CGFloat = 0, bottomOffset: CGFloat = 0) {
         obj.layoutIfNeeded()
         switch side {
         case .top:
@@ -40,11 +39,9 @@ public extension YEXProtocol where T: UIView {
                                                                        height: obj.bounds.size.height - topOffset - bottomOffset), color: color)
             obj.layer.addSublayer(border)
         }
-        return self
     }
     /// 渐变色
-    @discardableResult
-    func gradientLayer (direction: UIView.GradientDirection,locations: Array<NSNumber> = [0.0,1.0] ,colors: [UIColor]) -> YEXProtocol {
+    func gradientLayer (direction: UIView.GradientDirection,locations: Array<NSNumber> = [0.0,1.0] ,colors: [UIColor]) {
         obj.layoutIfNeeded()
         let gradientLayer = CAGradientLayer.init()
         gradientLayer.frame = obj.bounds
@@ -73,22 +70,18 @@ public extension YEXProtocol where T: UIView {
             break
         }
         obj.layer.insertSublayer(gradientLayer, at: 0)
-        return self
     }
     /// 添加多个视图
-    @discardableResult
-    func addSubviews(_ views: [UIView]) -> YEXProtocol {
+    func addSubviews(_ views: [UIView]) {
         views.forEach { eachView in
             obj.addSubview(eachView)
         }
-        return self
     }
 }
 
 //MARK: --- 跳转
 public extension YEXProtocol where T: UIView {
-    @discardableResult
-    func push(_ vc: UIViewController, animated: Bool = true) -> YEXProtocol {
+    func push(_ vc: UIViewController, animated: Bool = true) {
         if let currentC = currentController() {
             if currentC.isKind(of: UINavigationController.self) {
                 if let nav = currentC as? UINavigationController {
@@ -106,10 +99,9 @@ public extension YEXProtocol where T: UIView {
                 }
             }
         }
-        return self
     }
-    @discardableResult
-    func pop(_ animated: Bool = true) -> YEXProtocol {
+
+    func pop(_ animated: Bool = true) {
         if let currentC = currentController() {
             if currentC.isKind(of: UINavigationController.self) {
                 ((currentC as? UINavigationController))?.popViewController(animated: animated)
@@ -117,27 +109,24 @@ public extension YEXProtocol where T: UIView {
                 currentC.dismiss(animated: animated, completion: nil)
             }
         }
-        return self
     }
-    @discardableResult
-    func popRootViewController(_ animated: Bool = true) -> YEXProtocol {
+    
+    func popRootViewController(_ animated: Bool = true) {
         if let currentC = currentController() {
             if currentC.isKind(of: UINavigationController.self) {
                 ((currentC as? UINavigationController))?.popToRootViewController(animated: animated)
             }
         }
-        return self
     }
-    @discardableResult
-    func present(_ vc: UIViewController, animated: Bool = true) -> YEXProtocol {
+    
+    func present(_ vc: UIViewController, animated: Bool = true) {
         currentController()?.present(vc, animated: animated, completion: nil)
-        return self
     }
-    @discardableResult
-    func dismiss(_ animated: Bool = true) -> YEXProtocol {
+
+    func dismiss(_ animated: Bool = true) {
         currentController()? .dismiss(animated: animated, completion: nil)
-        return self
     }
+    
     ///获取父控制器
     func currentController() -> UIViewController? {
         for view in sequence(first: obj.superview, next: { $0?.superview }) {
@@ -162,31 +151,22 @@ public extension YEXProtocol where T: UIView {
 public extension YEXProtocol where T: UIView {
     //MARK: --- 切圆角
     ///切圆角
-    @discardableResult
-    func cornerRadii(_ radii: CGFloat) -> YEXProtocol {
-        obj.layoutIfNeeded()
+    func cornerRadii(_ radii: CGFloat) {
         obj.cornerRadii = .init(radii)
-        return self
     }
     //MARK: --- 切圆角
     ///切圆角
-    @discardableResult
-    func cornerRadii(_ topLeft: CGFloat,_ topRight: CGFloat,_ bottomLeft: CGFloat,_ bottomRight: CGFloat) -> YEXProtocol {
-        obj.layoutIfNeeded()
+    func cornerRadii(_ topLeft: CGFloat,_ topRight: CGFloat,_ bottomLeft: CGFloat,_ bottomRight: CGFloat) {
         obj.cornerRadii = .init(topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight)
-        return self
     }
     //MARK: --- 边框
     ///边框
-    @discardableResult
-    func borderWidth(width: CGFloat) -> YEXProtocol {
+    func borderWidth(width: CGFloat) {
         obj.layer.borderWidth = width
-        return self
     }
     //MARK: --- 阴影
     ///阴影
-    @discardableResult
-    func addShadow(offset: CGSize, radius: CGFloat, color: UIColor, opacity: Float,_ cornerRadius: CGFloat? = nil) -> YEXProtocol {
+    func addShadow(offset: CGSize, radius: CGFloat, color: UIColor, opacity: Float,_ cornerRadius: CGFloat? = nil) {
         obj.layer.shadowOffset = offset
         obj.layer.shadowRadius = radius
         obj.layer.shadowOpacity = opacity
@@ -194,51 +174,33 @@ public extension YEXProtocol where T: UIView {
         if let r = cornerRadius {
             obj.layer.shadowPath = UIBezierPath(roundedRect: obj.bounds, cornerRadius: r).cgPath
         }
-        return self
     }
     //MARK: ------- 边框
     ///边框
-    @discardableResult
-    func addBorder(width: CGFloat, _ color: UIColor = .black) -> YEXProtocol {
+    func addBorder(width: CGFloat, _ color: UIColor = .black) {
         obj.layer.borderWidth = width
         obj.layer.borderColor = color.cgColor
         obj.layer.masksToBounds = true
-        return self
     }
-    
     ///边框-上
-    @discardableResult
-    func addBorderTop(_ size: CGFloat,_ padding: CGFloat = 0,_ color: UIColor = .black) -> YEXProtocol {
+    func addBorderTop(_ size: CGFloat,_ padding: CGFloat = 0,_ color: UIColor = .black) {
         obj.yex._addBorderUtility(x: padding, y: 0, width: obj.frame.width - padding * 2, height: size, color: color)
-        return self
     }
-    
     ///边框-下
-    @discardableResult
-    func addBorderBottom(_ size: CGFloat,_ padding: CGFloat = 0,_ color: UIColor = .black) -> YEXProtocol {
+    func addBorderBottom(_ size: CGFloat,_ padding: CGFloat = 0,_ color: UIColor = .black) {
         obj.yex._addBorderUtility(x: padding, y: obj.frame.height - size, width: obj.frame.width - padding * 2, height: size, color: color)
-        return self
     }
-    
     ///边框-左
-    @discardableResult
-    func addBorderLeft(_ size: CGFloat,_ padding: CGFloat = 0,_ color: UIColor = .black) -> YEXProtocol {
+    func addBorderLeft(_ size: CGFloat,_ padding: CGFloat = 0,_ color: UIColor = .black) {
         obj.yex._addBorderUtility(x: 0, y: padding, width: size, height: obj.frame.height - padding * 2, color: color)
-        return self
     }
-    
     ///边框-右
-    @discardableResult
-    func addBorderRight(_ size: CGFloat,_ padding: CGFloat = 0,_ color: UIColor = .black) -> YEXProtocol {
+    func addBorderRight(_ size: CGFloat,_ padding: CGFloat = 0,_ color: UIColor = .black) {
         obj.yex._addBorderUtility(x: obj.frame.width - size, y: padding, width: size, height: obj.frame.height - padding * 2, color: color)
-        return self
     }
-    
-    
     //MARK: --- 绘画
     ///画圆
-    @discardableResult
-    func drawCircle(fillColor: UIColor,_ strokeColor: UIColor = .black, strokeWidth: CGFloat) -> YEXProtocol {
+    func drawCircle(fillColor: UIColor,_ strokeColor: UIColor = .black, strokeWidth: CGFloat) {
         let path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: obj.yex.width, height: obj.yex.width), cornerRadius: obj.yex.width / 2)
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
@@ -246,12 +208,9 @@ public extension YEXProtocol where T: UIView {
         shapeLayer.strokeColor = strokeColor.cgColor
         shapeLayer.lineWidth = strokeWidth
         obj.layer.addSublayer(shapeLayer)
-        return self
     }
-    
     ///画中空圆
-    @discardableResult
-    func drawStroke(width: CGFloat,_ color: UIColor = .black) -> YEXProtocol {
+    func drawStroke(width: CGFloat,_ color: UIColor = .black) {
         let path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: width, height: width), cornerRadius: width / 2)
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
@@ -259,12 +218,9 @@ public extension YEXProtocol where T: UIView {
         shapeLayer.strokeColor = color.cgColor
         shapeLayer.lineWidth = width
         obj.layer.addSublayer(shapeLayer)
-        return self
     }
-    
     ///画虚线
-    @discardableResult
-    func drawDashLine(lineLength: Int ,lineSpacing: Int,lineColor: UIColor) -> YEXProtocol {
+    func drawDashLine(lineLength: Int ,lineSpacing: Int,lineColor: UIColor) {
         let shapeLayer = CAShapeLayer()
         shapeLayer.bounds = obj.bounds
         //        只要是CALayer这种类型,他的anchorPoint默认都是(0.5,0.5)
@@ -283,15 +239,11 @@ public extension YEXProtocol where T: UIView {
         
         shapeLayer.path = path
         obj.layer.addSublayer(shapeLayer)
-        return self
     }
-    
     ///移除layer
-    @discardableResult
-    func removeLayer() -> YEXProtocol {
+    func removeLayer() {
         obj.layer.mask = nil
         obj.layer.borderWidth = 0
-        return self
     }
 }
 
@@ -361,7 +313,7 @@ public extension UIView {
 }
 
 //MARK: --- frame
-public extension YEXProtocol where T: UIView{
+public extension YEXProtocol where T: UIView {
     var x: CGFloat {
         get {
             return obj.frame.origin.x
@@ -467,7 +419,7 @@ public extension UIView {
     }
     ///单击
     func addTapGesture(_ action: ((UITapGestureRecognizer) -> Void)?) {
-        let tap = BlockTap(tapCount: 1, fingerCount: 1, action: action)
+        let tap = YEXBlockTap(tapCount: 1, fingerCount: 1, action: action)
         addGestureRecognizer(tap)
         isUserInteractionEnabled = true
     }
@@ -485,7 +437,7 @@ public extension UIView {
     func addSwipeGesture(_ direction: UISwipeGestureRecognizer.Direction,
                          _ numberOfTouches: Int = 1,
                          _ action: ((UISwipeGestureRecognizer) -> Void)?) {
-        let swipe = BlockSwipe(direction: direction, fingerCount: numberOfTouches, action: action)
+        let swipe = YEXBlockSwipe(direction: direction, fingerCount: numberOfTouches, action: action)
         addGestureRecognizer(swipe)
         isUserInteractionEnabled = true
     }
@@ -497,7 +449,7 @@ public extension UIView {
     }
     ///拖动
     func addPanGesture(_ action: ((UIPanGestureRecognizer) -> Void)?) {
-        let pan = BlockPan(action: action)
+        let pan = YEXBlockPan(action: action)
         addGestureRecognizer(pan)
         isUserInteractionEnabled = true
     }
@@ -509,13 +461,11 @@ public extension UIView {
     }
     ///长按
     func addLongPressGesture(_ action: ((UILongPressGestureRecognizer) -> Void)?) {
-        let longPress = BlockLongPress(action: action)
+        let longPress = YEXBlockLongPress(action: action)
         addGestureRecognizer(longPress)
         isUserInteractionEnabled = true
     }
 }
-
-
 
 //MARK: --- 圆角
 fileprivate extension UIView {

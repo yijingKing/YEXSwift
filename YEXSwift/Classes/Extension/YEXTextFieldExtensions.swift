@@ -11,43 +11,35 @@ import UIKit
 
 public extension YEXProtocol where T: UITextField {
     ///标识
-    @discardableResult
-    func identify(_ identify: String) -> YEXProtocol {
+    func identify(_ identify: String) {
         obj.identify = identify
-        return self
     }
     func identify() -> String {
         return obj.identify
     }
     ///最大字数
-    @discardableResult
-    func maxCount(_ count: Int) -> YEXProtocol {
+    func maxCount(_ count: Int) {
         obj.maxCount = count
-        return self
     }
     ///占位字颜色
-    @discardableResult
-    func placeholderColor(_ color: UIColor) -> YEXProtocol {
+    func placeholderColor(_ color: UIColor) {
         obj.placeholderColor = color
-        return self
     }
     /// 文本距离左右侧的距离
     ///
     /// - Parameters:
     ///   - leftWidth: 左侧距离
     ///   - rightWidth: 右侧距离
-    @discardableResult
     func distanceSides(_ leftWidth:CGFloat,
-                          _ rightWidth:CGFloat? = nil) -> YEXProtocol {
+                          _ rightWidth:CGFloat? = nil) {
         //左侧view
-        let leftV = UIView(frame: CGRect(x: 0, y: 0, width: leftWidth, height: 5.auto()))
+        let leftV = UIView(frame: CGRect(x: 0, y: 0, width: leftWidth, height: 5.auto))
         obj.leftViewMode = .always
         obj.leftView = leftV
         //右侧view
-        let rightV = UIView(frame: CGRect(x: 0, y: 0, width: rightWidth!, height: 5.auto()))
+        let rightV = UIView(frame: CGRect(x: 0, y: 0, width: rightWidth!, height: 5.auto))
         obj.rightViewMode = .always
         obj.rightView = rightV
-        return self
     }
     /// 添加标题
     ///
@@ -55,22 +47,20 @@ public extension YEXProtocol where T: UITextField {
     ///   - titleLabel: titleLabel
     ///   - titleWidth: titleWidth
     ///   - spacing: 距离左侧的距离
-    @discardableResult
     func leftTitle(_ title: String,
                       _ titleWidth: CGFloat,
                       _ color: UIColor? = nil,
                       _ font: UIFont? = nil,
-                      _ textAlignment: NSTextAlignment? = nil) -> YEXProtocol {
+                      _ textAlignment: NSTextAlignment? = nil) {
         let button = UIButton()
         button.title = title
         button.color = color
         button.font = font
-        let leftV = UIView(frame: CGRect(x: 0, y: 0, width: titleWidth, height: 30.auto()))
-        button.frame = CGRect(x: 0, y: 0, width: titleWidth , height: 30.auto())
+        let leftV = UIView(frame: CGRect(x: 0, y: 0, width: titleWidth, height: 30.auto))
+        button.frame = CGRect(x: 0, y: 0, width: titleWidth , height: 30.auto)
         leftV.addSubview(button)
         obj.leftViewMode = .always
         obj.leftView = leftV
-        return self
     }
     
     /// 添加左侧icon
@@ -79,9 +69,8 @@ public extension YEXProtocol where T: UITextField {
     ///   - image: image
     ///   - size: icon的size
     ///   - padding: 距离文本距离
-    @discardableResult
     func leftIcon(_ image: UIImage,
-                  _ size:CGSize) -> YEXProtocol {
+                  _ size:CGSize) {
         let leftV = UIView(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         let button = UIButton()
         button.image = image
@@ -89,7 +78,6 @@ public extension YEXProtocol where T: UITextField {
         button.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         obj.leftViewMode = .always
         obj.leftView = leftV
-        return self
     }
     
     /// 添加标题
@@ -98,23 +86,21 @@ public extension YEXProtocol where T: UITextField {
     ///   - titleLabel: titleLabel
     ///   - titleWidth: titleWidth
     ///   - spacing: 距离右侧的距离
-    @discardableResult
     func rightTitle(_ title: String,
                        _ titleWidth: CGFloat,
                        _ color: UIColor? = nil,
                        _ font: UIFont? = nil,
-                       block:((UIButton)->())?) -> YEXProtocol {
+                       block:((UIButton)->())?) {
         let button = UIButton()
         button.title = title
         button.color = color
         button.font = font
         button.yex.addTarget(block)
-        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: titleWidth, height: 30.auto()))
-        button.frame = CGRect(x: 0, y: 0, width: titleWidth, height: 30.auto())
+        let rightView = UIView(frame: CGRect(x: 0, y: 0, width: titleWidth, height: 30.auto))
+        button.frame = CGRect(x: 0, y: 0, width: titleWidth, height: 30.auto)
         rightView.addSubview(button)
         obj.rightViewMode = .always
         obj.rightView = rightView
-        return self
     }
     
     /// 添加右侧icon
@@ -123,8 +109,7 @@ public extension YEXProtocol where T: UITextField {
     ///   - image: image
     ///   - size: size
     ///   - padding: padding
-    @discardableResult
-    func rightIcon(_ image: UIImage,size:CGSize,_ block:((UIButton)->())?) -> YEXProtocol {
+    func rightIcon(_ image: UIImage,size:CGSize,_ block:((UIButton)->())?) {
         let rightV = UIView(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         let button = UIButton()
         button.image = image
@@ -133,16 +118,13 @@ public extension YEXProtocol where T: UITextField {
         rightV.addSubview(button)
         obj.rightViewMode = .always
         obj.rightView = rightV
-        return self
     }
     /// 方法
     /// - Parameters:
     ///   - event: 事件方式
     ///   - block: 回调
-    @discardableResult
-    func addTarget(_ event: UIControl.Event, _ block: ((UITextField)->())?) -> YEXProtocol {
+    func addTarget(_ event: UIControl.Event, _ block: ((UITextField)->())?) {
         obj.allEvent(event, block)
-        return self
     }
     
 }

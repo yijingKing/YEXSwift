@@ -1,69 +1,71 @@
 /*******************************************************************************
-Copyright (K), 2020 - ~, ╰莪呮想好好宠Nǐつ
+ Copyright (K), 2020 - ~, ╰莪呮想好好宠Nǐつ
 
-Author:        ╰莪呮想好好宠Nǐつ
-E-mail:        1091676312@qq.com
-GitHub:        https://github.com/yijingKing
-********************************************************************************/
+ Author:        ╰莪呮想好好宠Nǐつ
+ E-mail:        1091676312@qq.com
+ GitHub:        https://github.com/yijingKing
+ ********************************************************************************/
 
-import UIKit
 import Foundation
+import UIKit
 
 /*
-G:      公元时代，例如AD公元
-yy:     年的后2位
-yyyy:   完整年
-MM:     月，显示为1-12,带前置0
-MMM:    月，显示为英文月份简写,如 Jan
-MMMM:   月，显示为英文月份全称，如 Janualy
-dd:     日，2位数表示，如02
-d:      日，1-2位显示，如2，无前置0
-EEE:    简写星期几，如Sun
-EEEE:   全写星期几，如Sunday
-aa:     上下午，AM/PM
-H:      时，24小时制，0-23
-HH:     时，24小时制，带前置0
-h:      时，12小时制，无前置0
-hh:     时，12小时制，带前置0
-m:      分，1-2位
-mm:     分，2位，带前置0
-s:      秒，1-2位
-ss:     秒，2位，带前置0
-S:      毫秒
-Z:      GMT（时区）
-*/
+ G:      公元时代，例如AD公元
+ yy:     年的后2位
+ yyyy:   完整年
+ MM:     月，显示为1-12,带前置0
+ MMM:    月，显示为英文月份简写,如 Jan
+ MMMM:   月，显示为英文月份全称，如 Janualy
+ dd:     日，2位数表示，如02
+ d:      日，1-2位显示，如2，无前置0
+ EEE:    简写星期几，如Sun
+ EEEE:   全写星期几，如Sunday
+ aa:     上下午，AM/PM
+ H:      时，24小时制，0-23
+ HH:     时，24小时制，带前置0
+ h:      时，12小时制，无前置0
+ hh:     时，12小时制，带前置0
+ m:      分，1-2位
+ mm:     分，2位，带前置0
+ s:      秒，1-2位
+ ss:     秒，2位，带前置0
+ S:      毫秒
+ Z:      GMT（时区）
+ */
 /// 60s
-public let YEXDate_minute    = 60
+public let YEXDate_minute = 60
 /// 3600s
-public let YEXDate_hour      = 60 * 60
+public let YEXDate_hour = 60 * 60
 /// 86400
-public let YEXDate_day       = 60 * 60 * 24
+public let YEXDate_day = 60 * 60 * 24
 /// 604800
-public let YEXDate_week      = 60 * 60 * 24 * 7
+public let YEXDate_week = 60 * 60 * 24 * 7
 /// 31556926
-public let YEXDate_year      = 60 * 60 * 24 * 365
+public let YEXDate_year = 60 * 60 * 24 * 365
 
 public enum YEXDateFormatter: String {
-    ///月
-    case dateModeM          = "MMMM"
-    ///星期
-    case dateModeE          = "EEEE"
-    ///年
-    case dateModeY          = "yyyy"
-    ///年月
-    case dateModeYM         = "yyyy-MM"
-    ///年月日
-    case dateModeYMD        = "yyyy-MM-dd"
-    ///年月日时
-    case dateModeYMDH       = "yyyy-MM-dd HH"
-    ///年月日时分
-    case dateModeYMDHM      = "yyyy-MM-dd HH:mm"
-    ///年月日时分秒
-    case dateModeYMDHMS     = "yyyy-MM-dd HH:mm:ss"
-    ///年月日时分秒毫秒
-    case dateModeYMDHMSSS   = "yyyy-MM-dd HH:mm:ss SSS"
+    /// 月
+    case dateModeM = "MMMM"
+    /// 星期
+    case dateModeE = "EEEE"
+    /// 年
+    case dateModeY = "yyyy"
+    /// 年月
+    case dateModeYM = "yyyy-MM"
+    /// 年月日
+    case dateModeYMD = "yyyy-MM-dd"
+    /// 年月日时
+    case dateModeYMDH = "yyyy-MM-dd HH"
+    /// 年月日时分
+    case dateModeYMDHM = "yyyy-MM-dd HH:mm"
+    /// 年月日时分秒
+    case dateModeYMDHMS = "yyyy-MM-dd HH:mm:ss"
+    /// 年月日时分秒毫秒
+    case dateModeYMDHMSSS = "yyyy-MM-dd HH:mm:ss SSS"
 }
+
 // MARK: 时间条的显示格式
+
 public enum YEXTimeBarType {
     // 默认格式，如 9秒：09，66秒：01：06，
     case normal
@@ -71,6 +73,7 @@ public enum YEXTimeBarType {
     case minute
     case hour
 }
+
 /// 时间戳的类型
 public enum YEXTimestampType: Int {
     /// 秒
@@ -79,34 +82,34 @@ public enum YEXTimestampType: Int {
     case millisecond
 }
 
-
-public class DateFormattersManager {
-    public static var dateFormatters: SynchronizedDictionary = SynchronizedDictionary<String, DateFormatter>()
+public enum DateFormattersManager {
+    public static var dateFormatters = SynchronizedDictionary<String, DateFormatter>()
 }
 
 public extension YEXProtocol where T == Date {
     /// 获取当前的时间 Date
-    static var currentDate : Date {
+    static var currentDate: Date {
         return T()
     }
-    /// 获取当前 秒级 时间戳 - 10 位
-    static var secondStamp : String {
-        let timeInterval: TimeInterval = T().timeIntervalSince1970
+
+    /// 秒级 时间戳 - 10 位
+    var secondStamp: String {
+        let timeInterval: TimeInterval = obj.timeIntervalSince1970
         return "\(Int(timeInterval))"
     }
-    
-    /// 获取当前 毫秒级 时间戳 - 13 位
-    static var milliStamp : String {
-        let timeInterval: TimeInterval = T().timeIntervalSince1970
-        let millisecond = CLongLong(Darwin.round(timeInterval*1000))
+
+    /// 毫秒级 时间戳 - 13 位
+    var milliStamp: String {
+        let timeInterval: TimeInterval = obj.timeIntervalSince1970
+        let millisecond = CLongLong(Darwin.round(timeInterval * 1000))
         return "\(millisecond)"
     }
-    
+
     /// 时间戳(支持 10 位 和 13 位) 转 Date
     /// - Parameter timestamp: 时间戳
     /// - Returns: 返回 Date
     static func timestampToFormatterDate(timestamp: String) -> Date {
-        guard timestamp.count == 10 ||  timestamp.count == 13 else {
+        guard timestamp.count == 10 || timestamp.count == 13 else {
             #if DEBUG
             fatalError("时间戳位数不是 10 也不是 13")
             #else
@@ -125,7 +128,7 @@ public extension YEXProtocol where T == Date {
         let date = Date(timeIntervalSince1970: TimeInterval(timestampValue))
         return date
     }
-    
+
     /// 带格式的时间转 时间戳，支持返回 13位 和 10位的时间戳，时间字符串和时间格式必须保持一致
     /// - Parameters:
     ///   - timeString: 时间字符串，如：2020-10-26 16:52:41
@@ -133,7 +136,7 @@ public extension YEXProtocol where T == Date {
     ///   - timestampType: 返回的时间戳类型，默认是秒 10 为的时间戳字符串
     /// - Returns: 返回转化后的时间戳
     static func formatterTimeStringToTimestamp(timesString: String, formatter: String, timestampType: YEXTimestampType = .second) -> String {
-        let dateFormatter = DateFormatter.init()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = formatter
         guard let date = dateFormatter.date(from: timesString) else {
             #if DEBUG
@@ -147,14 +150,14 @@ public extension YEXProtocol where T == Date {
         }
         return "\(Int((date.timeIntervalSince1970) * 1000))"
     }
-    
+
     /// 秒转换成播放时间条的格式
     /// - Parameters:
     ///   - secounds: 秒数
     ///   - type: 格式类型
     /// - Returns: 返回时间条
     static func getFormatPlayTime(seconds: Int, type: YEXTimeBarType = .normal) -> String {
-        if seconds <= 0{
+        if seconds <= 0 {
             return "00:00"
         }
         // 秒
@@ -185,10 +188,10 @@ public extension YEXProtocol where T == Date {
         }
         return String(format: "%02d", second)
     }
-    
+
     /// 取得与当前时间的间隔差
     /// - Returns: 时间差
-    func callTimeAfterNow() -> String {
+    var callTimeAfterNow: String {
         let timeInterval = Date().timeIntervalSince(obj)
         if timeInterval < 0 {
             return "刚刚"
@@ -199,8 +202,8 @@ public extension YEXProtocol where T == Date {
         let i86400 = interval / 86400
         let i2592000 = interval / 2592000
         let i31104000 = interval / 31104000
-        
-        var time:String!
+
+        var time: String!
         if i3600 < 1 {
             let s = NSNumber(value: i60 as Double).intValue
             if s == 0 {
@@ -223,13 +226,13 @@ public extension YEXProtocol where T == Date {
         }
         return time
     }
-    
+
     /// 获取某一年某一月的天数
     /// - Parameters:
     ///   - year: 年份
     ///   - month: 月份
     /// - Returns: 返回天数
-    static func daysCount(year: Int, month: Int) -> Int {
+    func daysCount(year: Int, month: Int) -> Int {
         switch month {
         case 1, 3, 5, 7, 8, 10, 12:
             return 31
@@ -239,34 +242,42 @@ public extension YEXProtocol where T == Date {
             let isLeapYear = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)
             return isLeapYear ? 29 : 28
         default:
+            #if DEBUG
             fatalError("非法的月份:\(month)")
+            #else
+            return 0
+            #endif
         }
     }
-    
+
     /// 获取当前月的天数
     /// - Returns: 返回天数
-    static func currentMonthDays() -> Int {
-        return daysCount(year: Date.yex.currentDate.yex.year(), month: Date.yex.currentDate.yex.month())
+    var currentMonthDays: Int {
+        return daysCount(year: obj.yex.year, month: obj.yex.month)
     }
 }
 
-//MARK: --- 转换
-public extension YEXProtocol where T ==  Date {
-    //MARK: --- 将日期转换为字符串
-    ///将日期转换为字符串
-    func toString(format dateFormat: YEXDateFormatter = .dateModeYMDHMS,_ timeZone: TimeZone = NSTimeZone.system) -> String {
+// MARK: - -- 转换
+
+public extension YEXProtocol where T == Date {
+    // MARK: - -- 将日期转换为字符串
+
+    /// 将日期转换为字符串
+    func toString(format dateFormat: YEXDateFormatter = .dateModeYMDHMS, _ timeZone: TimeZone = NSTimeZone.system) -> String {
         let formatter = DateFormatter()
-        formatter.locale = Locale.init(identifier: "zh_CN")
+        formatter.locale = Locale(identifier: "zh_CN")
         formatter.dateFormat = dateFormat.rawValue
         formatter.timeZone = timeZone
         let date = formatter.string(from: obj)
         return date
     }
-    //MARK: --- 将日期转换为字符串
-    ///将日期转换为字符串
-    func toString(format formatstr: String,_ timeZone: TimeZone = NSTimeZone.system) -> String {
+
+    // MARK: - -- 将日期转换为字符串
+
+    /// 将日期转换为字符串
+    func toString(format formatstr: String, _ timeZone: TimeZone = NSTimeZone.system) -> String {
         let formatter = DateFormatter()
-        formatter.locale = Locale.init(identifier: "zh_CN")
+        formatter.locale = Locale(identifier: "zh_CN")
         formatter.dateFormat = formatstr
         formatter.timeZone = timeZone
         let date = formatter.string(from: obj)
@@ -275,63 +286,64 @@ public extension YEXProtocol where T ==  Date {
 }
 
 public extension YEXProtocol where T == Date {
-    //MARK: --- 计算
-    ///计算两时间差
+    // MARK: - -- 计算
+
+    /// 计算两时间差
     func calculate(_ formatter: String, startTime: String, endTime: String, timeZone: TimeZone? = nil) -> DateComponents? {
         let dateFormatter = DateFormatter()
-        
-        dateFormatter.timeZone = timeZone ?? TimeZone.init(secondsFromGMT: 8)
+
+        dateFormatter.timeZone = timeZone ?? TimeZone(secondsFromGMT: 8)
         dateFormatter.dateFormat = formatter
-        if let date1 = dateFormatter.date(from: startTime),let date2 = dateFormatter.date(from: endTime) {
-            let components = NSCalendar.current.dateComponents([.year,.month,.day], from: date1, to: date2)
+        if let date1 = dateFormatter.date(from: startTime), let date2 = dateFormatter.date(from: endTime) {
+            let components = NSCalendar.current.dateComponents([.year, .month, .day], from: date1, to: date2)
             return components
         } else {
             return nil
         }
     }
-    
-    ///计算两时间差多少年
+
+    /// 计算两时间差多少年
     func calculateYear(_ formatter: String, startTime: String, endTime: String, timeZone: TimeZone? = nil) -> Int? {
         let dateFormatter = DateFormatter()
-        
-        dateFormatter.timeZone = timeZone ?? TimeZone.init(secondsFromGMT: 8)
+
+        dateFormatter.timeZone = timeZone ?? TimeZone(secondsFromGMT: 8)
         dateFormatter.dateFormat = formatter
 
-        if let date1 = dateFormatter.date(from: startTime),let date2 = dateFormatter.date(from: endTime) {
+        if let date1 = dateFormatter.date(from: startTime), let date2 = dateFormatter.date(from: endTime) {
             let components = NSCalendar.current.dateComponents([.year], from: date1, to: date2)
             return components.year
         }
         return nil
     }
-    
-    ///计算两时间差多少月
+
+    /// 计算两时间差多少月
     func calculateMonth(_ formatter: String, startTime: String, endTime: String, timeZone: TimeZone? = nil) -> Int? {
         let dateFormatter = DateFormatter()
-        
-        dateFormatter.timeZone = timeZone ?? TimeZone.init(secondsFromGMT: 8)
+
+        dateFormatter.timeZone = timeZone ?? TimeZone(secondsFromGMT: 8)
         dateFormatter.dateFormat = formatter
 
-        if let date1 = dateFormatter.date(from: startTime),let date2 = dateFormatter.date(from: endTime) {
+        if let date1 = dateFormatter.date(from: startTime), let date2 = dateFormatter.date(from: endTime) {
             let components = NSCalendar.current.dateComponents([.month], from: date1, to: date2)
             return components.month
         }
         return nil
     }
-    
-    ///计算两时间差多少天
+
+    /// 计算两时间差多少天
     func calculateDay(_ formatter: String, startTime: String, endTime: String, timeZone: TimeZone? = nil) -> Int? {
         let dateFormatter = DateFormatter()
-        
-        dateFormatter.timeZone = timeZone ?? TimeZone.init(secondsFromGMT: 8)
+
+        dateFormatter.timeZone = timeZone ?? TimeZone(secondsFromGMT: 8)
         dateFormatter.dateFormat = formatter
 
-        if let date1 = dateFormatter.date(from: startTime),let date2 = dateFormatter.date(from: endTime) {
+        if let date1 = dateFormatter.date(from: startTime), let date2 = dateFormatter.date(from: endTime) {
             let components = NSCalendar.current.dateComponents([.day], from: date1, to: date2)
             return components.day
         }
         return nil
     }
-    
+
     ///  当前到date经过了多少天
     func daysInBetweenDate(_ date: Date) -> Double {
         var diff = obj.timeIntervalSince1970 - date.timeIntervalSince1970
@@ -352,159 +364,185 @@ public extension YEXProtocol where T == Date {
         diff = fabs(diff / Double(YEXDate_minute))
         return diff
     }
-    
+
     ///  当前到date经过了多少秒
     func secondsInBetweenDate(_ date: Date) -> Double {
         var diff = obj.timeIntervalSince1970 - date.timeIntervalSince1970
         diff = fabs(diff)
         return diff
     }
-    
+
     ///  Easy creation of time passed String. Can be Years, Months, days, hours, minutes or seconds
-    func timePassed() -> String {
+    var timePassedString: String {
         let date = Date()
         let calendar = Calendar.autoupdatingCurrent
         let components = (calendar as NSCalendar).components([.year, .month, .day, .hour, .minute, .second], from: obj, to: date, options: [])
-        var str: String
-        
+
         if components.year! >= 1 {
-            components.year == 1 ? (str = "year"): (str = "years")
-            return "\(components.year!) \(str) ago"
+            return "\(components.year!)年前"
         } else if components.month! >= 1 {
-            components.month == 1 ? (str = "month"): (str = "months")
-            return "\(components.month!) \(str) ago"
+            return "\(components.month!)月前"
         } else if components.day! >= 1 {
-            components.day == 1 ? (str = "day"): (str = "days")
-            return "\(components.day!) \(str) ago"
+            return "\(components.day!)天前"
         } else if components.hour! >= 1 {
-            components.hour == 1 ? (str = "hour"): (str = "hours")
-            return "\(components.hour!) \(str) ago"
+            return "\(components.hour!)小时前"
         } else if components.minute! >= 1 {
-            components.minute == 1 ? (str = "minute"): (str = "minutes")
-            return "\(components.minute!) \(str) ago"
+            return "\(components.minute!)分钟前"
         } else if components.second! >= 1 {
-            components.second == 1 ? (str = "second"): (str = "seconds")
-            return "\(components.second!) \(str) ago"
+            return "\(components.second!)秒前"
         } else {
-            return "Just now"
+            return "刚刚"
         }
     }
-    
+
     ///  Easy creation of time passed String. Can be Years, Months, days, hours, minutes or seconds. Useful for localization
-    func timePassed() -> TimePassed {
-        
+    var timePassed: YEXTimePassed {
         let date = Date()
         let calendar = Calendar.autoupdatingCurrent
         let components = (calendar as NSCalendar).components([.year, .month, .day, .hour, .minute, .second], from: obj, to: date, options: [])
-        
+
         if components.year! >= 1 {
-            return TimePassed.year(components.year!)
+            return YEXTimePassed.year(components.year!)
         } else if components.month! >= 1 {
-            return TimePassed.month(components.month!)
+            return YEXTimePassed.month(components.month!)
         } else if components.day! >= 1 {
-            return TimePassed.day(components.day!)
+            return YEXTimePassed.day(components.day!)
         } else if components.hour! >= 1 {
-            return TimePassed.hour(components.hour!)
+            return YEXTimePassed.hour(components.hour!)
         } else if components.minute! >= 1 {
-            return TimePassed.minute(components.minute!)
+            return YEXTimePassed.minute(components.minute!)
         } else if components.second! >= 1 {
-            return TimePassed.second(components.second!)
+            return YEXTimePassed.second(components.second!)
         } else {
-            return TimePassed.now
+            return YEXTimePassed.now
         }
     }
-    
-    //MARK: --- 检测
-    //MARK: --- 是否未来
+
+    // MARK: - -- 检测
+
+    // MARK: - -- 是否未来
+
     ///  是否未来
-    func future() -> Bool {
+    var future: Bool {
         return obj > Date()
     }
-    //MARK: --- 是否过去
+
+    // MARK: - -- 是否过去
+
     ///  是否过去
-    func isPast() -> Bool {
+    var isPast: Bool {
         return obj < Date()
     }
-    //MARK: --- 今天
+
+    // MARK: - -- 今天
+
     //  今天
-    func isToday() -> Bool {
+    var isToday: Bool {
         let dateFormatter = obj.getDateFormatter(for: .dateModeYMD)
         return dateFormatter.string(from: obj) == dateFormatter.string(from: Date())
     }
-    //MARK: --- 昨天
+
+    // MARK: - -- 昨天
+
     ///  昨天
-    func isYesterday() -> Bool {
+    var isYesterday: Bool {
         let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: Date())
         let dateFormatter = obj.getDateFormatter(for: .dateModeYMD)
         return dateFormatter.string(from: obj) == dateFormatter.string(from: yesterDay!)
     }
-    //MARK: --- 明天
+
+    // MARK: - -- 明天
+
     ///  明天
-    func isTomorrow() -> Bool {
+    var isTomorrow: Bool {
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())
         let dateFormatter = obj.getDateFormatter(for: .dateModeYMD)
-        
+
         return dateFormatter.string(from: obj) == dateFormatter.string(from: tomorrow!)
     }
-    //MARK: --- 在本月内
+
+    // MARK: - -- 在本月内
+
     ///  在本月内
-    func isThisMonth() -> Bool {
+    var isThisMonth: Bool {
         let today = Date()
-        return month() == today.yex.month() && year() == today.yex.year()
+        return month == today.yex.month && year == today.yex.year
     }
-    //MARK: --- 在本周内
+
+    // MARK: - -- 在本周内
+
     ///  在本周内
-    func isThisWeek() -> Bool {
+    var isThisWeek: Bool {
         return minutesInBetweenDate(Date()) <= Double(Date.minutesInAWeek)
     }
-    //MARK: --- era
+
+    // MARK: - -- era
+
     ///  era
-    func era() -> Int {
+    var era: Int {
         return Calendar.current.component(.era, from: obj)
     }
-    //MARK: --- 年
+
+    // MARK: - -- 年
+
     ///  年
-    func year() -> Int {
+    var year: Int {
         return Calendar.current.component(.year, from: obj)
     }
-    //MARK: --- 月
+
+    // MARK: - -- 月
+
     ///  月
-    func month() -> Int {
+    var month: Int {
         return Calendar.current.component(.month, from: obj)
     }
-    //MARK: --- 工作日
+
+    // MARK: - -- 工作日
+
     ///  工作日
-    func weekdayString() -> String {
+    var weekdayString: String {
         let dateFormatter = obj.getDateFormatter(for: .dateModeE)
         return dateFormatter.string(from: obj)
     }
-    //MARK: --- 月
+
+    // MARK: - -- 月
+
     ///  月
-    var monthString:  String {
+    var monthString: String {
         let dateFormatter = obj.getDateFormatter(for: .dateModeM)
         return dateFormatter.string(from: obj)
     }
-    //MARK: --- 天
+
+    // MARK: - -- 天
+
     ///  天
     var day: Int {
         return Calendar.current.component(.day, from: obj)
     }
-    //MARK: --- 时
+
+    // MARK: - -- 时
+
     ///  时
     var hour: Int {
         return Calendar.current.component(.hour, from: obj)
     }
-    //MARK: --- 分钟
+
+    // MARK: - -- 分钟
+
     ///  分钟
     var minute: Int {
         return Calendar.current.component(.minute, from: obj)
     }
-    //MARK: --- 秒
+
+    // MARK: - -- 秒
+
     ///  秒
     var second: Int {
         return Calendar.current.component(.second, from: obj)
     }
-    //MARK: --- 纳秒
+
+    // MARK: - -- 纳秒
+
     ///  纳秒
     var nanosecond: Int {
         return Calendar.current.component(.nanosecond, from: obj)
@@ -513,12 +551,15 @@ public extension YEXProtocol where T == Date {
 
 public extension Date {
     static let minutesInAWeek = YEXDate_week
-    //MARK: --- 初始化
+
+    // MARK: - -- 初始化
+
     ///  初始化
     init?(fromString string: String,
-                 format: String,
-                 timezone: TimeZone = TimeZone.autoupdatingCurrent,
-                 locale: Locale = Locale.current) {
+          format: String,
+          timezone: TimeZone = TimeZone.autoupdatingCurrent,
+          locale: Locale = Locale.current)
+    {
         if let dateFormatter = DateFormattersManager.dateFormatters.getValue(for: format) {
             if let date = dateFormatter.date(from: string) {
                 self = date
@@ -538,7 +579,7 @@ public extension Date {
             }
         }
     }
-    
+
     ///  Initializes Date from string returned from an http response, according to several RFCs / ISO
     init?(httpDateString: String) {
         if let rfc1123 = Date(fromString: httpDateString, format: "EEE',' dd' 'MMM' 'yyyy HH':'mm':'ss zzz") {
@@ -571,27 +612,28 @@ public extension Date {
         }
         return nil
     }
-    
-    ///时间戳初始化m 
+
+    /// 时间戳初始化m
     init?(_ timeInterval: Double) {
-        self = Date.init(timeIntervalSince1970: timeInterval)
+        self = Date(timeIntervalSince1970: timeInterval)
     }
-    
-    //MARK: --- 格式化
+
+    // MARK: - -- 格式化
+
     ///  格式化
     fileprivate func getDateFormatter(for format: YEXDateFormatter) -> DateFormatter {
-        
         var dateFormatter: DateFormatter?
         if let _dateFormatter = DateFormattersManager.dateFormatters.getValue(for: format.rawValue) {
-             dateFormatter = _dateFormatter
+            dateFormatter = _dateFormatter
         } else {
             dateFormatter = createDateFormatter(for: format.rawValue)
         }
-        
+
         return dateFormatter!
     }
 
-    //MARK: --- 格式化
+    // MARK: - -- 格式化
+
     /// 格式化
     fileprivate func createDateFormatter(for format: String) -> DateFormatter {
         let formatter = DateFormatter()
@@ -601,7 +643,7 @@ public extension Date {
     }
 }
 
-public enum TimePassed {
+public enum YEXTimePassed {
     case year(Int)
     case month(Int)
     case day(Int)
@@ -611,44 +653,40 @@ public enum TimePassed {
     case now
 }
 
-extension TimePassed: Equatable {
-    
-    public static func == (lhs: TimePassed, rhs: TimePassed) -> Bool {
-        
-        switch(lhs, rhs) {
-            
+extension YEXTimePassed: Equatable {
+    public static func == (lhs: YEXTimePassed, rhs: YEXTimePassed) -> Bool {
+        switch (lhs, rhs) {
         case (.year(let a), .year(let b)):
             return a == b
-            
+
         case (.month(let a), .month(let b)):
             return a == b
-            
+
         case (.day(let a), .day(let b)):
             return a == b
-            
+
         case (.hour(let a), .hour(let b)):
             return a == b
-            
+
         case (.minute(let a), .minute(let b)):
             return a == b
-            
+
         case (.second(let a), .second(let b)):
             return a == b
-            
+
         case (.now, .now):
             return true
-            
+
         default:
             return false
         }
     }
 }
 
-public class SynchronizedDictionary <Key: Hashable, Value> {
-    
+public class SynchronizedDictionary<Key: Hashable, Value> {
     fileprivate let queue = DispatchQueue(label: "SynchronizedDictionary", attributes: .concurrent)
     fileprivate var dict = [Key: Value]()
-    
+
     public func getValue(for key: Key) -> Value? {
         var value: Value?
         queue.sync {
@@ -656,16 +694,17 @@ public class SynchronizedDictionary <Key: Hashable, Value> {
         }
         return value
     }
-    
+
     public func setValue(for key: Key, value: Value) {
         queue.sync {
             dict[key] = value
         }
     }
+
     public func getSize() -> Int {
         return dict.count
     }
-    
+
     public func containValue(for key: Key) -> Bool {
         guard let _ = dict.index(forKey: key) else {
             return false
@@ -674,42 +713,51 @@ public class SynchronizedDictionary <Key: Hashable, Value> {
     }
 }
 
-//MARK: --- 前后时间
+// MARK: - -- 前后时间
+
 public extension YEXProtocol where T == Date {
-    //MARK: --- 加几天
-    ///加几天
+    // MARK: - -- 加几天
+
+    /// 加几天
     func addingDay(_ days: Int) -> Date? {
         var c = DateComponents()
         c.day = days
         let calender = Calendar(identifier: .chinese)
-        
+
         return calender.date(byAdding: c, to: obj)
     }
-    //MARK: --- 减几天
-    ///减几天
+
+    // MARK: - -- 减几天
+
+    /// 减几天
     func subtractingDay(_ days: Int) -> Date? {
         var c = DateComponents()
         c.day = days * -1
         let calender = Calendar(identifier: .chinese)
-        
+
         return calender.date(byAdding: c, to: obj)
     }
-    //MARK: --- 增加几小时
-    ///增加几小时
+
+    // MARK: - -- 增加几小时
+
+    /// 增加几小时
     func addingHours(_ dHours: Int) -> Date? {
         let aTimeInterval = TimeInterval(obj.timeIntervalSinceReferenceDate + Double(YEXDate_hour * dHours))
         let newDate = Date(timeIntervalSinceReferenceDate: aTimeInterval)
         return newDate
     }
-    //MARK: --- 减少几小时
-    ///减少几小时
+
+    // MARK: - -- 减少几小时
+
+    /// 减少几小时
     func subtractingHours(_ dHours: Int) -> Date {
         let aTimeInterval = TimeInterval(obj.timeIntervalSinceReferenceDate - Double(YEXDate_hour * dHours))
         let newDate = Date(timeIntervalSinceReferenceDate: aTimeInterval)
         return newDate
     }
-    ///转时间戳
-    func toCurrentTimeStamp(_ isMS:Bool = true) ->Int? {
+
+    /// 转时间戳
+    func toCurrentTimeStamp(_ isMS: Bool = true) -> Int? {
         let dateFormatter = DateFormatter()
         var format = "yyyy-MM-dd HH:mm:ss.SSS"
         if isMS == false {
@@ -717,7 +765,7 @@ public extension YEXProtocol where T == Date {
         }
         dateFormatter.dateFormat = format
         let dataString = dateFormatter.string(from: obj)
-        
+
         if let date = dateFormatter.date(from: dataString) {
             let stamp = date.timeIntervalSince1970
             return isMS ? Int(stamp * 1000) : Int(stamp)

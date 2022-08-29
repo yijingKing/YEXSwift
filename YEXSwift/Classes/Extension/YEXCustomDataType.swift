@@ -28,30 +28,37 @@ public struct YEXStrInt: Codable {
     }
 }
 
-///bool and int
-public struct YEXBoolInt: Codable {
+///bool int string
+public struct YEXBool: Codable {
     public var int: Int?
     public var bool: Bool?
-    
+    public var string: String?
     public init(from decoder: Decoder) throws {
         let singleValueContainer = try decoder.singleValueContainer()
         if let boolValue = try? singleValueContainer.decode(Bool.self) {
             bool = boolValue
             int = boolValue ? 1 : 0
+            string = boolValue ? "1" : "0"
         } else if let intValue = try? singleValueContainer.decode(Int.self) {
             int = intValue
             bool = intValue == 1 ? true : false
+            string = String(intValue)
+        } else if let stringValue = try? singleValueContainer.decode(String.self) {
+            int = Int(stringValue)
+            bool = stringValue == "1" ? true : false
+            string = stringValue
         } else {
             int = nil
             bool = nil
+            string = nil
         }
     }
 }
 
-///string  double
-public struct YIStrDouble: Codable {
+///string  double decimal
+public struct YIDouble: Codable {
     public var double: Double?
-    
+    public var decimal: Decimal?
     public var string: String?
     
     public init(from decoder: Decoder) throws {
@@ -60,10 +67,17 @@ public struct YIStrDouble: Codable {
         if let stringValue = try? singleValueContainer.decode(String.self) {
             string = stringValue
             double = Double(stringValue)
+            decimal = Decimal(Double(stringValue) ?? 0)
         } else if let doubleValue = try? singleValueContainer.decode(Double.self) {
             double = doubleValue
             string = String(doubleValue)
+            decimal = Decimal(Double(doubleValue) )
+        } else if let decimalValue = try? singleValueContainer.decode(Decimal.self) {
+            double = Double(truncating: decimalValue as NSNumber)
+            string = String(Double(truncating: decimalValue as NSNumber))
+            decimal = decimalValue
         } else {
+            decimal = nil
             double = nil
             string = nil
         }
