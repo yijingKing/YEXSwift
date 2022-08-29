@@ -9,50 +9,6 @@ GitHub:        https://github.com/yijingKing
 
 import Foundation
 
-
-public extension YEXProtocol where T == Array<Any> {
-    // MARK: - 转data
-    /// 转data
-    func toData(_ options: JSONSerialization.WritingOptions = []) -> Data? {
-        guard JSONSerialization.isValidJSONObject(obj) else {
-            #if DEBUG
-            fatalError("数组转data失败")
-            #else
-            return nil
-            #endif
-
-        }
-        guard let data = try? JSONSerialization.data(withJSONObject: obj, options: options) else {
-            #if DEBUG
-            fatalError("数组转data失败")
-            #else
-            return nil
-            #endif
-        }
-        return data
-    }
-    // MARK: - 转json
-    ///转json
-    func toJSONString(_ options: JSONSerialization.WritingOptions = []) -> String? {
-        guard JSONSerialization.isValidJSONObject(obj) else {
-            #if DEBUG
-            fatalError("转json失败")
-            #else
-            return nil
-            #endif
-        }
-        guard let newData : Data = try? JSONSerialization.data(withJSONObject: obj, options: options) else {
-            #if DEBUG
-            fatalError("转json失败")
-            #else
-            return nil
-            #endif
-        }
-        let JSONString = NSString(data:newData as Data,encoding: String.Encoding.utf8.rawValue)
-        return JSONString as String? ?? nil
-    }
-}
-
 public extension YEXProtocol where T == Array<String> {
     // MARK: - 转字符串
     ///转字符串
