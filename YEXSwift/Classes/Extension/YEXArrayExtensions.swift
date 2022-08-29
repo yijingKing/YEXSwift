@@ -36,16 +36,16 @@ public extension YEXProtocol where T == Array<Any> {
     func toJSONString(_ options: JSONSerialization.WritingOptions = []) -> String? {
         guard JSONSerialization.isValidJSONObject(obj) else {
             #if DEBUG
-            fatalError("数组转data失败")
+            fatalError("转json失败")
             #else
-            return Data()
+            return ""
             #endif
         }
         guard let newData : Data = try? JSONSerialization.data(withJSONObject: obj, options: options) else {
             #if DEBUG
-            fatalError("数组转data失败")
+            fatalError("转json失败")
             #else
-            return Data()
+            return ""
             #endif
         }
         let JSONString = NSString(data:newData as Data,encoding: String.Encoding.utf8.rawValue)
