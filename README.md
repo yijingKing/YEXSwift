@@ -26,7 +26,7 @@ pod 'YEXSwift'
 
 ## Author
 
-1091676312@qq.com, 1091676312@qq.com
+1091676312@qq.com
 
 ## License
 
