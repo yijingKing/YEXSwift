@@ -118,10 +118,7 @@ public extension YEXProtocol where T == Int {
             }
         }
     }
-}
-
-public extension Int {
-
+    
     ///  取区间内的随机数，如取  0..<10 之间的随机数
     /// - Parameter within: 0..<10
     /// - Returns: 返回区间内的随机数
@@ -130,3 +127,4 @@ public extension Int {
         return within.lowerBound + Int(arc4random_uniform(UInt32(delta)))
     }
 }
+

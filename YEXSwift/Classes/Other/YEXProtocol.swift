@@ -10,6 +10,8 @@ GitHub:        https://github.com/yijingKing
 import Foundation
 import UIKit
 
+
+/// 协议
 public struct YEXProtocol<T> {
     let obj: T
     init(_ obj: T) {

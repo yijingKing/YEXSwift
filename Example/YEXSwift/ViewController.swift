@@ -10,12 +10,17 @@ import UIKit
 import YEXSwift
 
 class ViewController: UIViewController {
-                override func viewDidLoad() {
-                    super.viewDidLoad()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
-                print(635.055.auto)
-            }
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let nav = UINavigationController(rootViewController: SecendViewController())
+        
+        navigationController?.pushViewController(nav, animated: true)
+    }
+    
 }
-
-        extension YEXAuto {}

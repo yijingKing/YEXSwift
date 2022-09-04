@@ -14,6 +14,8 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		7F3B799C28C1AB6000094805 /* SecendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B799B28C1AB6000094805 /* SecendViewController.swift */; };
+		7F87182E28C0567200D8B8B2 /* 加载图.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F87182D28C0567200D8B8B2 /* 加载图.png */; };
 		F198D7136E89A129B70E8C22 /* Pods_YEXSwift_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE325B8F51FF0E1302F8FF61 /* Pods_YEXSwift_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,8 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		78DCBB8BB9C411AA506B0EA3 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		7B0F8C6B6CB5630AEAE20E58 /* Pods-YEXSwift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YEXSwift_Example.debug.xcconfig"; path = "Target Support Files/Pods-YEXSwift_Example/Pods-YEXSwift_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		7F3B799B28C1AB6000094805 /* SecendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecendViewController.swift; sourceTree = "<group>"; };
+		7F87182D28C0567200D8B8B2 /* 加载图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "加载图.png"; sourceTree = "<group>"; };
 		96CB0E048F169A86E538F8C6 /* YEXSwift.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = YEXSwift.podspec; path = ../YEXSwift.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		99E6776D8E3B60DAC3B60F2C /* Pods-YEXSwift_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YEXSwift_Example.release.xcconfig"; path = "Target Support Files/Pods-YEXSwift_Example/Pods-YEXSwift_Example.release.xcconfig"; sourceTree = "<group>"; };
 		B9F71A70F91124F14BF999C0 /* Pods-YEXSwift_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YEXSwift_Tests.debug.xcconfig"; path = "Target Support Files/Pods-YEXSwift_Tests/Pods-YEXSwift_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -104,8 +108,10 @@
 		607FACD21AFB9204008FA782 /* Example for YEXSwift */ = {
 			isa = PBXGroup;
 			children = (
+				7F87182D28C0567200D8B8B2 /* 加载图.png */,
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				7F3B799B28C1AB6000094805 /* SecendViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -250,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				7F87182E28C0567200D8B8B2 /* 加载图.png in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
@@ -386,6 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F3B799C28C1AB6000094805 /* SecendViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);

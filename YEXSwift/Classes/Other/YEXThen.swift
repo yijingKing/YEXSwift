@@ -9,6 +9,7 @@ GitHub:        https://github.com/yijingKing
 
 import Foundation
 
+/// 闭包
 public extension YEXProtocol where T: Any {
 
     /// 使它可以在初始化和复制值类型之后使用闭包设置属性。

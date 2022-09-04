@@ -26,7 +26,7 @@ open class YEXBaseTableViewController: YEXBaseViewController,BaseViewProtocol {
     public var dataSource: [DataSourceType<Any>] = []
     public var dispaseBag = DisposeBag()
     ///设置tableView方式(viewDidLoad前调用)
-    public var style: UITableView.Style = .plain
+    public var style: UITableView.Style = .grouped
     ///隐藏刷新
     public var hiddenHeaderRefresh = false
     ///隐藏加载
@@ -76,8 +76,8 @@ open class YEXBaseTableViewController: YEXBaseViewController,BaseViewProtocol {
     private func base_initializeView() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
-            $0.left.right.bottom.equalTo(0)
-            $0.top.equalTo(view.snp.topMargin)
+            $0.left.right.bottom.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -171,7 +171,9 @@ public extension YEXBaseTableViewController {
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard dataSource.count > 0 else { return 0 }
         if dataSource[section] is Array<Any> {
-            return (dataSource[section] as? Array<Any>)?.count ?? 0
+            if let data = dataSource[section] as? Array<Any> {
+                return data.count
+            }
         }
         return 1
     }

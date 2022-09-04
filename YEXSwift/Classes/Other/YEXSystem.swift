@@ -10,6 +10,7 @@ GitHub:        https://github.com/yijingKing
 import Foundation
 import UIKit
 
+/// 系统方法
 open class YEXSystem: NSObject {
     ///是否编辑,默认false
     public var allowsEditing: Bool?

@@ -157,7 +157,12 @@ extension YEXBaseCollectionViewController: UICollectionViewDelegate,UICollection
     }
     
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.dataSource.count
+        if dataSource[section] is Array<Any> {
+            if let data = dataSource[section] as? Array<Any> {
+                return data.count
+            }
+        }
+        return 1
     }
     
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

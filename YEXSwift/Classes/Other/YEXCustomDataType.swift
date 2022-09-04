@@ -56,7 +56,7 @@ public struct YEXBool: Codable {
 }
 
 ///string  double decimal
-public struct YIDouble: Codable {
+public struct YEXDouble: Codable {
     public var double: Double?
     public var decimal: Decimal?
     public var string: String?

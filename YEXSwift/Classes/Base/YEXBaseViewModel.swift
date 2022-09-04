@@ -10,11 +10,8 @@ GitHub:        https://github.com/yijingKing
 import UIKit
 import Foundation
 
-enum SeverCode: String {
-    case SeverCode_0 = "0"
-}
 
-open class YIBaseViewModel {
+open class YEXBaseViewModel {
 
 
 

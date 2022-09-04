@@ -25,10 +25,6 @@ open class YEXBaseViewController: UIViewController {
         }
     }
     
-    public var mainTableView: YEXBaseTableView?
-    public var mainCollection: YEXBaseCollectionView?
-    
-    
     public init() {
         super.init(nibName: nil, bundle: nil)
         self.modalTransitionStyle = .crossDissolve
