@@ -165,7 +165,7 @@ public extension YEXProtocol where T: UIButton {
               let imageHeight = obj.imageView?.image?.size.height else { return }
         
         guard var titleWidth = obj.titleLabel?.text?.yex.getWidth(obj.titleLabel?.font ?? UIFont.systemFont(ofSize: 17)) else { return }
-        
+        let width = CGFloat(obj.yex.width)
         if titleWidth >= width {
             titleWidth = width
         }
