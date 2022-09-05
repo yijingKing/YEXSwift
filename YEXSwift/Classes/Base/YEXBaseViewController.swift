@@ -42,8 +42,7 @@ open class YEXBaseViewController: UIViewController {
         
         extendedLayoutIncludesOpaqueBars = true
         
-        view.backgroundColor = UIColor.white
-        
+        view.backgroundColor = UIColor.yex.hexF2F2F2
         
 #if DEBUG
         NotificationCenter.default.addObserver(self, selector: #selector(injectionNotifications), name: NSNotification.Name("INJECTION_BUNDLE_NOTIFICATION"), object: nil)
@@ -63,6 +62,18 @@ open class YEXBaseViewController: UIViewController {
     ///侧滑结束
     open func didMove() { }
     
+    /// 添加控制器
+    public func addChildController(_ childController: UIViewController) {
+        self.addChild(childController)
+        self.view.addSubview(childController.view)
+        childController.didMove(toParent: self)
+    }
+    /// 移除添加的控制器
+    func removeChildController() {
+        self.willMode()
+        self.view.removeFromSuperview()
+        self.removeFromParent()
+    }
 }
 
 //MARK: --- 系统方法重写

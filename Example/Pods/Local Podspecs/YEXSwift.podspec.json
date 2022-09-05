@@ -1,6 +1,6 @@
 {
   "name": "YEXSwift",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "summary": "A short description of YEXSwift.",
   "description": "常用扩展,基类",
   "homepage": "https://github.com/1091676312@qq.com/YEXSwift",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/yijingKing/YEXSwift.git",
-    "tag": "0.1.0"
+    "tag": "0.1.2"
   },
   "swift_versions": "5.0",
   "platforms": {
