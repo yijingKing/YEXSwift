@@ -22,10 +22,13 @@ Pod::Spec.new do |s|
   s.swift_versions   = '5.0'
   s.platform         = :ios, "11.0"
   
+  s.frameworks       = 'CommonCrypto','QuartzCore','CoreGraphics','Accelerate','Photos'
+
   s.dependency 'MJRefresh'
   s.dependency 'SnapKit'
   s.dependency 'RxSwift'
   s.dependency 'RxCocoa'
+  
 #  s.resource_bundles = {
 #      'YEXSwift' => ['YEXSwift/Assets/*.png']
 #  }

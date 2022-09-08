@@ -1600,6 +1600,76 @@ public extension YEXProtocol where T ==  String {
     }
 }
 
+// MARK: - url编码   html
+public extension YEXProtocol where T == String {
+    /// url编码
+    var urlEncoder: String? {
+        return urlEncoding()
+    }
+    /// url编码
+    func urlEncoding(_ set: CharacterSet = .urlQueryAllowed) -> String? {
+        return obj.addingPercentEncoding(withAllowedCharacters: set)
+    }
+    
+    /// 网页图片适配
+    var htmlAuto: String? {
+        let htmls = String(
+            format: """
+                <html>\
+                <head>\
+                <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'>\
+                <style type="text/css"> \
+                p {width:100%%}\
+                img {width:100%%!important;height:auto!important}\
+                </style>\
+                </head>\
+                <body>\
+                %@\
+                </body>\
+                </html>
+                """, obj)
+        return htmls
+    }
+    
+    /// String 或者String HTML标签 转 html 富文本设置
+    /// - Parameters:
+    ///   - font: 设置字体
+    ///   - lineSpacing: 设置行高
+    /// - Returns: 默认不将 \n替换<br/> 返回处理好的富文本
+    func setHtmlAttributedString(font: UIFont? = UIFont.systemFont(ofSize: 16), lineSpacing: CGFloat? = 3) -> NSMutableAttributedString {
+        
+        var htmlString: NSMutableAttributedString? = nil
+        do {
+            if let data = obj.replacingOccurrences(of: "\n", with: "<br/>").data(using: .utf8) {
+                htmlString = try NSMutableAttributedString(data: data, options: [
+                NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html,
+                NSAttributedString.DocumentReadingOptionKey.characterEncoding: NSNumber(value: String.Encoding.utf8.rawValue)], documentAttributes: nil)
+                let wrapHtmlString = NSMutableAttributedString(string: "\n")
+                // 判断尾部是否是换行符
+                if let weakHtmlString = htmlString, weakHtmlString.string.hasSuffix("\n") {
+                    htmlString?.deleteCharacters(in: NSRange(location: weakHtmlString.length - wrapHtmlString.length, length: wrapHtmlString.length))
+                }
+            }
+        } catch {
+        }
+        // 设置富文本字的大小
+        if let font = font {
+            htmlString?.addAttributes([
+            NSAttributedString.Key.font: font], range: NSRange(location: 0, length: htmlString?.length ?? 0))
+        }
+    
+        // 设置行间距
+        if let weakLineSpacing = lineSpacing {
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = weakLineSpacing
+            htmlString?.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: htmlString?.length ?? 0))
+        }
+        return htmlString ?? NSMutableAttributedString(string: obj)
+    }
+}
+
+
+
 // MARK: - 效果
 public extension YEXProtocol where T == String {
     /// 给字体添加描边效果 : strokeWidth为正数为空心文字描边 strokeWidth为负数为实心文字描边
