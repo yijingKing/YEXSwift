@@ -40,10 +40,7 @@ public extension YEXProtocol where T: UITabBarController {
         } else {
             UITabBarItem.appearance().titlePositionAdjustment = offset
         }
-        
     }
-    
-    
 }
 
 

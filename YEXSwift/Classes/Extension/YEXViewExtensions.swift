@@ -283,7 +283,7 @@ public extension YEXProtocol where T: UIView {
 
 public extension UIView {
     /// 渐变色方向
-    enum GradientDirection {
+    enum GradientDirection: Int {
         ///垂直
         case vertical
         ///水平
@@ -293,7 +293,7 @@ public extension UIView {
         ///左下到右上
         case leftBottom
     }
-    enum ViewSide {
+    enum ViewSide: Int {
         case top
         case right
         case bottom
@@ -421,16 +421,6 @@ public extension UIView {
     func addTapGesture(_ action: ((UITapGestureRecognizer) -> Void)?) {
         let tap = YEXBlockTap(tapCount: 1, fingerCount: 1, action: action)
         addGestureRecognizer(tap)
-        isUserInteractionEnabled = true
-    }
-    ///滑动
-    func addSwipeGesture(_ direction: UISwipeGestureRecognizer.Direction,
-                         _ numberOfTouches: Int = 1,
-                         _ target: AnyObject,
-                         _ action: Selector) {
-        let swipe = UISwipeGestureRecognizer(target: target, action: action)
-        swipe.direction = direction
-        addGestureRecognizer(swipe)
         isUserInteractionEnabled = true
     }
     ///滑动
