@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'YEXSwift'
-  s.version          = '0.1.3'
+  s.version          = '0.1.0'
   s.summary          = 'A short description of YEXSwift.'
   s.description      = <<-DESC
                         常用扩展,基类
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.swift_versions   = '5.0'
   s.platform         = :ios, "11.0"
   
-  s.frameworks       = 'CommonCrypto','QuartzCore','CoreGraphics','Accelerate','Photos'
+#  s.frameworks       = 'QuartzCore','CoreGraphics','Accelerate','Photos'
 
   s.dependency 'MJRefresh'
   s.dependency 'SnapKit'
