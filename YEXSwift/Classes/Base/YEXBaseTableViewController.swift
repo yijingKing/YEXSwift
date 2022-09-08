@@ -9,14 +9,12 @@ GitHub:        https://github.com/yijingKing
 
 import Foundation
 import UIKit
-import RxSwift
 import MJRefresh
 
 protocol BaseViewProtocol {
     typealias DataSourceType<T: Any> = T
 }
 
-public let NoNetworkSubject = ReplaySubject<Bool>.create(bufferSize: 0)
 
 open class YEXBaseTableViewController: YEXBaseViewController,BaseViewProtocol {
     private var isLoading  : Bool = true
@@ -24,7 +22,6 @@ open class YEXBaseTableViewController: YEXBaseViewController,BaseViewProtocol {
     public typealias DataSourceType<T: Any> = T
     ///数据数组(默认使用二维)
     public var dataSource: [DataSourceType<Any>] = []
-    public var dispaseBag = DisposeBag()
     ///设置tableView方式(viewDidLoad前调用)
     public var style: UITableView.Style = .grouped
     ///隐藏刷新
