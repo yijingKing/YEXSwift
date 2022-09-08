@@ -9,6 +9,7 @@ GitHub:        https://github.com/yijingKing
 
 import Foundation
 import UIKit
+import Photos
 
 /// 系统方法
 open class YEXSystem: NSObject {
@@ -39,9 +40,73 @@ open class YEXSystem: NSObject {
             }
         }
     }
-    
+    // MARK: - 跳转系统设置界面
+    ///跳转系统设置界面
+    public func openPermissionsSetting() {
+        let alertController = UIAlertController(title: "访问受限",
+                                                message: "点击“设置”，允许访问权限",
+                                                preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title:"取消", style: .cancel, handler:nil)
+        let settingsAction = UIAlertAction(title:"设置", style: .default, handler: {
+            (action) -> Void in
+            if let openURL = URL(string: UIApplication.openSettingsURLString) {
+                if  UIApplication.shared.canOpenURL(openURL) {
+                    if #available(iOS 10, *) {
+                        UIApplication.shared.open(openURL, options: [:],completionHandler: {(success) in})
+                    } else {
+                        UIApplication.shared.openURL(openURL)
+                    }
+                }
+            }
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(settingsAction)
+        UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+    }
+    // MARK: - 检测是否开启相册
+    /// 检测是否开启相册
+    public func isOpenAlbumService(_ action :@escaping ((Bool)->())) {
+        let authStatus = PHPhotoLibrary.authorizationStatus()
+        if authStatus == .notDetermined {
+            PHPhotoLibrary.requestAuthorization({ (status) in
+                if #available(iOS 14, *) {
+                    if status == .limited {
+                        action(true)
+                    }
+                }
+                
+                if status == .authorized {
+                    action(true)
+                } else if status == .denied || status == .restricted {
+                    action(false)
+                } else {
+                    action(false)
+                }
+            })
+        } else if authStatus == PHAuthorizationStatus.restricted || authStatus == PHAuthorizationStatus.denied {
+            action(false)
+        } else {
+            action(true)
+        }
+    }
+    /// 打开相机相册
+    public func openAlbumService(_ completion: ((UIImage)->())? = nil) {
+        let alertController = UIAlertController(title: "",
+                                                message: "",
+                                                preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title:"相机", style: .default) { action in
+            self.openSystemPhoto(completion)
+        }
+        let settingsAction = UIAlertAction(title:"相册", style: .default, handler: {
+            (action) -> Void in
+            self.openSystemCamera(completion)
+        })
+        alertController.addAction(cancelAction)
+        alertController.addAction(settingsAction)
+        UIApplication.shared.keyWindow?.rootViewController?.present(alertController, animated: true, completion: nil)
+    }
     ///打开相册
-    public func invokeSystemPhoto(_ completion: ((UIImage)->())? = nil) -> Void {
+    public func openSystemPhoto(_ completion: ((UIImage)->())? = nil) -> Void {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .photoLibrary
         imagePickerController.delegate = self
@@ -55,7 +120,7 @@ open class YEXSystem: NSObject {
         self.photoBlock = completion
     }
     ///打开相机
-    public func invokeSystemCamera(_ completion: ((UIImage)->())? = nil) -> Void {
+    public func openSystemCamera(_ completion: ((UIImage)->())? = nil) -> Void {
         let imagePickerController = UIImagePickerController()
         imagePickerController.sourceType = .camera
         imagePickerController.delegate = self

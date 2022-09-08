@@ -8,10 +8,15 @@ GitHub:        https://github.com/yijingKing
 
 
 import UIKit
-import SnapKit
+@_exported import SnapKit
+@_exported import RxSwift
+@_exported import RxCocoa
 
 open class YEXBaseViewController: UIViewController {
 
+    /// 视图
+    public var completion: (() -> Void)?
+    
     //MARK: --- 状态栏
     private var _barStyle: UIStatusBarStyle?
     ///状态栏
@@ -24,25 +29,29 @@ open class YEXBaseViewController: UIViewController {
             return _barStyle ?? UIStatusBarStyle.default
         }
     }
+    /// 导航视图
+    public lazy var customNavigationView: UIView = {
+        let tmp = UIView()
+        return tmp
+    }()
     
-    public init() {
-        super.init(nibName: nil, bundle: nil)
-        self.modalTransitionStyle = .crossDissolve
-        self.modalPresentationStyle = .overFullScreen
+    open override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        completion?()
     }
-    
-    public required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     //MARK: --- viewDidLoad
     open override func viewDidLoad() {
         super.viewDidLoad()
         print("当前页面:" + "\(self.self)")
         
-        extendedLayoutIncludesOpaqueBars = true
-        
         view.backgroundColor = UIColor.yex.hexF2F2F2
+        
+        view.addSubview(customNavigationView)
+        customNavigationView.snp.makeConstraints { make in
+            make.left.right.equalTo(view)
+            make.bottom.equalTo(view.snp.topMargin)
+            make.top.equalTo(view)
+        }
         
 #if DEBUG
         NotificationCenter.default.addObserver(self, selector: #selector(injectionNotifications), name: NSNotification.Name("INJECTION_BUNDLE_NOTIFICATION"), object: nil)
@@ -55,7 +64,7 @@ open class YEXBaseViewController: UIViewController {
     }
     
     @objc func injected() {
-//        viewDidLoad()
+
     }
     ///侧滑开始
     open func willMode() { }
@@ -68,8 +77,14 @@ open class YEXBaseViewController: UIViewController {
         self.view.addSubview(childController.view)
         childController.didMove(toParent: self)
     }
+    
+    deinit {
+        print("--\(self)---控制器销毁")
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     /// 移除添加的控制器
-    func removeChildController() {
+    public func removeChildController() {
         self.willMode()
         self.view.removeFromSuperview()
         self.removeFromParent()

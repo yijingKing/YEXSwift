@@ -129,7 +129,6 @@ public extension YEXBaseTableViewController {
         self.totalPage = 1
         reloadDataAndEndRefreshing()
     }
-    
     ///下拉
     private func refreshHeaderAction() {
         self.tableView.mj_footer?.isHidden = false

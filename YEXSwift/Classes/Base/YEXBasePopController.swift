@@ -21,16 +21,14 @@ open class YEXBasePopController: YEXBaseViewController {
         return tmp
     }()
     
-    public override init() {
-        super.init()
+    public init() {
+        super.init(nibName: nil, bundle: nil)
         self.modalTransitionStyle = .crossDissolve
-        self.modalPresentationStyle = .overCurrentContext
+        self.modalPresentationStyle = .overFullScreen
     }
-    
-    required public init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,10 +48,6 @@ open class YEXBasePopController: YEXBaseViewController {
             }
             dismiss(animated: true)
         }
-    }
-    
-    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
     }
     
 }
