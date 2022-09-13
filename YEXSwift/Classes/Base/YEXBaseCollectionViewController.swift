@@ -150,19 +150,23 @@ public extension YEXBaseCollectionViewController {
 extension YEXBaseCollectionViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
     open func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
-        guard self.dataSource.count > 0 else { return 0 }
-        
+        guard dataSource.count > 0 else { return 0 }
+        if dataSource.first is Array<Any> {
+            return dataSource.count
+        }
         return 1
     }
     
     open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard dataSource.count > 0 else { return 0 }
         if dataSource[section] is Array<Any> {
             if let data = dataSource[section] as? Array<Any> {
                 return data.count
+            } else {
+                return 0
             }
         }
-        return 1
+        return dataSource.count
     }
     
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -8,38 +8,39 @@ GitHub:        https://github.com/yijingKing
 
 import UIKit
 
-public extension YEXProtocol where T == Float {
-    
-    /// 转 Int
-    func int() -> Int { return Int(obj) }
-    
-    /// 转 CGFloat
-    func cgFloat() -> CGFloat { return CGFloat(obj) }
+
+public extension CGFloat {
+    var int: Int { return Int(self) }
     
     /// 转 Int64
-    func int64() -> Int64 { return Int64(obj) }
+    var int64: Int64 { return Int64(self) }
     
     /// 转 Double
-    func double() -> Double { return Double(obj) }
+    var double: Double { return Double(self) }
     
     /// 转 String
-    func string() -> String { return String(obj) }
+    var string: String { return String(Float(self)) }
     
     /// 转 NSNumber
-    func number() -> NSNumber { return NSNumber.init(value: obj) }
+    var number: NSNumber { return NSNumber.init(value: Float(self)) }
     
     /// 转 Float
-    func float() -> Float { return obj }
+    var float: Float { return Float(self) }
+}
+
+public extension YEXProtocol where T == CGFloat {
+    
     /// 浮点数四舍五入,places
     /// - Parameter places: 小数保留的位数
     /// - Returns: 保留后的小数
     func round(to places: Int) -> Float {
         let divisor = pow(10.0, Float(places))
-        return (obj * divisor).rounded() / divisor
+        return (Float(obj) * divisor).rounded() / divisor
     }
+    
 }
 
-public extension YEXProtocol where T == Float {
+public extension YEXProtocol where T == CGFloat {
     /**
      NumberFormatter.Style:
      none                   四舍五入的整数
@@ -81,6 +82,7 @@ public extension YEXProtocol where T == Float {
     func decimal(min minFraction: Int? = 2,max maxFraction: Int? = nil) -> String? {
         return localized(.decimal, minFraction: minFraction, maxFraction: maxFraction,minInteger: 1,maxInteger: nil)
     }
+    
     ///百分数(默认最小2位,最大3位)
     func percent(min minFraction: Int? = 2,max maxFraction: Int? = nil) -> String? {
         return localized(.percent, minFraction: minFraction, maxFraction: maxFraction,minInteger: 1,maxInteger: nil)
@@ -116,31 +118,3 @@ public extension YEXProtocol where T == Float {
     }
 }
 
-
-public extension YEXProtocol where T == CGFloat {
-    
-    /// 转 Int
-    func int() -> Int { return Int(obj) }
-    
-    /// 转 Int64
-    func int64() -> Int64 { return Int64(obj) }
-    
-    /// 转 Double
-    func double() -> Double { return Double(obj) }
-    
-    /// 转 String
-    func string() -> String { return String(Float(obj)) }
-    
-    /// 转 NSNumber
-    func number() -> NSNumber { return NSNumber.init(value: Float(obj)) }
-    
-    /// 转 Float
-    func float() -> Float { return Float(obj) }
-    /// 浮点数四舍五入,places
-    /// - Parameter places: 小数保留的位数
-    /// - Returns: 保留后的小数
-    func round(to places: Int) -> Float {
-        let divisor = pow(10.0, Float(places))
-        return (Float(obj) * divisor).rounded() / divisor
-    }
-}

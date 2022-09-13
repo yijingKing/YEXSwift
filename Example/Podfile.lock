@@ -24,7 +24,32 @@ PODS:
     - RxSwift (= 6.5.0)
   - RxSwift (6.5.0)
   - SnapKit (5.6.0)
-  - YEXSwift (0.1.3):
+  - SwifterSwift (5.2.0):
+    - SwifterSwift/AppKit (= 5.2.0)
+    - SwifterSwift/CoreAnimation (= 5.2.0)
+    - SwifterSwift/CoreGraphics (= 5.2.0)
+    - SwifterSwift/CoreLocation (= 5.2.0)
+    - SwifterSwift/Dispatch (= 5.2.0)
+    - SwifterSwift/Foundation (= 5.2.0)
+    - SwifterSwift/MapKit (= 5.2.0)
+    - SwifterSwift/SceneKit (= 5.2.0)
+    - SwifterSwift/SpriteKit (= 5.2.0)
+    - SwifterSwift/StoreKit (= 5.2.0)
+    - SwifterSwift/SwiftStdlib (= 5.2.0)
+    - SwifterSwift/UIKit (= 5.2.0)
+  - SwifterSwift/AppKit (5.2.0)
+  - SwifterSwift/CoreAnimation (5.2.0)
+  - SwifterSwift/CoreGraphics (5.2.0)
+  - SwifterSwift/CoreLocation (5.2.0)
+  - SwifterSwift/Dispatch (5.2.0)
+  - SwifterSwift/Foundation (5.2.0)
+  - SwifterSwift/MapKit (5.2.0)
+  - SwifterSwift/SceneKit (5.2.0)
+  - SwifterSwift/SpriteKit (5.2.0)
+  - SwifterSwift/StoreKit (5.2.0)
+  - SwifterSwift/SwiftStdlib (5.2.0)
+  - SwifterSwift/UIKit (5.2.0)
+  - YEXSwift (0.1.4):
     - MJRefresh
     - RxCocoa
     - RxSwift
@@ -35,6 +60,7 @@ DEPENDENCIES:
   - Nimble (~> 10.0.0)
   - Nimble-Snapshots (~> 9.4.0)
   - Quick (~> 2.2.0)
+  - SwifterSwift
   - YEXSwift (from `../`)
 
 SPEC REPOS:
@@ -44,6 +70,7 @@ SPEC REPOS:
     - RxRelay
     - RxSwift
     - SnapKit
+    - SwifterSwift
   trunk:
     - FBSnapshotTestCase
     - iOSSnapshotTestCase
@@ -66,8 +93,9 @@ SPEC CHECKSUMS:
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
-  YEXSwift: 8281521d9e33f3e366870422ddebce21d9261fc7
+  SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
+  YEXSwift: 028b73a3a0a6e0e67a40c78ed5cfc3a2cd7820f1
 
-PODFILE CHECKSUM: ab7ee6089e374d3cf2cc9d8207735dc100d514ae
+PODFILE CHECKSUM: 8c9038141b056d4b9a03f773fb1924ae7343129d
 
 COCOAPODS: 1.11.3

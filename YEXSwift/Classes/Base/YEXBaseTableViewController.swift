@@ -161,17 +161,23 @@ public extension YEXBaseTableViewController {
 @objc extension YEXBaseTableViewController: UITableViewDelegate,UITableViewDataSource {
     open func numberOfSections(in tableView: UITableView) -> Int {
         guard dataSource.count > 0 else { return 0 }
-        return dataSource.count
+        if dataSource.first is Array<Any> {
+            return dataSource.count
+        }
+        return 1
     }
     
     open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard dataSource.count > 0 else { return 0 }
+        
         if dataSource[section] is Array<Any> {
             if let data = dataSource[section] as? Array<Any> {
                 return data.count
+            } else {
+                return 0
             }
         }
-        return 1
+        return dataSource.count
     }
     
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

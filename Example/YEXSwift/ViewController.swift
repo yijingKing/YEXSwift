@@ -9,11 +9,12 @@
 import UIKit
 import YEXSwift
 
-class ViewController: UIViewController {
+class ViewController: YEXBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         
     }
     
