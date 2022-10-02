@@ -482,8 +482,6 @@ fileprivate extension UIView {
             } else {
                 layer.mask = nil
             }
-            
-            UIView.swizzled
         }
     }
     
