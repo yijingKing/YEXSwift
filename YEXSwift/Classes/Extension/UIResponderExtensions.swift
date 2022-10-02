@@ -10,11 +10,10 @@
 import Foundation
 import UIKit
 
-public extension UIResponder {
+public extension YEXProtocol where T: UIResponder {
     ///InjectionIII
     func hotReload(_ appName: String = "InjectionIII") {
         #if DEBUG
-        // 把InjectionIII.app换成InjectionX.app
         Bundle(path: "/Applications/\(appName).app/Contents/Resources/iOSInjection.bundle")?.load()
         #endif
     }

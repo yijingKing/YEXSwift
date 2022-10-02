@@ -644,5 +644,11 @@ fileprivate extension UIView {
     }
 }
 
-
+// MARK: - 扩展
+public extension UIView {
+    /// 添加多个视图
+    func addSubviews(_ subviews: [UIView]) {
+        subviews.forEach { addSubview($0) }
+    }
+}
 
