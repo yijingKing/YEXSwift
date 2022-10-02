@@ -10,14 +10,11 @@
 import Foundation
 import UIKit
 
-//MARK: --- 宏定义
-///屏幕宽
-public var YEXScreenWidth: CGFloat {
-    return UIScreen.main.bounds.size.width
+public var ScreenWidth: Double {
+    return Screen.width
 }
-///屏幕高
-public var YEXScreenHeight: CGFloat {
-    return UIScreen.main.bounds.size.height
+public var ScreenHeight: Double {
+    return Screen.height
 }
 
 public struct Screen {
@@ -30,10 +27,10 @@ public struct Screen {
     public static var height: Double {
         return UIScreen.main.bounds.height
     }
-    public static var scale: CGFloat {
+    public static var scale: Double {
         UIScreen.main.scale
     }
-    public static var nativeScale: CGFloat {
+    public static var nativeScale: Double {
         UIScreen.main.nativeScale
     }
 }

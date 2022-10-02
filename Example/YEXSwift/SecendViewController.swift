@@ -15,7 +15,11 @@ class SecendViewController: YEXBaseViewController {
         super.viewDidLoad()
         
         title = "二"
-        
-        
+        view.backgroundColor = .red
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        dismiss(animated: true)
     }
 }
+
+

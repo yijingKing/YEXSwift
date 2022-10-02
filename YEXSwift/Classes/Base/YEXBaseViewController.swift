@@ -76,17 +76,16 @@ open class YEXBaseViewController: UIViewController {
         self.view.addSubview(childController.view)
         childController.didMove(toParent: self)
     }
-    
-    deinit {
-        print("--\(self)---控制器销毁")
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     /// 移除添加的控制器
     public func removeChildController() {
         self.willMode()
         self.view.removeFromSuperview()
         self.removeFromParent()
+    }
+    
+    deinit {
+        print("--\(self.self)---控制器销毁")
+        NotificationCenter.default.removeObserver(self)
     }
 }
 

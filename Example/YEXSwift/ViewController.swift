@@ -9,6 +9,26 @@
 import UIKit
 import YEXSwift
 
+
+struct Model: Codable {
+    var s: String
+    
+    enum CodingKeys: CodingKey {
+        case s
+    }
+    init(s: String) {
+        self.s = s
+    }
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.s = try container.decode(String.self, forKey: .s)
+    }
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(self.s, forKey: .s)
+    }
+}
+
 class ViewController: YEXBaseViewController {
     
     override func viewDidLoad() {
@@ -19,9 +39,8 @@ class ViewController: YEXBaseViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let nav = UINavigationController(rootViewController: SecendViewController())
         
-        navigationController?.pushViewController(nav, animated: true)
+        navigationController?.pushViewController(SecendViewController(), animated: true)
     }
     
 }

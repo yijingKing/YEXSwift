@@ -8,12 +8,34 @@ GitHub:        https://github.com/yijingKing
 
 
 import Foundation
-///YEXNavigationControllerExtensions
+
 public extension UINavigationController {
-    
+    private struct RuntimeKey {
+        static let TitleViewKey = UnsafeRawPointer.init(bitPattern: "TitleViewKey".hashValue)
+    }
+    fileprivate var titleView: UIView? {
+        set {
+            objc_setAssociatedObject(self, RuntimeKey.TitleViewKey!, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            guard let newValue else { return }
+            let titleViewBG = UIView(frame: .init(x: 0, y: 0, width: newValue.yex.width, height: newValue.yex.height))
+            if #available(iOS 16.0, *) {
+                titleViewBG.addSubview(newValue)
+                navigationItem.titleView = titleViewBG
+            } else {
+                navigationItem.titleView = newValue
+            }
+        }
+        get {
+            objc_getAssociatedObject(self, RuntimeKey.TitleViewKey!) as? UIView
+        }
+    }
 }
 
 public extension YEXProtocol where T: UINavigationController {
+    /// 设置导航标题视图(适配iOS16标题视图设置alpha无效)
+    func setTitleView(_ titleView: UIView) {
+        obj.titleView = titleView
+    }
     
     /// 跳转
     /// - Parameters:

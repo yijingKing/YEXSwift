@@ -8,6 +8,10 @@ platform :ios, '11.0'
 target 'YEXSwift_Example' do
   pod 'YEXSwift', :path => '../'
   pod 'SwifterSwift'
+  
+#  pod 'AutoInch'
+  
+  
   target 'YEXSwift_Tests' do
     inherit! :search_paths
 

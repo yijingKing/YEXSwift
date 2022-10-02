@@ -56,7 +56,7 @@ open class YEXBaseTableViewController: YEXBaseViewController,BaseViewProtocol {
         tableView.estimatedSectionFooterHeight = 0
         tableView.estimatedSectionHeaderHeight = 0
         tableView.tableFooterView = UIView().yex.then {
-            $0.frame = .init(x: 0, y: 0, width: YEXScreenWidth, height: YEXBottomHeight)
+            $0.frame = .init(x: 0, y: 0, width: ScreenWidth, height: SafeDistanceBottom)
             $0.backgroundColor = UIColor.clear
         }
         tableView.keyboardDismissMode = .onDrag

@@ -53,6 +53,7 @@ public struct YEXBool: Codable {
             string = nil
         }
     }
+    
 }
 
 ///string  double decimal
