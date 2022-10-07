@@ -10,26 +10,24 @@
 import Foundation
 import UIKit
 
-public var ScreenWidth: Double {
-    return Screen.width
-}
-public var ScreenHeight: Double {
-    return Screen.height
-}
-
-public struct Screen {
+public struct YEXScreen {
+    /// 屏幕大小
     public static var size: CGSize {
         return UIScreen.main.bounds.size
     }
+    /// 屏幕宽
     public static var width: Double {
         return UIScreen.main.bounds.width
     }
+    /// 屏幕高
     public static var height: Double {
         return UIScreen.main.bounds.height
     }
+    /// 屏幕比例
     public static var scale: Double {
         UIScreen.main.scale
     }
+    /// 物理屏幕比例
     public static var nativeScale: Double {
         UIScreen.main.nativeScale
     }
