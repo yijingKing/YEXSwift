@@ -22,6 +22,7 @@ public struct YEXProtocol<T> {
 public protocol YEXCompatible {
     associatedtype CompatibleType
     var yex: CompatibleType { get }
+    var yi: CompatibleType { get }
 }
 public extension YEXCompatible {
     static var yex: YEXProtocol<Self>.Type {
@@ -29,6 +30,13 @@ public extension YEXCompatible {
         set {}
     }
     var yex: YEXProtocol<Self> {
+        return YEXProtocol(self)
+    }
+    static var yi: YEXProtocol<Self>.Type {
+        get { YEXProtocol<Self>.self }
+        set {}
+    }
+    var yi: YEXProtocol<Self> {
         return YEXProtocol(self)
     }
 }

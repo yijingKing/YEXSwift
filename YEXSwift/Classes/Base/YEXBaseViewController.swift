@@ -38,6 +38,7 @@ open class YEXBaseViewController: UIViewController {
         super.viewDidDisappear(animated)
         completion?()
     }
+    
     //MARK: --- viewDidLoad
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,22 +66,19 @@ open class YEXBaseViewController: UIViewController {
     @objc func injected() {
 
     }
-    ///侧滑开始
-    open func willMode() { }
-    ///侧滑结束
-    open func didMove() { }
-    
+
     /// 添加控制器
     public func addChildController(_ childController: UIViewController) {
-        self.addChild(childController)
-        self.view.addSubview(childController.view)
+        addChild(childController)
+        view.addSubview(childController.view)
         childController.didMove(toParent: self)
     }
     /// 移除添加的控制器
     public func removeChildController() {
-        self.willMode()
-        self.view.removeFromSuperview()
-        self.removeFromParent()
+        guard parent != nil else { return }
+        willMove(toParent: nil)
+        removeFromParent()
+        view.removeFromSuperview()
     }
     
     deinit {
@@ -95,20 +93,5 @@ extension YEXBaseViewController {
         return barStyle
     }
     
-    open override func willMove(toParent parent: UIViewController?) {
-        super.willMove(toParent: parent)
-        guard let _ = parent else {
-            willMode()
-            return
-        }
-    }
-    
-    open override func didMove(toParent parent: UIViewController?) {
-        super.didMove(toParent: parent)
-        guard let _ = parent else {
-            didMove()
-            return
-        }
-    }
 }
 
