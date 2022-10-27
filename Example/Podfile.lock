@@ -49,7 +49,7 @@ PODS:
   - SwifterSwift/StoreKit (5.2.0)
   - SwifterSwift/SwiftStdlib (5.2.0)
   - SwifterSwift/UIKit (5.2.0)
-  - YEXSwift (0.1.5):
+  - YEXSwift (0.2.0):
     - MJRefresh
     - RxCocoa
     - RxSwift
@@ -94,7 +94,7 @@ SPEC CHECKSUMS:
   RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwifterSwift: 334181863c416882d97b7a60c05054d9e4d799e2
-  YEXSwift: d5fcd70f85afa46d309cbf4df2fe6b094f5ef117
+  YEXSwift: 57605208c4aa43b5268c47d4504418c0dd0c5b92
 
 PODFILE CHECKSUM: 0f821aec1ee2b0605b638c03446a392dc6363cfc
 

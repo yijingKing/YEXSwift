@@ -17,7 +17,7 @@ public extension UINavigationController {
         set {
             objc_setAssociatedObject(self, RuntimeKey.TitleViewKey!, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             guard let newValue else { return }
-            let titleViewBG = UIView(frame: .init(x: 0, y: 0, width: newValue.yex.width, height: newValue.yex.height))
+            let titleViewBG = UIView(frame: .init(x: 0, y: 0, width: newValue.width, height: newValue.height))
             if #available(iOS 16.0, *) {
                 titleViewBG.addSubview(newValue)
                 navigationItem.titleView = titleViewBG

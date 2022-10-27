@@ -184,24 +184,24 @@ public extension YEXProtocol where T: UIView {
     }
     ///边框-上
     func addBorderTop(_ size: CGFloat,_ padding: CGFloat = 0,_ color: UIColor = .black) {
-        obj.yex._addBorderUtility(x: padding, y: 0, width: obj.frame.width - padding * 2, height: size, color: color)
+        obj._addBorderUtility(x: padding, y: 0, width: obj.frame.width - padding * 2, height: size, color: color)
     }
     ///边框-下
     func addBorderBottom(_ size: CGFloat,_ padding: CGFloat = 0,_ color: UIColor = .black) {
-        obj.yex._addBorderUtility(x: padding, y: obj.frame.height - size, width: obj.frame.width - padding * 2, height: size, color: color)
+        obj._addBorderUtility(x: padding, y: obj.frame.height - size, width: obj.frame.width - padding * 2, height: size, color: color)
     }
     ///边框-左
     func addBorderLeft(_ size: CGFloat,_ padding: CGFloat = 0,_ color: UIColor = .black) {
-        obj.yex._addBorderUtility(x: 0, y: padding, width: size, height: obj.frame.height - padding * 2, color: color)
+        obj._addBorderUtility(x: 0, y: padding, width: size, height: obj.frame.height - padding * 2, color: color)
     }
     ///边框-右
     func addBorderRight(_ size: CGFloat,_ padding: CGFloat = 0,_ color: UIColor = .black) {
-        obj.yex._addBorderUtility(x: obj.frame.width - size, y: padding, width: size, height: obj.frame.height - padding * 2, color: color)
+        obj._addBorderUtility(x: obj.frame.width - size, y: padding, width: size, height: obj.frame.height - padding * 2, color: color)
     }
     //MARK: --- 绘画
     ///画圆
     func drawCircle(fillColor: UIColor,_ strokeColor: UIColor = .black, strokeWidth: CGFloat) {
-        let path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: obj.yex.width, height: obj.yex.width), cornerRadius: obj.yex.width / 2)
+        let path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: obj.width, height: obj.width), cornerRadius: obj.width / 2)
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath
         shapeLayer.fillColor = fillColor.cgColor
@@ -325,7 +325,7 @@ public extension UIView {
         get {
             return frame.origin.y
         } set(value) {
-            obj.frame = CGRect(x: x, y: value, width: width, height: height)
+            frame = CGRect(x: x, y: value, width: width, height: height)
         }
     }
     var width: CGFloat {
