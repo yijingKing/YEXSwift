@@ -316,30 +316,30 @@ public extension UIView {
 public extension UIView {
     var x: CGFloat {
         get {
-            return obj.frame.origin.x
+            return frame.origin.x
         } set(value) {
-            obj.frame = CGRect(x: value, y: y, width: width, height: height)
+            frame = CGRect(x: value, y: y, width: width, height: height)
         }
     }
     var y: CGFloat {
         get {
-            return obj.frame.origin.y
+            return frame.origin.y
         } set(value) {
             obj.frame = CGRect(x: x, y: value, width: width, height: height)
         }
     }
     var width: CGFloat {
         get {
-            return obj.frame.size.width
+            return frame.size.width
         } set(value) {
-            obj.frame = CGRect(x: x, y: y, width: value, height: height)
+            frame = CGRect(x: x, y: y, width: value, height: height)
         }
     }
     var height: CGFloat {
         get {
-            return obj.frame.size.height
+            return frame.size.height
         } set(value) {
-            obj.frame = CGRect(x: x, y: y, width: width, height: value)
+            frame = CGRect(x: x, y: y, width: width, height: value)
         }
     }
     var left: CGFloat {
@@ -372,37 +372,37 @@ public extension UIView {
     }
     var origin: CGPoint {
         get {
-            return obj.frame.origin
+            return frame.origin
         } set(value) {
-            obj.frame = CGRect(origin: value, size: obj.frame.size)
+            frame = CGRect(origin: value, size: frame.size)
         }
     }
     var centerX: CGFloat {
         get {
-            return obj.center.x
+            return center.x
         } set(value) {
-            obj.center.x = value
+            center.x = value
         }
     }
     var centerY: CGFloat {
         get {
-            return obj.center.y
+            return center.y
         } set(value) {
-            obj.center.y = value
+            center.y = value
         }
     }
     var size: CGSize {
         get {
-            return obj.frame.size
+            return frame.size
         } set(value) {
-            obj.frame = CGRect(origin: obj.frame.origin, size: value)
+            frame = CGRect(origin: frame.origin, size: value)
         }
     }
     fileprivate func _addBorderUtility(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, color: UIColor) {
         let border = CALayer()
         border.backgroundColor = color.cgColor
         border.frame = CGRect(x: x, y: y, width: width, height: height)
-        obj.layer.addSublayer(border)
+        layer.addSublayer(border)
     }
 }
 
