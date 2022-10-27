@@ -313,7 +313,7 @@ public extension UIView {
 }
 
 //MARK: --- frame
-public extension YEXProtocol where T: UIView {
+public extension UIView {
     var x: CGFloat {
         get {
             return obj.frame.origin.x
