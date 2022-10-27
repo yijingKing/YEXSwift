@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension UIWindow {
+public extension UIWindow {
     func switchRootViewController(
         to viewController: UIViewController,
         animated: Bool = true,

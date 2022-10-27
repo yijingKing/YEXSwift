@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension UINavigationBar {
+public extension UINavigationBar {
     /// 文本尺寸 颜色
     func setTitleFont(_ font: UIFont, color: UIColor = .black) {
         var attrs = [NSAttributedString.Key: Any]()
