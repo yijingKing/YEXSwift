@@ -9,7 +9,7 @@ GitHub:        https://github.com/yijingKing
 import UIKit
 
 open class YEXBaseView: UIView {
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         initializeView()
     }

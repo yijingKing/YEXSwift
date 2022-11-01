@@ -13,7 +13,7 @@ import SnapKit
 
 open class YEXBaseCollectionView: UICollectionView {
     
-    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+    public override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
         if #available(iOS 11.0, *) {
             if #available(iOS 13.0, *) {

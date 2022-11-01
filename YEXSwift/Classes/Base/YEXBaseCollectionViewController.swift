@@ -54,7 +54,7 @@ open class YEXBaseCollectionViewController: YEXBaseViewController {
         return collectionView
     }()
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
 
         base_initializeView()
