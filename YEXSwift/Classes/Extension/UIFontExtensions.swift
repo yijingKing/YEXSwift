@@ -34,7 +34,7 @@ public extension YEXProtocol where T: UIFont {
     static func heavy(size: CGFloat) -> UIFont {
         return UIFont(name: "PingFang-SC-Heavy", size: size) ?? UIFont.boldSystemFont(ofSize: size)
     }
-    static func bold(size: CGFloat) -> UIFont {
+    func bold(size: CGFloat) -> UIFont {
         return UIFont(name: "PingFang-SC-Bold", size: size) ?? UIFont.boldSystemFont(ofSize: size)
     }
     
