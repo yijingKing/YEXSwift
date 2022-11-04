@@ -47,18 +47,22 @@ public extension YEXProtocol where T: UITextField {
     ///   - titleLabel: titleLabel
     ///   - titleWidth: titleWidth
     ///   - spacing: 距离左侧的距离
-    func leftTitle(_ title: String,
-                      _ titleWidth: CGFloat,
-                      _ color: UIColor? = nil,
-                      _ font: UIFont? = nil,
-                      _ textAlignment: NSTextAlignment? = nil) {
-        let button = UIButton()
-        button.title = title
-        button.color = color
-        button.font = font
-        let leftV = UIView(frame: CGRect(x: 0, y: 0, width: titleWidth, height: 30.auto))
-        button.frame = CGRect(x: 0, y: 0, width: titleWidth , height: 30.auto)
-        leftV.addSubview(button)
+    func leftView(title: String,
+                   titleWidth: CGFloat,
+                   color: UIColor = UIColor.black,
+                   font: UIFont = UIFont.yi.regular(size: 16),
+                   textAlignment: NSTextAlignment = .left) {
+        let label = UILabel()
+        label.text = title
+        label.textColor = color
+        label.font = font
+        label.textAlignment = textAlignment
+        
+        let height = title.yi.getHeight(font, fixedWidth: titleWidth) + 5
+        
+        let leftV = UIView(frame: CGRect(x: 0, y: 0, width: titleWidth, height: height))
+        label.frame = CGRect(x: 0, y: 0, width: titleWidth , height: height)
+        leftV.addSubview(label)
         obj.leftViewMode = .always
         obj.leftView = leftV
     }
