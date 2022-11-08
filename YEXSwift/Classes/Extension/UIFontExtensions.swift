@@ -9,7 +9,7 @@ GitHub:        https://github.com/yijingKing
 import Foundation
 import UIKit
 
-public extension YEXProtocol where T: UIFont {
+public extension UIFont {
 
     ///极细体
     static func thin(size: CGFloat) -> UIFont {

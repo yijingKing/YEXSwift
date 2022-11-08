@@ -27,18 +27,18 @@ public extension Float {
     
 }
 
-public extension YEXProtocol where T == Float {
+public extension Float {
     
     /// 浮点数四舍五入,places
     /// - Parameter places: 小数保留的位数
     /// - Returns: 保留后的小数
     func round(to places: Int) -> Float {
         let divisor = pow(10.0, Float(places))
-        return (obj * divisor).rounded() / divisor
+        return (self * divisor).rounded() / divisor
     }
 }
 
-public extension YEXProtocol where T == Float {
+public extension Float {
     /**
      NumberFormatter.Style:
      none                   四舍五入的整数
@@ -73,7 +73,7 @@ public extension YEXProtocol where T == Float {
         if let max = maxInteger {
             numberFormatter.maximumIntegerDigits = max
         }
-        return numberFormatter.string(for: obj)
+        return numberFormatter.string(for: self)
     }
     
     ///分数(默认最小2位,最大3位)
@@ -97,7 +97,7 @@ public extension YEXProtocol where T == Float {
         numberFormatter.usesGroupingSeparator = true
         numberFormatter.groupingSeparator = separator
         numberFormatter.groupingSize = length ?? 0
-        return numberFormatter.string(for: obj)
+        return numberFormatter.string(for: self)
     }
     
     /// 增加前后缀
@@ -111,7 +111,7 @@ public extension YEXProtocol where T == Float {
         numberFormatter.numberStyle = style
         numberFormatter.positivePrefix = prefix
         numberFormatter.positiveSuffix = suffix
-        return numberFormatter.string(for: obj)
+        return numberFormatter.string(for: self)
     }
 }
 

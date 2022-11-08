@@ -19,21 +19,29 @@ public var YEXScreenHeight: Double {
 }
 /// 顶部安全区高度
 public var YEXSafeDistanceTop: Double {
-    return UIDevice.yex.safeDistanceTop
+    return UIDevice.safeDistanceTop
 }
 /// 底部安全区高度
 public var YEXSafeDistanceBottom: Double {
-    return UIDevice.yex.safeDistanceBottom
+    return UIDevice.safeDistanceBottom
 }
 /// 状态栏+导航栏的高度
 public var YEXNavigationFullHeight: Double {
-    return UIDevice.yex.navigationFullHeight
+    return UIDevice.navigationFullHeight
 }
 /// 底部导航栏高度（包括安全区）
 public var YEXTabBarFullHeight: Double {
-    return UIDevice.yex.tabBarFullHeight
+    return UIDevice.tabBarFullHeight
 }
 /// 底部导航栏高度
 public var YEXTabBarHeight: Double {
-    return UIDevice.yex.tabBarHeight
+    return UIDevice.tabBarHeight
+}
+
+func YEXPrint(_ text: Any?) {
+    print("""
+    ╔═══════ 🎈 YEXSwift 🎈 ═══════
+    ║ \((text as? NSObject)?.json ?? "")
+    ╚═══════════════════════════════════
+    """)
 }

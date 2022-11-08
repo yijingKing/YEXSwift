@@ -8,7 +8,7 @@ GitHub:        https://github.com/yijingKing
 
 import Foundation
 
-public extension YEXProtocol where T: UIDevice {
+public extension UIDevice {
     /// 顶部安全区高度
     static var safeDistanceTop: Double {
         if #available(iOS 13.0, *) {
@@ -58,7 +58,7 @@ public extension YEXProtocol where T: UIDevice {
     
     /// 状态栏+导航栏的高度
     static var navigationFullHeight: Double {
-        return UIDevice.yex.statusBarHeight + UIDevice.yex.navigationBarHeight
+        return UIDevice.statusBarHeight + UIDevice.navigationBarHeight
     }
     
     /// 底部导航栏高度
@@ -68,7 +68,7 @@ public extension YEXProtocol where T: UIDevice {
     
     /// 底部导航栏高度（包括安全区）
     static var tabBarFullHeight: Double {
-        return UIDevice.yex.tabBarHeight + UIDevice.yex.safeDistanceBottom
+        return UIDevice.tabBarHeight + UIDevice.safeDistanceBottom
     }
 }
 

@@ -9,8 +9,14 @@ GitHub:        https://github.com/yijingKing
 
 import Foundation
 
+extension UIEdgeInsets: YEXThen {}
+extension UIOffset: YEXThen {}
+extension UIRectEdge: YEXThen {}
+extension NSObject: YEXThen {}
+
+public protocol YEXThen {}
 /// 闭包
-public extension YEXProtocol where T: Any {
+public extension YEXThen where Self: Any {
 
     /// 使它可以在初始化和复制值类型之后使用闭包设置属性。
     ///
@@ -18,8 +24,8 @@ public extension YEXProtocol where T: Any {
     ///       $0.origin.x = 10
     ///       $0.size.width = 100
     ///     }
-    func with (_ block: (inout T) throws -> Void) rethrows -> T {
-        var copy = obj
+    func with (_ block: (inout Self) throws -> Void) rethrows -> Self {
+        var copy = self
         try block(&copy)
         return copy
     }
@@ -31,12 +37,12 @@ public extension YEXProtocol where T: Any {
     ///       $0.set("devxoul@gmail.com", forKey: "email")
     ///       $0.synchronize()
     ///     }
-    func dos (_ block: (T) throws -> Void) rethrows {
-        try block(obj)
+    func dos (_ block: (Self) throws -> Void) rethrows {
+        try block(self)
     }
 }
 
-public extension YEXProtocol where T: AnyObject {
+public extension YEXThen where Self: AnyObject {
 
     ///使它可以在初始化后使用闭包设置属性。
     ///
@@ -45,9 +51,9 @@ public extension YEXProtocol where T: AnyObject {
     ///       $0.textColor = UIColor.black
     ///       $0.text = "Hello, World!"
     ///     }
-    func then(_ block: (T) throws -> Void) rethrows -> T {
-        try block(obj)
-        return obj
+    func then(_ block: (Self) throws -> Void) rethrows -> Self {
+        try block(self)
+        return self
     }
 }
 

@@ -52,7 +52,7 @@ public extension String {
     ///时间戳创建时间字符串
     init?(timeInterval: Double,formatter: String) {
         let date = Date.init(timeIntervalSince1970: timeInterval / 1000)
-        let dateStr = date.yex.toString(format: formatter)
+        let dateStr = date.toString(format: formatter)
         
         self.init(dateStr)
     }
@@ -60,11 +60,11 @@ public extension String {
 }
 //MARK: --- 功能
 
-public extension YEXProtocol where T == String {
+public extension String {
     ///为空
     var isEmpty: Bool {
         get {
-            if obj.count > 0 {
+            if self.count > 0 {
                 return false
             }
             return true
@@ -73,31 +73,31 @@ public extension YEXProtocol where T == String {
     ///不为空
     var isNotEmpty: Bool {
         get {
-            return !obj.isEmpty
+            return !self.isEmpty
         }
     }
     
 }
 
-public extension YEXProtocol where T == String {
+public extension String {
     var length: Int {
-        let string = obj
+        let string = self
         return string.count
     }
     //MARK: --- 异或
     ///异或
     func xor (_ pinV: String) -> String {
-        guard !obj.isEmpty else { return "" }
+        guard !self.isEmpty else { return "" }
         
-        if obj.count != pinV.count {
+        if self.count != pinV.count {
             print("长度不匹配")
             return ""
         }
         var code = ""
-        for i in 0 ..< obj.length {
+        for i in 0 ..< self.length {
             let pan = index(i,length: 1)
-            let pin = pinV.yex.index(i,length: 1)
-            let codes = obj.creator(pan, pin)
+            let pin = pinV.index(i,length: 1)
+            let codes = self.creator(pan, pin)
             code = code + codes
         }
         return code
@@ -105,21 +105,21 @@ public extension YEXProtocol where T == String {
     //MARK: --- 获取文本高度
     /// 获取文本高度
     func getHeight(_ font : UIFont = UIFont.systemFont(ofSize: 18), fixedWidth : CGFloat) -> CGFloat {
-        guard !obj.isEmpty && fixedWidth > 0 else {
+        guard !self.isEmpty && fixedWidth > 0 else {
             return 0
         }
         let size = CGSize(width:fixedWidth, height:CGFloat.greatestFiniteMagnitude)
-        let text = obj as NSString
+        let text = self as NSString
         let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: [.font : font], context:nil)
         return rect.size.height
     }
     //MARK: --- 获取文本宽度
     /// 获取文本宽度
     func getWidth(_ font : UIFont = UIFont.systemFont(ofSize: 18)) -> CGFloat {
-        guard !obj.isEmpty else { return 0 }
+        guard !self.isEmpty else { return 0 }
         
         let size = CGSize(width:CGFloat.greatestFiniteMagnitude, height:0)
-        let text = obj as NSString
+        let text = self as NSString
         let rect = text.boundingRect(with: size, options:.usesLineFragmentOrigin, attributes: [.font : font], context:nil)
         return rect.size.width
     }
@@ -132,7 +132,7 @@ public extension YEXProtocol where T == String {
     }
     /// 复制
     func copy() {
-        UIPasteboard.general.string = obj
+        UIPasteboard.general.string = self
     }
     
     /// 提取出字符串中所有的URL链接
@@ -144,24 +144,24 @@ public extension YEXProtocol where T == String {
             return nil
         }
         // 匹配字符串，返回结果集
-        let res = dataDetector.matches(in: obj, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, obj.count))
+        let res = dataDetector.matches(in: self, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, self.count))
         // 取出结果
         for checkingRes in res {
-            urls.append((obj as NSString).substring(with: checkingRes.range))
+            urls.append((self as NSString).substring(with: checkingRes.range))
         }
         return urls
     }
 }
 
 //MARK: --- 截取  插入  删除  添加
-public extension YEXProtocol where T == String {
+public extension String {
     ///开始结束
     func index(_ start: Int ,_ stop: Int) -> String {
-        guard !obj.isEmpty else {
+        guard !self.isEmpty else {
             print("字符串为空")
             return ""
         }
-        let string = obj
+        let string = self
         let index1 = string.index(string.startIndex, offsetBy: start)
         let index2 = string.index(string.startIndex, offsetBy: stop)
         return String(string[index1..<index2])
@@ -169,9 +169,9 @@ public extension YEXProtocol where T == String {
     
     ///从哪到之后长度
     func index(_ start: Int ,length: Int) -> String {
-        guard !obj.isEmpty else { return "" }
+        guard !self.isEmpty else { return "" }
         
-        let string = obj
+        let string = self
         let index1 = string.index(string.startIndex, offsetBy: start)
         let index2 = string.index(string.startIndex, offsetBy: start + length)
         return String(string[index1..<index2])
@@ -179,18 +179,18 @@ public extension YEXProtocol where T == String {
     
     ///开始到i
     func index(to i: Int) -> String {
-        guard !obj.isEmpty else { return "" }
+        guard !self.isEmpty else { return "" }
         
-        let string = obj
+        let string = self
         let index = string.index(string.startIndex, offsetBy: i)
         return String(string[string.startIndex..<index])
     }
     
     ///从i到结束
     func index(after i: Int) -> String {
-        guard !obj.isEmpty else { return "" }
+        guard !self.isEmpty else { return "" }
         
-        let string = obj
+        let string = self
         let index1 = string.index(string.startIndex, offsetBy: i)
         let index2 = string.index(string.endIndex, offsetBy: 0)
         return String(string[index1..<index2])
@@ -198,9 +198,9 @@ public extension YEXProtocol where T == String {
     
     ///截取range
     func index(_ range: Range<Int>) -> String {
-        guard !obj.isEmpty else { return "" }
+        guard !self.isEmpty else { return "" }
         
-        let string = obj
+        let string = self
         let start = string.index(string.startIndex, offsetBy: range.lowerBound)
         let end = string.index(string.startIndex, offsetBy: range.upperBound)
         return String(string[start..<end])
@@ -214,15 +214,15 @@ public extension YEXProtocol where T == String {
     ///   - cycle: 是否循环插入替换字符串
     /// - Returns: 新字符串
     func replacing(index:Int, length:Int, replac:String,_ cycle: Bool? = nil) -> String {
-        guard !obj.isEmpty else { return "" }
+        guard !self.isEmpty else { return "" }
         
-        var string = obj
-        let count = obj.count
+        var string = self
+        let count = self.count
         let startIndex = string.index(string.startIndex, offsetBy: index)
         string.replaceSubrange(startIndex..<string.index(startIndex, offsetBy: length), with: replac)
         if cycle ?? false {
             while count < string.count {
-                string = string.yex.insert(replac, index: index)
+                string = string.insert(replac, index: index)
             }
             return string
         }
@@ -233,8 +233,8 @@ public extension YEXProtocol where T == String {
     ///   - range: 范围
     ///   - with: 替换字符串
     func replacingCharacters(_ range: NSRange, with: String) -> String {
-        guard !obj.isEmpty else { return "" }
-        let string = obj
+        guard !self.isEmpty else { return "" }
+        let string = self
         return (string as NSString).replacingCharacters(in: range, with: with)
     }
     /// 替换字符串
@@ -242,62 +242,62 @@ public extension YEXProtocol where T == String {
     ///   - of: 字符串
     ///   - with: 替换字符串
     func replacingCharacters(_ of: String, with: String) -> String {
-        guard !obj.isEmpty else { return "" }
-        let string = obj
+        guard !self.isEmpty else { return "" }
+        let string = self
         return (string as NSString).replacingOccurrences(of: of, with: with)
     }
     ///删除第一个字符
     func deleteFirst() -> String {
-        guard !obj.isEmpty else { return "" }
+        guard !self.isEmpty else { return "" }
         
-        var string = obj
+        var string = self
         string.remove(at: string.index(before: string.startIndex))
         return string
     }
     ///删除最后一个字符
     func deleteLast() -> String {
-        guard !obj.isEmpty else { return "" }
+        guard !self.isEmpty else { return "" }
         
-        var string = obj
+        var string = self
         string.remove(at: string.index(before: string.endIndex))
         return string
     }
     /// 删除指定字符串
     func delete(_ text: String) -> String {
-        guard !obj.isEmpty else { return "" }
+        guard !self.isEmpty else { return "" }
         
-        let string = obj
+        let string = self
         return string.replacingOccurrences(of: text, with: "")
     }
     ///字符串的插入
     func insert(_ text: String, index: Int) -> String {
-        guard !obj.isEmpty else { return "" }
+        guard !self.isEmpty else { return "" }
         
-        var string = obj
+        var string = self
         let start = string.index(string.startIndex, offsetBy: index)
         string.insert(contentsOf: text, at: start)
         return string
     }
     /// 将字符串通过特定的字符串拆分为字符串数组
     func components(_ text: String) -> [String] {
-        guard !obj.isEmpty else { return [] }
+        guard !self.isEmpty else { return [] }
         
-        let string = obj
+        let string = self
         return NSString(string: string).components(separatedBy: text)
     }
     ///去除前后的换行和空格
     var removeSapce: String {
-        guard !obj.isEmpty else { return "" }
+        guard !self.isEmpty else { return "" }
         
-        let string = obj
+        let string = self
         var resultString = string.trimmingCharacters(in: CharacterSet.whitespaces)
         resultString = resultString.trimmingCharacters(in: CharacterSet.newlines)
         return resultString
     }
     /// 去掉所有空格
     var removeAllSapce: String {
-        guard !obj.isEmpty else { return "" }
-        return obj.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
+        guard !self.isEmpty else { return "" }
+        return self.replacingOccurrences(of: " ", with: "", options: .literal, range: nil)
     }
     /// 替换
     /// - Parameters:
@@ -305,7 +305,7 @@ public extension YEXProtocol where T == String {
     ///   - with: 替换后的字符
     /// - Returns: 替换后的字符串
     func replac(of: String,with: String) -> String? {
-        var str = obj
+        var str = self
         str = str.replacingOccurrences(of: of, with: with)
         return str
     }
@@ -317,13 +317,13 @@ public extension YEXProtocol where T == String {
     ///   - text:  替换的文本
     /// - Returns: 替换后的字符串
     func replac(beforeFew before: Int,afterFew after: Int, _ text: String? = nil) -> String? {
-        let phone = obj
+        let phone = self
         var tempStr = ""
         let replacText = text ?? "*"
         while tempStr.count < phone.count - before - after {
             tempStr = tempStr + replacText
         }
-        return phone.yex.index(to: before) + tempStr + phone.yex.index(after: phone.count - after)
+        return phone.index(to: before) + tempStr + phone.index(after: phone.count - after)
     }
     
     /// 银行卡替换
@@ -333,17 +333,17 @@ public extension YEXProtocol where T == String {
     ///   - text:  替换的文本
     /// - Returns: 替换后的字符串
     func replacCard(beforeFew before: Int,afterFew after: Int, _ text: String? = nil) -> String? {
-        var idCardNumber = obj
+        var idCardNumber = self
         var tempStr = ""
         let replacText = text ?? "*"
         while tempStr.count < idCardNumber.count - before - after {
             tempStr = tempStr + replacText
         }
-        idCardNumber = idCardNumber.yex.index(to: before) + tempStr + idCardNumber.yex.index(after: idCardNumber.count - after)
+        idCardNumber = idCardNumber.index(to: before) + tempStr + idCardNumber.index(after: idCardNumber.count - after)
         let nu = idCardNumber.count / 4
         var i = 1
         while i <= nu {
-            idCardNumber = idCardNumber.yex.insert(" ", index: 4 * i + i - 1)
+            idCardNumber = idCardNumber.insert(" ", index: 4 * i + i - 1)
             i += 1
         }
         
@@ -352,37 +352,37 @@ public extension YEXProtocol where T == String {
 }
 
 //MARK: --- 转换
-public extension YEXProtocol where T == String {
+public extension String {
     //MARK: --- 数据类型
     /// Int
     func toInt() -> Int? {
-        guard obj.yex.isNotEmpty else { return nil }
+        guard self.isNotEmpty else { return nil }
         
-        return NSDecimalNumber.init(string: String(format: "%@", obj)).intValue
+        return NSDecimalNumber.init(string: String(format: "%@", self)).intValue
     }
     /// Number
     func toNumber() -> NSNumber? {
-        guard !obj.isEmpty else { return nil }
+        guard !self.isEmpty else { return nil }
         
-        return NSNumber.init(value: NSDecimalNumber.init(string: String(format: "%@", obj)).intValue)
+        return NSNumber.init(value: NSDecimalNumber.init(string: String(format: "%@", self)).intValue)
     }
     /// Double
     func toDouble() -> Double? {
-        guard !obj.isEmpty else { return nil }
+        guard !self.isEmpty else { return nil }
         
-        return NSDecimalNumber.init(string: String(format: "%@", obj)).doubleValue
+        return NSDecimalNumber.init(string: String(format: "%@", self)).doubleValue
     }
     /// Float
     func toFloat() -> Float? {
-        guard !obj.isEmpty else { return nil }
+        guard !self.isEmpty else { return nil }
         
-        return NSDecimalNumber.init(string: String(format: "%@", obj)).floatValue
+        return NSDecimalNumber.init(string: String(format: "%@", self)).floatValue
     }
     /// Bool
     func toBool() -> Bool? {
-        guard !obj.isEmpty else { return nil }
+        guard !self.isEmpty else { return nil }
         
-        let trimmedString = obj.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let trimmedString = self.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         if trimmedString == "true" || trimmedString == "false" {
             return (trimmedString as NSString).boolValue
         }
@@ -391,31 +391,31 @@ public extension YEXProtocol where T == String {
     //MARK: --- 时间
     ///string --> date
     func toDate(from dateFormat: String,_ timeZone: TimeZone = NSTimeZone.system) -> Date? {
-        guard !obj.isEmpty else { return nil }
+        guard !self.isEmpty else { return nil }
         
         let formatter = DateFormatter()
         formatter.locale = Locale.init(identifier: "zh_CN")
         formatter.dateFormat = dateFormat
         formatter.timeZone = timeZone
-        let date = formatter.date(from: obj)
+        let date = formatter.date(from: self)
         return date
     }
     ///string --> date
     func toDate(_ dateFormat: YEXDateFormatter,_ timeZone: TimeZone = NSTimeZone.system) -> Date? {
-        guard !obj.isEmpty else { return nil }
+        guard !self.isEmpty else { return nil }
         let formatter = DateFormatter()
         formatter.locale = Locale.init(identifier: "zh_CN")
         formatter.dateFormat = dateFormat.rawValue
         formatter.timeZone = timeZone
-        let date = formatter.date(from: obj)
+        let date = formatter.date(from: self)
         return date
     }
     /// 字符串转时间戳
     func toStampTime(_ mode: YEXDateFormatter = .dateModeYMDHMS) -> Int {
-        guard !obj.isEmpty else { return 0 }
+        guard !self.isEmpty else { return 0 }
         let dateFormatter = DateFormatter.init()
         dateFormatter.dateFormat = mode.rawValue
-        let current = dateFormatter.date(from: obj)
+        let current = dateFormatter.date(from: self)
         let date = Date.init(timeInterval: 0, since: current ?? Date())
         let stamp = date.timeIntervalSince1970
         return Int(stamp)
@@ -423,9 +423,9 @@ public extension YEXProtocol where T == String {
     //MARK: --- json转换
     /// JSONString转换为字典
     func toDictionary() -> [String:Any]? {
-        guard !obj.isEmpty else { return nil }
+        guard !self.isEmpty else { return nil }
         
-        guard let jsonData:Data = obj.data(using: .utf8) else {
+        guard let jsonData:Data = self.data(using: .utf8) else {
             print("json转dict失败")
             return nil
         }
@@ -437,19 +437,19 @@ public extension YEXProtocol where T == String {
     }
     /// JSONString转换为data
     func toData(_ using: String.Encoding = .utf8) -> Data? {
-        guard !obj.isEmpty else {
+        guard !self.isEmpty else {
             print("json转data失败")
             return nil
         }
-        let data = obj.data(using: using)
+        let data = self.data(using: using)
         return data
     }
     //MARK: --- 进制
     ///十六进制转数字
     func hexToInt() -> Int {
-        guard !obj.isEmpty else { return 0 }
+        guard !self.isEmpty else { return 0 }
         
-        let str = obj.uppercased()
+        let str = self.uppercased()
         var sum = 0
         for i in str.utf8 {
             // 0-9 从48开始
@@ -464,14 +464,14 @@ public extension YEXProtocol where T == String {
     
     ///十六进制转换为普通字符串
     func hexToString() -> String {
-        guard !obj.isEmpty else { return "" }
+        guard !self.isEmpty else { return "" }
         
         var bytes = [UInt8]()
         var dataBStr: String = ""
-        for (index, _) in obj.enumerated(){
+        for (index, _) in self.enumerated(){
             let fromIndex = index * 2
             let toIndex = index * 2 + 1
-            if toIndex > (obj.count - 1) {
+            if toIndex > (self.count - 1) {
                 break
             }
             let hexCharStr = self.index(fromIndex, 2)
@@ -485,9 +485,9 @@ public extension YEXProtocol where T == String {
     
     ///普通字符串转换为十六进制
     func toHexString() -> String {
-        guard !obj.isEmpty else { return "" }
+        guard !self.isEmpty else { return "" }
         
-        let strData = obj.data(using: String.Encoding.utf8)
+        let strData = self.data(using: String.Encoding.utf8)
         let bytes = [UInt8](strData!)
         var sumString: String = ""
         for byte in bytes {
@@ -504,10 +504,10 @@ public extension YEXProtocol where T == String {
     
     ///转成byte数组
     func toBytes() -> [UInt8] {
-        guard !obj.isEmpty else { return [] }
+        guard !self.isEmpty else { return [] }
         
-        let strData = obj.data(using: String.Encoding.utf8)! as NSData
-        let count = obj.count / MemoryLayout<UInt8>.size
+        let strData = self.data(using: String.Encoding.utf8)! as NSData
+        let count = self.count / MemoryLayout<UInt8>.size
         var bytesArray = [UInt8](repeating: 0, count: count)
         strData.getBytes(&bytesArray, length:count * MemoryLayout<UInt8>.size)
         return bytesArray
@@ -515,32 +515,32 @@ public extension YEXProtocol where T == String {
     
     ///encode
     func encoded(_ charactersIn: String? = nil) -> String? {
-        guard !obj.isEmpty else { return obj }
+        guard !self.isEmpty else { return self }
         
         var customAllowedSet = NSCharacterSet.alphanumerics
         if let characters = charactersIn {
             ///"!*'();:@&=+$,/?%#[]"
             customAllowedSet =  NSCharacterSet(charactersIn:characters).inverted
         }
-        let st = (obj as NSString).addingPercentEncoding(withAllowedCharacters: customAllowedSet)
+        let st = (self as NSString).addingPercentEncoding(withAllowedCharacters: customAllowedSet)
         return st
     }
     
     ///url
     func toUrl() -> URL? {
-        guard !obj.isEmpty else { return nil }
+        guard !self.isEmpty else { return nil }
         
-        return URL(string: obj)
+        return URL(string: self)
     }
     
     ///图片
     func toUrlImage() -> UIImage? {
-        guard !obj.isEmpty else { return nil }
+        guard !self.isEmpty else { return nil }
         
-        if obj.length <= 0 {
+        if self.length <= 0 {
             return nil
         }
-        guard let url = URL.init(string: obj) else {
+        guard let url = URL.init(string: self) else {
             return nil
         }
         guard let data = try? Data(contentsOf: url) else {
@@ -552,7 +552,7 @@ public extension YEXProtocol where T == String {
     ///NSAttributedString
     func toAttributedString() -> NSAttributedString {
         
-        return NSAttributedString.init(string: obj)
+        return NSAttributedString.init(string: self)
     }
     
     // MARK: 将金额字符串转化为带逗号的金额 按照千分位划分，如  "1234567" => 1,234,567   1234567.56 => 1,234,567.56
@@ -563,12 +563,12 @@ public extension YEXProtocol where T == String {
         formatter.roundingMode = .floor
         formatter.maximumFractionDigits = 0
         formatter.minimumFractionDigits = 0
-        if obj.contains(".") {
+        if self.contains(".") {
             formatter.maximumFractionDigits = 2
             formatter.minimumFractionDigits = 1
             formatter.minimumIntegerDigits = 1
         }
-        var num = NSDecimalNumber(string: obj)
+        var num = NSDecimalNumber(string: self)
         if num.doubleValue.isNaN {
             num = NSDecimalNumber(string: "0")
         }
@@ -605,21 +605,21 @@ public extension YEXProtocol where T == String {
         let namespace = Bundle.main.infoDictionary!["CFBundleExecutable"] as! String
         // 2.将字符串转换为类
         // 2.1.默认情况下命名空间就是项目的名称，但是命名空间的名称是可以更改的
-        guard let Class: AnyClass = NSClassFromString(namespace.yex.removeSomeStringUseSomeString(removeString: " ", replacingString: "_") + "." + obj)else {
+        guard let Class: AnyClass = NSClassFromString(namespace.removeSomeStringUseSomeString(removeString: " ", replacingString: "_") + "." + self)else {
             return nil
         }
         return Class
     }
     
     func removeSomeStringUseSomeString(removeString: String, replacingString: String = "") -> String {
-        return obj.replacingOccurrences(of: removeString, with: replacingString)
+        return self.replacingOccurrences(of: removeString, with: replacingString)
     }
     
     // MARK: 字符串转数组
     /// 字符串转数组
     /// - Returns: 转化后的数组
     func toArray() -> Array<Any> {
-        let a = Array(obj)
+        let a = Array(self)
         return a
     }
     
@@ -627,7 +627,7 @@ public extension YEXProtocol where T == String {
     /// - Parameter isLatin: true：带声调，false：不带声调，默认 false
     /// - Returns: 拼音
     func toPinyexn(_ isTone: Bool = false) -> String {
-        let mutableString = NSMutableString(string: obj)
+        let mutableString = NSMutableString(string: self)
         CFStringTransform(mutableString, nil, kCFStringTransformToLatin, false)
         if !isTone {
             // 不带声调
@@ -649,7 +649,7 @@ public extension YEXProtocol where T == String {
     /// - Parameter char: 分隔符
     /// - Returns: 分隔后的数组
     func separatedByString(with char: String) -> Array<Any> {
-        return obj.components(separatedBy: char)
+        return self.components(separatedBy: char)
     }
     // MARK: 切割字符串(区间范围 前闭后开)
     /**
@@ -672,55 +672,55 @@ public extension YEXProtocol where T == String {
         guard startIndex < endIndex else {
             return ""
         }
-        return String(obj[startIndex ..< endIndex])
+        return String(self[startIndex ..< endIndex])
     }
 }
 
 //MARK: --- 大小写
-public extension YEXProtocol where T == String {
+public extension String {
     ///转为大写
     func uppercased(_ locale: Locale) -> String {
-        guard !obj.isEmpty else { return "" }
+        guard !self.isEmpty else { return "" }
         
-        let string = obj
+        let string = self
         return string.uppercased(with: locale)
     }
     ///转为小写
     func lowercased(_ locale: Locale) -> String {
-        guard !obj.isEmpty else { return "" }
+        guard !self.isEmpty else { return "" }
         
-        let string = obj
+        let string = self
         return string.lowercased(with: locale)
     }
     ///大写字符串的第“计数”字符
     func uppercasePrefix(_ count: Int) -> String {
-        guard !obj.isEmpty && count > 0 else { return obj }
+        guard !self.isEmpty && count > 0 else { return self }
         
-        var string = obj
+        var string = self
         string.replaceSubrange(string.startIndex..<string.index(string.startIndex, offsetBy: min(count, string.length)),
                                with: String(string[string.startIndex..<string.index(string.startIndex, offsetBy: min(count, string.length))]).uppercased())
         return string
     }
     ///大写首'计数'字符的字符串
     func uppercasedPrefix(_ count: Int) -> String {
-        guard !obj.isEmpty && count > 0 else { return obj }
-        var result = obj
+        guard !self.isEmpty && count > 0 else { return self }
+        var result = self
         result.replaceSubrange(result.startIndex..<result.index(result.startIndex, offsetBy: min(count, result.length)),
                                with: String(result[result.startIndex..<result.index(result.startIndex, offsetBy: min(count, result.length))]).uppercased())
         return result
     }
     ///字符串的最后“计数”字符，返回一个新字符串
     func uppercasedSuffix(_ count: Int) -> String {
-        guard !obj.isEmpty && count > 0 else { return obj }
-        var result = obj
+        guard !self.isEmpty && count > 0 else { return self }
+        var result = self
         result.replaceSubrange(result.index(result.endIndex, offsetBy: -min(count, result.length))..<result.endIndex,
                                with: String(result[result.index(result.endIndex, offsetBy: -min(count, result.length))..<result.endIndex]).uppercased())
         return result
     }
     ///范围内大写
     func uppercased(range: CountableRange<Int>) -> String {
-        guard !obj.isEmpty else { return obj }
-        var result = obj
+        guard !self.isEmpty else { return self }
+        var result = self
         let from = max(range.lowerBound, 0), to = min(range.upperBound, result.length)
         guard result.count > 0 && (0..<result.length).contains(from) else { return result }
         result.replaceSubrange(result.index(result.startIndex, offsetBy: from)..<result.index(result.startIndex, offsetBy: to),
@@ -729,23 +729,23 @@ public extension YEXProtocol where T == String {
     }
     ///首字母小写
     func lowercasedFirst() -> String {
-        guard !obj.isEmpty else { return obj }
-        var result = obj
+        guard !self.isEmpty else { return self }
+        var result = self
         result.replaceSubrange(result.startIndex...result.startIndex, with: String(result[result.startIndex]).lowercased())
         return result
     }
     ///小写字符串的第一个“计数”字符
     func lowercasedPrefix(_ count: Int) -> String {
-        guard !obj.isEmpty && count > 0 else { return obj }
-        var result = obj
+        guard !self.isEmpty && count > 0 else { return self }
+        var result = self
         result.replaceSubrange(result.startIndex..<result.index(result.startIndex, offsetBy: min(count, result.length)),
                                with: String(result[result.startIndex..<result.index(result.startIndex, offsetBy: min(count, result.length))]).lowercased())
         return result
     }
     ///字符串的最后“计数”字符小写
     func lowercasedSuffix(_ count: Int) -> String {
-        guard !obj.isEmpty && count > 0 else { return obj }
-        var result = obj
+        guard !self.isEmpty && count > 0 else { return self }
+        var result = self
         result.replaceSubrange(result.index(result.endIndex, offsetBy: -min(count, result.length))..<result.endIndex,
                                with: String(result[result.index(result.endIndex, offsetBy: -min(count, result.length))..<result.endIndex]).lowercased())
         return result
@@ -754,9 +754,9 @@ public extension YEXProtocol where T == String {
 }
 
 // MARK:- 字符串包含表情的处理
-public extension YEXProtocol where T: ExpressibleByStringLiteral {
+public extension ExpressibleByStringLiteral {
     var length: Int {
-        let string = obj as! String
+        let string = self as! String
         return string.count
     }
     
@@ -764,7 +764,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// 检查字符串是否包含 Emoji 表情
     /// - Returns: bool
     func containsEmoji() -> Bool {
-        for scalar in (obj as! String).unicodeScalars {
+        for scalar in (self as! String).unicodeScalars {
             switch scalar.value {
             case 0x1F600...0x1F64F,
                  0x1F300...0x1F5FF,
@@ -785,7 +785,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// - Returns: bool
     func includesEmoji() -> Bool {
         for i in 0...length {
-            let c: unichar = ((obj as! String) as NSString).character(at: i)
+            let c: unichar = ((self as! String) as NSString).character(at: i)
             if (0xD800 <= c && c <= 0xDBFF) || (0xDC00 <= c && c <= 0xDFFF) {
                 return true
             }
@@ -801,7 +801,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
         do {
             let regex = try NSRegularExpression(pattern: "[^\\u0020-\\u007E\\u00A0-\\u00BE\\u2E80-\\uA4CF\\uF900-\\uFAFF\\uFE30-\\uFE4F\\uFF00-\\uFFEF\\u0080-\\u009F\\u2000-\\u201f\r\n]", options: NSRegularExpression.Options.caseInsensitive)
             
-            let modifiedString = regex.stringByReplacingMatches(in: (obj as! String), options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, self.length), withTemplate: "")
+            let modifiedString = regex.stringByReplacingMatches(in: (self as! String), options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, self.length), withTemplate: "")
             
             return modifiedString
         } catch {
@@ -812,28 +812,28 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
 }
 
 // MARK:- 字符串的一些正则校验
-public extension YEXProtocol where T: ExpressibleByStringLiteral {
+public extension ExpressibleByStringLiteral {
     
     // MARK: 判断是否全是空白,包括空白字符和换行符号，长度为0返回true
     /// 判断是否全是空白,包括空白字符和换行符号，长度为0返回true
     var isBlank: Bool {
-        return (obj as! String).trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines) == ""
+        return (self as! String).trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines) == ""
     }
     
     // MARK: 判断是否全十进制数字，长度为0返回false
     /// 判断是否全十进制数字，长度为0返回false
     var isDecimalDigits: Bool {
-        if (obj as! String).isEmpty {
+        if (self as! String).isEmpty {
             return false
         }
         // 去除什么的操作
-        return (obj as! String).trimmingCharacters(in: NSCharacterSet.decimalDigits) == ""
+        return (self as! String).trimmingCharacters(in: NSCharacterSet.decimalDigits) == ""
     }
     
     // MARK: 判断是否是整数
     /// 判断是否是整数
     var isPureInt: Bool {
-        let scan: Scanner = Scanner(string: (obj as! String))
+        let scan: Scanner = Scanner(string: (self as! String))
         var n: Int = 0
         return scan.scanInt(&n) && scan.isAtEnd
     }
@@ -841,7 +841,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     // MARK: 判断是否是Float,此处Float是包含Int的，即Int是特殊的Float
     /// 判断是否是Float，此处Float是包含Int的，即Int是特殊的Float
     var isPureFloat: Bool {
-        let scan: Scanner = Scanner(string: (obj as! String))
+        let scan: Scanner = Scanner(string: (self as! String))
         var n: Float = 0.0
         return scan.scanFloat(&n) && scan.isAtEnd
     }
@@ -849,10 +849,10 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     // MARK: 判断是否全是字母，长度为0返回false
     /// 判断是否全是字母，长度为0返回false
     var isLetters: Bool {
-        if (obj as! String).isEmpty {
+        if (self as! String).isEmpty {
             return false
         }
-        return (obj as! String).trimmingCharacters(in: NSCharacterSet.letters) == ""
+        return (self as! String).trimmingCharacters(in: NSCharacterSet.letters) == ""
     }
     
     // MARK: 判断是否是中文, 这里的中文不包括数字及标点符号
@@ -896,12 +896,12 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// - Returns: String.Index
     func validIndex(original: Int) -> String.Index {
         switch original {
-        case ...(obj as! String).startIndex.utf16Offset(in: obj as! String):
-            return (obj as! String).startIndex
-        case (obj as! String).endIndex.utf16Offset(in: obj as! String)...:
-            return (obj as! String).endIndex
+        case ...(self as! String).startIndex.utf16Offset(in: self as! String):
+            return (self as! String).startIndex
+        case (self as! String).endIndex.utf16Offset(in: self as! String)...:
+            return (self as! String).endIndex
         default:
-            return (obj as! String).index((obj as! String).startIndex, offsetBy: original)
+            return (self as! String).index((self as! String).startIndex, offsetBy: original)
         }
     }
     
@@ -910,7 +910,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// - Parameter prefix: 前缀字符串
     /// - Returns: 结果
     func isHasPrefix(prefix: String) -> Bool {
-        return (obj as! String).hasPrefix(prefix)
+        return (self as! String).hasPrefix(prefix)
     }
     
     // MARK: 检查字符串是否有特定后缀：hasSuffix
@@ -918,14 +918,14 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// - Parameter suffix: 后缀字符串
     /// - Returns: 结果
     func isHasSuffix(suffix: String) -> Bool {
-        return (obj as! String).hasSuffix(suffix)
+        return (self as! String).hasSuffix(suffix)
     }
     
     // MARK: 是否为0-9之间的数字(字符串的组成是：0-9之间的数字)
     /// 是否为0-9之间的数字(字符串的组成是：0-9之间的数字)
     /// - Returns: 返回结果
     func isValidNumberValue() -> Bool {
-        guard (obj as! String).count > 0 else {
+        guard (self as! String).count > 0 else {
             return false
         }
         let rgex = "^[\\d]*$"
@@ -936,7 +936,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// 是否为数字或者小数点(字符串的组成是：0-9之间的数字或者小数点即可)
     /// - Returns: 返回结果
     func isValidNumberAndDecimalPoint() -> Bool {
-        guard (obj as! String).count > 0 else {
+        guard (self as! String).count > 0 else {
             return false
         }
         let rgex = "^[\\d.]*$"
@@ -948,7 +948,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// - Returns: 结果
     func verifyUrl() -> Bool {
         // 创建NSURL实例
-        if let url = URL(string: (obj as! String)) {
+        if let url = URL(string: (self as! String)) {
             //检测应用是否能打开这个NSURL实例
             return UIApplication.shared.canOpenURL(url)
         }
@@ -958,7 +958,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     // MARK: 是否是一个有效的文件URL, "file://Documents/file.txt".isValidFileUrl -> true
     /// 是否是一个有效的文件URL
     var isValidFileUrl: Bool {
-        return URL(string: obj as! String)?.isFileURL ?? false
+        return URL(string: self as! String)?.isFileURL ?? false
     }
     
     // MARK:- private 方法
@@ -980,7 +980,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     
     private func predicateValue(rgex: String) -> Bool {
         let checker: NSPredicate = NSPredicate(format: "SELF MATCHES %@", rgex)
-        return checker.evaluate(with: (obj as! String))
+        return checker.evaluate(with: (self as! String))
     }
     
 }
@@ -1006,10 +1006,6 @@ public extension String {
         }
         return 0
     }
-    ///count
-    fileprivate var length: Int {
-        return self.count
-    }
 }
 
 /// NSDecimalNumberHandler 苹果针对浮点类型计算精度问题提供出来的计算类
@@ -1030,13 +1026,13 @@ public extension String {
  case bankers = 3 是在四舍五入的基础上，加上末尾数为5时，变成偶数的规则
  }
  */
-extension YEXProtocol where T: ExpressibleByStringLiteral {
+extension ExpressibleByStringLiteral {
     // MARK: ＋
     /// ＋
     /// - Parameter strNumber: strNumber description
     /// - Returns: description
     public func adding(_ strNumber: String?) -> String {
-        var ln = NSDecimalNumber(string: (obj as! String))
+        var ln = NSDecimalNumber(string: (self as! String))
         var rn = NSDecimalNumber(string: strNumber)
         if ln.doubleValue.isNaN {
             ln = NSDecimalNumber.zero
@@ -1053,7 +1049,7 @@ extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// - Parameter strNumber: strNumber description
     /// - Returns: description
     public func subtracting(_ strNumber: String?) -> String {
-        var ln = NSDecimalNumber(string: (obj as! String))
+        var ln = NSDecimalNumber(string: (self as! String))
         var rn = NSDecimalNumber(string: strNumber)
         if ln.doubleValue.isNaN {
             ln = NSDecimalNumber.zero
@@ -1070,7 +1066,7 @@ extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// - Parameter strNumber: strNumber description
     /// - Returns: description
     public func multiplyexng(_ strNumber: String?) -> String {
-        var ln = NSDecimalNumber(string: (obj as! String))
+        var ln = NSDecimalNumber(string: (self as! String))
         var rn = NSDecimalNumber(string: strNumber)
         if ln.doubleValue.isNaN {
             ln = NSDecimalNumber.zero
@@ -1087,7 +1083,7 @@ extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// - Parameter strNumber: strNumber description
     /// - Returns: description
     public func dividing(_ strNumber: String?) -> String {
-        var ln = NSDecimalNumber(string: (obj as! String))
+        var ln = NSDecimalNumber(string: (self as! String))
         var rn = NSDecimalNumber(string: strNumber)
         if ln.doubleValue.isNaN {
             ln = NSDecimalNumber.zero
@@ -1110,9 +1106,9 @@ extension YEXProtocol where T: ExpressibleByStringLiteral {
  Decimal：     十进制
  Hexadecimal： 十六进制
  */
-public extension YEXProtocol where T: ExpressibleByStringLiteral {
+public extension ExpressibleByStringLiteral {
     func toInt() -> Int? {
-        if let num = NumberFormatter().number(from: obj as! String) {
+        if let num = NumberFormatter().number(from: self as! String) {
             return num.intValue
         } else {
             return nil
@@ -1127,17 +1123,17 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
         // 十进制
         let decimal = binary.binaryTodecimal()
         // 八进制
-        return decimal.yex.decimalToOctal()
+        return decimal.decimalToOctal()
     }
     
     // MARK: 二进制 -> 十进制
     /// 二进制 -> 十进制
     /// - Returns: 十进制
     func binaryTodecimal() -> String {
-        let binary = self.obj as! String
+        let binary = self.self as! String
         var sum = 0
         for c in binary {
-            if let number = "\(c)".yex.toInt() {
+            if let number = "\(c)".toInt() {
                 sum = sum * 2 + number
             }
         }
@@ -1153,7 +1149,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
         // 十进制
         let decimal = binary.binaryTodecimal()
         // 十六进制
-        return decimal.yex.decimalToHexadecimal()
+        return decimal.decimalToHexadecimal()
     }
     
     // MARK: 八进制 -> 二进制
@@ -1165,17 +1161,17 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
         // 十进制
         let decimal = octal.octalTodecimal()
         // 二进制
-        return decimal.yex.decimalToBinary()
+        return decimal.decimalToBinary()
     }
     
     // MARK: 八进制 -> 十进制
     /// 八进制 -> 十进制
     /// - Returns: 十进制
     func octalTodecimal() -> String {
-        let binary = obj as! String
+        let binary = self as! String
         var sum: Int = 0
         for c in binary {
-            if let number = "\(c)".yex.toInt() {
+            if let number = "\(c)".toInt() {
                 sum = sum * 8 + number
             }
         }
@@ -1187,18 +1183,18 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// - Returns: 十六进制
     func octalToHexadecimal() -> String {
         // 八进制
-        let octal = obj as! String
+        let octal = self as! String
         // 十进制
-        let decimal = octal.yex.octalTodecimal()
+        let decimal = octal.octalTodecimal()
         // 十六进制
-        return decimal.yex.decimalToHexadecimal()
+        return decimal.decimalToHexadecimal()
     }
     
     // MARK: 十进制 -> 二进制
     /// 十进制 -> 二进制
     /// - Returns: 二进制
     func decimalToBinary() -> String {
-        guard var decimal = (obj as! String).yex.toInt() else {
+        guard var decimal = (self as! String).toInt() else {
             return ""
         }
         var str = ""
@@ -1213,7 +1209,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// 十进制 -> 八进制
     /// - Returns: 八进制
     func decimalToOctal() -> String {
-        guard let decimal = (obj as! String).yex.toInt() else {
+        guard let decimal = (self as! String).toInt() else {
             return ""
         }
         return String(format: "%0O", decimal)
@@ -1238,7 +1234,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
         // 十进制
         let decimal = hexadecimal.hexadecimalToDecimal()
         // 二进制
-        return decimal.yex.decimalToBinary()
+        return decimal.decimalToBinary()
     }
     
     // MARK: 十六进制 -> 八进制
@@ -1250,14 +1246,14 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
         // 十进制
         let decimal = hexadecimal.hexadecimalToDecimal()
         // 八进制
-        return decimal.yex.decimalToOctal()
+        return decimal.decimalToOctal()
     }
     
     // MARK: 十六进制 -> 十进制
     /// 十六进制  -> 十进制
     /// - Returns: 十进制
     func hexadecimalToDecimal() -> String {
-        let str = (obj as! String).uppercased()
+        let str = (self as! String).uppercased()
         var sum = 0
         for i in str.utf8 {
             // 0-9 从48开始
@@ -1272,14 +1268,14 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
 }
 
 // MARK:- String -> NSMutableAttributedString
-public extension YEXProtocol where T: ExpressibleByStringLiteral {
+public extension ExpressibleByStringLiteral {
     
     // MARK: String 添加颜色后转 NSMutableAttributedString
     /// String 添加颜色后转 NSMutableAttributedString
     /// - Parameter color: 背景色
     /// - Returns: NSMutableAttributedString
     func color(_ color: UIColor) -> NSMutableAttributedString {
-        let attributedText = NSMutableAttributedString(string: obj as! String, attributes: [.foregroundColor: color])
+        let attributedText = NSMutableAttributedString(string: self as! String, attributes: [.foregroundColor: color])
         return attributedText
     }
     
@@ -1288,7 +1284,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// - Parameter font: 字体的大小
     /// - Returns: NSMutableAttributedString
     func font(_ font: CGFloat) -> NSMutableAttributedString {
-        let attributedText = NSMutableAttributedString(string: obj as! String, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: font)])
+        let attributedText = NSMutableAttributedString(string: self as! String, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: font)])
         return attributedText
     }
     
@@ -1297,7 +1293,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// - Parameter font: UIFont
     /// - Returns: NSMutableAttributedString
     func font(_ font: UIFont) -> NSMutableAttributedString {
-        let attributedText = NSMutableAttributedString(string: obj as! String, attributes: [NSAttributedString.Key.font: font])
+        let attributedText = NSMutableAttributedString(string: self as! String, attributes: [NSAttributedString.Key.font: font])
         return attributedText
     }
     
@@ -1305,7 +1301,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// String 添加 text 后转 NSMutableAttributedString
     /// - Returns: NSMutableAttributedString
     func text() -> NSMutableAttributedString {
-        let attributedText = NSMutableAttributedString(string: obj as! String)
+        let attributedText = NSMutableAttributedString(string: self as! String)
         return attributedText
     }
     
@@ -1313,7 +1309,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// String 添加 删除线 后转 NSMutableAttributedString
     /// - Returns: NSMutableAttributedString
     func strikethrough() -> NSMutableAttributedString {
-        let attributedText = NSMutableAttributedString(string: obj as! String, attributes: [.strikethroughStyle: NSUnderlineStyle.single.rawValue])
+        let attributedText = NSMutableAttributedString(string: self as! String, attributes: [.strikethroughStyle: NSUnderlineStyle.single.rawValue])
         return attributedText
     }
 }
@@ -1333,30 +1329,29 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
  SHA-256、SHA-384、SHA-512，散列值长度分别是256bit、384bit、512bit
  SHA-3 全新标准
  */
-public extension YEXProtocol where T: ExpressibleByStringLiteral {
-    /// MD5 加密类型
-    enum MD5EncryptType {
-        /// 32 位小写
-        case lowercase32
-        /// 32 位大写
-        case uppercase32
-        /// 16 位小写
-        case lowercase16
-        /// 16 位大写
-        case uppercase16
-    }
-    
+/// MD5 加密类型
+public enum MD5EncryptType {
+    /// 32 位小写
+    case lowercase32
+    /// 32 位大写
+    case uppercase32
+    /// 16 位小写
+    case lowercase16
+    /// 16 位大写
+    case uppercase16
+}
+public extension ExpressibleByStringLiteral {
     // MARK: MD5加密 默认是32位小写加密
     /// MD5加密 默认是32位小写加密
     /// - Parameter md5Type: 加密类型
     /// - Returns: MD5加密后的字符串
     func md5Encrypt(_ md5Type: MD5EncryptType = .lowercase32) -> String {
-        guard (obj as! String).count > 0 else {
+        guard (self as! String).count > 0 else {
             print("⚠️⚠️⚠️md5加密无效的字符串⚠️⚠️⚠️")
             return ""
         }
         // 1.把待加密的字符串转成char类型数据 因为MD5加密是C语言加密
-        let cCharArray = (obj as! String).cString(using: .utf8)
+        let cCharArray = (self as! String).cString(using: .utf8)
         // 2.创建一个字符串数组接受MD5的值
         var uint8Array = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
         // 3.计算MD5的值
@@ -1377,11 +1372,11 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
         // 16位小写
         case .lowercase16:
             let tempStr = uint8Array.reduce("") { $0 + String(format: "%02x", $1)}
-            return tempStr.yex.slice(8..<24)
+            return tempStr.slice(8..<24)
         // 16位大写
         case .uppercase16:
             let tempStr = uint8Array.reduce("") { $0 + String(format: "%02X", $1)}
-            return tempStr.yex.slice(8..<24)
+            return tempStr.slice(8..<24)
         }
     }
 
@@ -1392,14 +1387,14 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     func base64String(encode: Bool) -> String? {
         guard encode else {
             // 1.解码
-            guard let decryptionData = Data(base64Encoded: obj as! String, options: .ignoreUnknownCharacters) else {
+            guard let decryptionData = Data(base64Encoded: self as! String, options: .ignoreUnknownCharacters) else {
                 return nil
             }
             return String(data: decryptionData, encoding: .utf8)
         }
         
         // 2.编码
-        guard let codingData = (obj as! String).data(using: .utf8) else {
+        guard let codingData = (self as! String).data(using: .utf8) else {
             return nil
         }
         return codingData.base64EncodedString()
@@ -1434,7 +1429,7 @@ public enum DDYSCAType {
     }
 }
 
-public extension YEXProtocol where T: ExpressibleByStringLiteral {
+public extension ExpressibleByStringLiteral {
     
     // MARK: 字符串 AES, AES128, DES, DES3, CAST, RC2, RC4, Blowfish 多种加密
     /// 字符串 AES, AES128, DES, DES3, CAST, RC2, RC4, Blowfish 多种加密
@@ -1445,7 +1440,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     /// - Returns: 编码或者解码后的字符串
     func scaCrypt(cryptType: DDYSCAType, key: String?, encode: Bool) -> String? {
 
-        let strData = encode ? (obj as! String).data(using: .utf8) : Data(base64Encoded: (obj as! String))
+        let strData = encode ? (self as! String).data(using: .utf8) : Data(base64Encoded: (self as! String))
         // 创建数据编码后的指针
         let dataPointer = UnsafeRawPointer((strData! as NSData).bytes)
         // 获取转码后数据的长度
@@ -1520,7 +1515,7 @@ public enum DDYSHAType {
     }
 }
 
-public extension YEXProtocol where T: ExpressibleByStringLiteral {
+public extension ExpressibleByStringLiteral {
     
     // MARK: SHA1, SHA224, SHA256, SHA384, SHA512 加密
     /// SHA1, SHA224, SHA256, SHA384, SHA512 加密
@@ -1530,7 +1525,7 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
     ///   - lower: 大写还是小写，默认小写
     /// - Returns: 加密以后的字符串
     func shaCrypt(cryptType: DDYSHAType = .SHA1, key: String?, lower: Bool = true) -> String? {
-        guard let cStr = (obj as! String).cString(using: String.Encoding.utf8) else {
+        guard let cStr = (self as! String).cString(using: String.Encoding.utf8) else {
             return nil
         }
         let strLen  = strlen(cStr)
@@ -1563,14 +1558,14 @@ public extension YEXProtocol where T: ExpressibleByStringLiteral {
 }
 
 // MARK:- unicode编码和解码
-public extension YEXProtocol where T ==  String {
+public extension String {
 
     // MARK: unicode编码
     /// unicode编码
     /// - Returns: unicode编码后的字符串
     func unicodeEncode() -> String {
         var tempStr = String()
-        for v in obj.utf16 {
+        for v in self.utf16 {
             if v < 128 {
                 tempStr.append(Unicode.Scalar(v)!.escaped(asASCII: true))
                 continue
@@ -1586,7 +1581,7 @@ public extension YEXProtocol where T ==  String {
     /// unicode解码
     /// - Returns: unicode解码后的字符串
     func unicodeDecode() -> String {
-        let tempStr1 = obj.replacingOccurrences(of: "\\u", with: "\\U")
+        let tempStr1 = self.replacingOccurrences(of: "\\u", with: "\\U")
         let tempStr2 = tempStr1.replacingOccurrences(of: "\"", with: "\\\"")
         let tempStr3 = "\"".appending(tempStr2).appending("\"")
         let tempData = tempStr3.data(using: String.Encoding.utf8)
@@ -1601,14 +1596,14 @@ public extension YEXProtocol where T ==  String {
 }
 
 // MARK: - url编码   html
-public extension YEXProtocol where T == String {
+public extension String {
     /// url编码
     var urlEncoder: String? {
         return urlEncoding()
     }
     /// url编码
     func urlEncoding(_ set: CharacterSet = .urlQueryAllowed) -> String? {
-        return obj.addingPercentEncoding(withAllowedCharacters: set)
+        return self.addingPercentEncoding(withAllowedCharacters: set)
     }
     
     /// 网页图片适配
@@ -1627,7 +1622,7 @@ public extension YEXProtocol where T == String {
                 %@\
                 </body>\
                 </html>
-                """, obj)
+                """, self)
         return htmls
     }
     
@@ -1640,7 +1635,7 @@ public extension YEXProtocol where T == String {
         
         var htmlString: NSMutableAttributedString? = nil
         do {
-            if let data = obj.replacingOccurrences(of: "\n", with: "<br/>").data(using: .utf8) {
+            if let data = self.replacingOccurrences(of: "\n", with: "<br/>").data(using: .utf8) {
                 htmlString = try NSMutableAttributedString(data: data, options: [
                 NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html,
                 NSAttributedString.DocumentReadingOptionKey.characterEncoding: NSNumber(value: String.Encoding.utf8.rawValue)], documentAttributes: nil)
@@ -1664,14 +1659,14 @@ public extension YEXProtocol where T == String {
             paragraphStyle.lineSpacing = weakLineSpacing
             htmlString?.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: htmlString?.length ?? 0))
         }
-        return htmlString ?? NSMutableAttributedString(string: obj)
+        return htmlString ?? NSMutableAttributedString(string: self)
     }
 }
 
 
 
 // MARK: - 效果
-public extension YEXProtocol where T == String {
+public extension String {
     /// 给字体添加描边效果 : strokeWidth为正数为空心文字描边 strokeWidth为负数为实心文字描边
     func setOutline(font: UIFont, alignment: NSTextAlignment, textColor: UIColor, strokeWidth: CGFloat, widthColor: UIColor) -> NSAttributedString {
         let paragraph = NSMutableParagraphStyle()
@@ -1685,10 +1680,10 @@ public extension YEXProtocol where T == String {
             NSAttributedString.Key.kern: 1
         ]
         
-        guard obj.yex.isNotEmpty else {
+        guard self.isNotEmpty else {
             return NSAttributedString()
         }
         
-        return NSMutableAttributedString(string: self.obj, attributes: dic)
+        return NSMutableAttributedString(string: self.self, attributes: dic)
     }
 }

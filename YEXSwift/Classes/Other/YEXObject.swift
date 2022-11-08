@@ -11,13 +11,13 @@ import Foundation
 import UIKit
 
 //MARK: --- 获取属性和方法
-public extension YEXProtocol where T: NSObject {
+public extension NSObject {
     
     //MARK: --- 获取类的属性列表
     /// 获取类的属性列表
-    func get_class_copyPropertyList() -> [String] {
+    var get_class_copyPropertyList:[String] {
         var outCount:UInt32 = 0
-        let propers:UnsafeMutablePointer<objc_property_t>! =  class_copyPropertyList(obj.classForCoder, &outCount)
+        let propers:UnsafeMutablePointer<objc_property_t>! =  class_copyPropertyList(self.classForCoder, &outCount)
         let count:Int = Int(outCount);
         var names:[String] = [String]()
         for i in 0...(count-1) {
@@ -30,10 +30,10 @@ public extension YEXProtocol where T: NSObject {
     }
     //MARK: --- 获取类的方法列表
     /// 获取类的方法列表
-    func get_class_copyMethodList() -> [String] {
+    var get_class_copyMethodList: [String] {
         var outCount:UInt32
         outCount = 0
-        let methods:UnsafeMutablePointer<objc_property_t>! =  class_copyMethodList(obj.classForCoder, &outCount)
+        let methods:UnsafeMutablePointer<objc_property_t>! =  class_copyMethodList(self.classForCoder, &outCount)
         let count:Int = Int(outCount);
         var names:[String] = [String]()
         for i in 0...(count-1) {
@@ -45,7 +45,7 @@ public extension YEXProtocol where T: NSObject {
         return names
     }
     ///获取当前控制器
-    func getTopViewController () -> UIViewController? {
+    var getTopViewController: UIViewController? {
         guard let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first, let rootVC = window.rootViewController  else {
             return nil
         }

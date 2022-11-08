@@ -10,11 +10,11 @@ GitHub:        https://github.com/yijingKing
 import Foundation
 import UIKit
 
-public extension YEXProtocol where T: NSAttributedString {
+public extension NSAttributedString {
     // MARK: - 加粗
     /// 加粗
     func bold(_ font: CGFloat = UIFont.systemFontSize) -> NSAttributedString {
-        guard let copy = obj.mutableCopy() as? NSMutableAttributedString else { return obj }
+        guard let copy = self.mutableCopy() as? NSMutableAttributedString else { return self }
         let range = (copy.string as NSString).range(of: copy.string)
         copy.addAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: font)], range: range)
         return copy
@@ -22,7 +22,7 @@ public extension YEXProtocol where T: NSAttributedString {
     // MARK: - 下划线
     /// 下划线
     func underline() -> NSAttributedString {
-        guard let copy = obj.mutableCopy() as? NSMutableAttributedString else { return obj }
+        guard let copy = self.mutableCopy() as? NSMutableAttributedString else { return self }
         let range = (copy.string as NSString).range(of: copy.string)
         copy.addAttributes([NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue], range: range)
         return copy
@@ -30,7 +30,7 @@ public extension YEXProtocol where T: NSAttributedString {
     // MARK: - 删除线
     /// 删除线
     func strikethrough() -> NSAttributedString {
-        guard let copy = obj.mutableCopy() as? NSMutableAttributedString else { return obj }
+        guard let copy = self.mutableCopy() as? NSMutableAttributedString else { return self }
         let range = (copy.string as NSString).range(of: copy.string)
         let attributes = [
             NSAttributedString.Key.strikethroughStyle: NSNumber(value: NSUnderlineStyle.single.rawValue as Int)]
@@ -40,14 +40,14 @@ public extension YEXProtocol where T: NSAttributedString {
     // MARK: - 前景色
     /// 前景色
     func color(_ color: UIColor) -> NSAttributedString {
-        guard let copy = obj.mutableCopy() as? NSMutableAttributedString else { return obj }
+        guard let copy = self.mutableCopy() as? NSMutableAttributedString else { return self }
         let range = (copy.string as NSString).range(of: copy.string)
         copy.addAttributes([NSAttributedString.Key.foregroundColor: color], range: range)
         return copy
     }
 }
 
-public extension YEXProtocol where T: NSAttributedString {
+public extension NSAttributedString {
     // MARK: 设置特定区域的字体大小
     /// 设置特定区域的字体大小
     /// - Parameters:
@@ -173,7 +173,7 @@ public extension YEXProtocol where T: NSAttributedString {
     ///   - imgIndex: 图片的位置，默认放在开头
     /// - Returns: 返回设置后的富文本
     func setInsertImage(imgName: String, imgBounds: CGRect = .zero, imgIndex: Int = 0) -> NSAttributedString {
-        let attributedString = NSMutableAttributedString(attributedString: obj)
+        let attributedString = NSMutableAttributedString(attributedString: self)
         // NSTextAttachment可以将要插入的图片作为特殊字符处理
         let attch = NSTextAttachment()
         attch.image = loadImage(imageName: imgName)
@@ -191,7 +191,7 @@ public extension YEXProtocol where T: NSAttributedString {
     func setFirstLineLeftEdge(_ edge: CGFloat) -> NSAttributedString {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.firstLineHeadIndent = edge
-        return setSpecificRangeTextMoreAttributes(attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle], range: NSRange(location: 0, length: obj.length))
+        return setSpecificRangeTextMoreAttributes(attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle], range: NSRange(location: 0, length: self.length))
     }
     // MARK: 设置特定区域的多个字体属性
     /// 设置特定区域的多个字体属性
@@ -200,7 +200,7 @@ public extension YEXProtocol where T: NSAttributedString {
     ///   - range: 特定区域
     /// - Returns: 返回设置后的富文本
     func setSpecificRangeTextMoreAttributes(attributes: Dictionary<NSAttributedString.Key, Any>, range: NSRange) -> NSAttributedString {
-        let mutableAttributedString = NSMutableAttributedString(attributedString: obj)
+        let mutableAttributedString = NSMutableAttributedString(attributedString: self)
         for name in attributes.keys {
             mutableAttributedString.addAttribute(name, value: attributes[name] ?? "", range: range)
         }
@@ -213,7 +213,7 @@ public extension YEXProtocol where T: NSAttributedString {
     ///   - attributes: 字体属性
     /// - Returns: 返回设置后的富文本
     func setSpecificTextMoreAttributes(_ text: String, attributes: Dictionary<NSAttributedString.Key, Any>) -> NSAttributedString {
-        let mutableAttributedString = NSMutableAttributedString(attributedString: obj)
+        let mutableAttributedString = NSMutableAttributedString(attributedString: self)
         let rangeArray = getStringRangeArray(with: [text])
         if !rangeArray.isEmpty {
             for name in attributes.keys {
@@ -244,7 +244,7 @@ public extension YEXProtocol where T: NSAttributedString {
     }
 }
 
-public extension YEXProtocol where T: NSAttributedString {
+public extension NSAttributedString {
     /// 获取对应字符串的range数组
     /// - Parameter textArray: 字符串数组
     /// - Returns: range数组
@@ -252,8 +252,8 @@ public extension YEXProtocol where T: NSAttributedString {
         var rangeArray = Array<NSRange>()
         // 遍历
         for str in textArray {
-            if obj.string.contains(str) {
-                let subStrArr = obj.string.components(separatedBy: str)
+            if self.string.contains(str) {
+                let subStrArr = self.string.components(separatedBy: str)
                 var subStrIndex = 0
                 for i in 0 ..< (subStrArr.count - 1) {
                     let subDivisionStr = subStrArr[i]

@@ -84,17 +84,21 @@ public extension UIColor {
 }
 
 //MARK: --- 换换
-public extension YEXProtocol where T: UIColor {
+public extension UIColor {
     ///UIColor转化为16进制
     var hexString: String {
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
         var alpha: CGFloat = 0
-        obj.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         var rgb: Int = (Int)(red * 255) << 16 | (Int)(green * 255) << 8
         rgb = rgb | (Int)(blue * 255) << 0
         return String(format: "#%06x", rgb)
+    }
+    ///颜色生成image
+    var image: UIImage {
+        return image(self)
     }
     ///颜色生成image
     func image(_ color : UIColor) -> UIImage {
@@ -109,7 +113,7 @@ public extension YEXProtocol where T: UIColor {
     }
 }
 
-public extension YEXProtocol where T: UIColor {
+public extension UIColor {
     static var hexF2F2F2: UIColor {
         return YEXHexColor("#F2F2F2")
     }

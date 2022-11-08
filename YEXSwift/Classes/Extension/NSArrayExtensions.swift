@@ -9,11 +9,11 @@ GitHub:        https://github.com/yijingKing
 
 import Foundation
 
-public extension YEXProtocol where T == Array<String> {
+public extension Array<String> {
     // MARK: - 转字符串
     ///转字符串
     func toString(separator: String = "") -> String {
-        return obj.toStrinig(separator: separator)
+        return self.toStrinig(separator: separator)
     }
 }
 

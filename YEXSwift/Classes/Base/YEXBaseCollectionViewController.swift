@@ -68,7 +68,7 @@ open class YEXBaseCollectionViewController: YEXBaseViewController {
             $0.left.right.bottom.equalTo(0)
             $0.top.equalTo(view.snp.topMargin)
         }
-        collectionView.yex.register(cellWithClass: UICollectionViewCell.self)
+        collectionView.register(cellWithClass: UICollectionViewCell.self)
     }
     
 }
@@ -170,7 +170,7 @@ extension YEXBaseCollectionViewController: UICollectionViewDelegate,UICollection
     }
     
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.yex.dequeueReusableCell(withClass: UICollectionViewCell.self, for: indexPath)
+        return collectionView.dequeueReusableCell(withClass: UICollectionViewCell.self, for: indexPath)
     }
     
     open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -30,19 +30,19 @@ public extension Double {
     
 }
 
-public extension YEXProtocol where T == Double {
+public extension Double {
 
     /// 浮点数四舍五入
     /// - Parameter places: 数字
     /// - Returns: Double
     func round(to places: Int) -> Double {
         let divisor = pow(10.0, Double(places))
-        return (obj * divisor).rounded() / divisor
+        return (self * divisor).rounded() / divisor
     }
 }
 
 
-public extension YEXProtocol where T == Double {
+public extension Double {
     /**
      NumberFormatter.Style:
      none                   四舍五入的整数
@@ -78,7 +78,7 @@ public extension YEXProtocol where T == Double {
         if let max = maxInteger {
             numberFormatter.maximumIntegerDigits = max
         }
-        return numberFormatter.string(for: obj)
+        return numberFormatter.string(for: self)
     }
     
     ///分数(默认最小2位,最大3位)
@@ -102,7 +102,7 @@ public extension YEXProtocol where T == Double {
         numberFormatter.usesGroupingSeparator = true
         numberFormatter.groupingSeparator = separator
         numberFormatter.groupingSize = length ?? 0
-        return numberFormatter.string(for: obj)
+        return numberFormatter.string(for: self)
     }
     
     /// 增加前后缀
@@ -116,6 +116,6 @@ public extension YEXProtocol where T == Double {
         numberFormatter.numberStyle = style
         numberFormatter.positivePrefix = prefix
         numberFormatter.positiveSuffix = suffix
-        return numberFormatter.string(for: obj)
+        return numberFormatter.string(for: self)
     }
 }

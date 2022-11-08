@@ -44,7 +44,7 @@ public extension UIViewController {
 }
 
 
-public extension YEXProtocol where T: UIViewController {
+public extension UIViewController {
     
     /// 系统提示弹窗
     /// - Parameters:
@@ -73,9 +73,21 @@ public extension YEXProtocol where T: UIViewController {
                 alertController.preferredAction = action
             }
         }
-        obj.present(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
         return alertController
     }
     
-    
+    /// 添加控制器
+    func addChildController(_ childController: UIViewController) {
+        self.addChild(childController)
+        self.view.addSubview(childController.view)
+        childController.didMove(toParent: self)
+    }
+    /// 移除添加的控制器
+    func removeChildController() {
+        guard self.parent != nil else { return }
+        self.willMove(toParent: nil)
+        self.removeFromParent()
+        self.view.removeFromSuperview()
+    }
 }

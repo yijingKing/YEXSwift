@@ -9,34 +9,6 @@ GitHub:        https://github.com/yijingKing
 import Foundation
 import UIKit
 
-public extension YEXProtocol where T: UITextView {
-    
-    var placeholder: String? {
-        set {
-            obj.placeholder = newValue
-        }
-        get {
-            return obj.placeholder
-        }
-    }
-    var placeholderColor: UIColor {
-        set {
-            obj.placeholderColor = newValue
-        }
-        get {
-            return obj.placeholderColor
-        }
-    }
-    var placeholderEdgeInsets: UIEdgeInsets? {
-        set {
-            obj.placeholderEdgeInsets = newValue
-        }
-        get {
-            return obj.placeholderEdgeInsets
-        }
-    }
-}
-
 //MARK:   -------   属性扩展 ----------
 public extension UITextView {
     private struct YEXRuntimeKey {

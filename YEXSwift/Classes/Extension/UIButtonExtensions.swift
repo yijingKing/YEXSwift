@@ -130,14 +130,14 @@ public extension UIButton {
     
 }
 
-public extension YEXProtocol where T: UIButton {
+public extension UIButton {
     ///点击
     func addTarget(_ block:((UIButton)->())?) {
-        obj.addTargetAction(block: block, for: .touchUpInside)
+        self.addTargetAction(block: block, for: .touchUpInside)
     }
     ///点击
     func addTarget(_ taget: UIControl.Event = .touchUpInside,_ block:((UIButton)->())?) {
-        obj.addTargetAction(block: block, for: taget)
+        self.addTargetAction(block: block, for: taget)
     }
 }
 
@@ -148,7 +148,7 @@ public enum YEXButtonImagePosition: Int {
     case bottom     = 0x03
 }
 
-public extension YEXProtocol where T: UIButton {
+public extension UIButton {
     //MARK: --- 图片文本位置
     /// 图片文本位置
     /// - Parameters:
@@ -158,49 +158,49 @@ public extension YEXProtocol where T: UIButton {
     func imagePosition(_ type: YEXButtonImagePosition,_ space: CGFloat? = nil,_ imageW: CGFloat? = nil,_ imageH: CGFloat? = nil){
         var image: UIImage?
         if let w = imageW, let h = imageH {
-            image = image?.yex.scale(w, h)
-            obj.setImage(image, for: .normal)
+            image = image?.scale(w, h)
+            self.setImage(image, for: .normal)
         }
-        guard let imageWidth = obj.imageView?.image?.size.width,
-              let imageHeight = obj.imageView?.image?.size.height else { return }
+        guard let imageWidth = self.imageView?.image?.size.width,
+              let imageHeight = self.imageView?.image?.size.height else { return }
         
-        guard var titleWidth = obj.titleLabel?.text?.yex.getWidth(obj.titleLabel?.font ?? UIFont.systemFont(ofSize: 17)) else { return }
-        let width = CGFloat(obj.width)
+        guard var titleWidth = self.titleLabel?.text?.getWidth(self.titleLabel?.font ?? UIFont.systemFont(ofSize: 17)) else { return }
+        let width = CGFloat(self.width)
         if titleWidth >= width {
             titleWidth = width
         }
         
-        let titleHeight = obj.titleLabel?.font.pointSize ?? 0
+        let titleHeight = self.titleLabel?.font.pointSize ?? 0
         let insetAmount = (space ?? 0) / 2
         let imageOffWidth = (imageWidth + titleWidth) / 2 - imageWidth / 2
         let imageOffHeight = imageHeight / 2 + insetAmount
         let titleOffWidth = imageWidth + titleWidth / 2 - (imageWidth + titleWidth) / 2
         let titleOffHeight = titleHeight / 2 + insetAmount
         switch type {
-        case .left:
-            obj.imageEdgeInsets = .init(top: 0, left: -insetAmount,
-                                        bottom: 0, right: insetAmount)
-            obj.titleEdgeInsets = .init(top: 0, left: insetAmount,
-                                        bottom: 0, right: -insetAmount)
-            obj.contentHorizontalAlignment = .center
-        case .right:
-            obj.imageEdgeInsets = .init(top: 0, left: titleWidth + insetAmount,
-                                        bottom: 0, right: -(titleWidth + insetAmount))
-            obj.titleEdgeInsets = .init(top: 0, left: -(imageWidth + insetAmount),
-                                        bottom: 0, right: imageWidth + insetAmount)
-            obj.contentHorizontalAlignment = .center
-        case .top:
-            obj.imageEdgeInsets = .init(top: -imageOffHeight, left: imageOffWidth,
-                                        bottom: imageOffHeight, right: -imageOffWidth)
-            obj.titleEdgeInsets = .init(top: titleOffHeight, left: -titleOffWidth,
-                                        bottom: -titleOffHeight, right: titleOffWidth)
-            obj.contentVerticalAlignment = .center
-        case .bottom:
-            obj.imageEdgeInsets = .init(top: imageOffHeight, left: imageOffWidth,
-                                        bottom: -imageOffHeight, right: -imageOffWidth)
-            obj.titleEdgeInsets = .init(top: -titleOffHeight, left: -titleOffWidth,
-                                        bottom: titleOffHeight, right: titleOffWidth)
-            obj.contentVerticalAlignment = .center
+            case .left:
+                self.imageEdgeInsets = .init(top: 0, left: -insetAmount,
+                                             bottom: 0, right: insetAmount)
+                self.titleEdgeInsets = .init(top: 0, left: insetAmount,
+                                             bottom: 0, right: -insetAmount)
+                self.contentHorizontalAlignment = .center
+            case .right:
+                self.imageEdgeInsets = .init(top: 0, left: titleWidth + insetAmount,
+                                             bottom: 0, right: -(titleWidth + insetAmount))
+                self.titleEdgeInsets = .init(top: 0, left: -(imageWidth + insetAmount),
+                                             bottom: 0, right: imageWidth + insetAmount)
+                self.contentHorizontalAlignment = .center
+            case .top:
+                self.imageEdgeInsets = .init(top: -imageOffHeight, left: imageOffWidth,
+                                             bottom: imageOffHeight, right: -imageOffWidth)
+                self.titleEdgeInsets = .init(top: titleOffHeight, left: -titleOffWidth,
+                                             bottom: -titleOffHeight, right: titleOffWidth)
+                self.contentVerticalAlignment = .center
+            case .bottom:
+                self.imageEdgeInsets = .init(top: imageOffHeight, left: imageOffWidth,
+                                             bottom: -imageOffHeight, right: -imageOffWidth)
+                self.titleEdgeInsets = .init(top: -titleOffHeight, left: -titleOffWidth,
+                                             bottom: titleOffHeight, right: titleOffWidth)
+                self.contentVerticalAlignment = .center
         }
     }
 }
@@ -228,3 +228,31 @@ public extension UIButton {
     }
 }
 
+private var ExtendEdgeInsetsKey: Void?
+public extension UIButton {
+    /// 设置此属性即可扩大响应范围, 分别对应上左下右
+    var extendEdgeInsets: UIEdgeInsets {
+        get {
+            return objc_getAssociatedObject(self, &ExtendEdgeInsetsKey) as? UIEdgeInsets ?? UIEdgeInsets.zero
+        }
+        set {
+            objc_setAssociatedObject(self, &ExtendEdgeInsetsKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        if extendEdgeInsets == .zero || !self.isEnabled || self.isHidden || self.alpha < 0.01 {
+            return super.point(inside: point, with: event)
+        }
+        let newRect = extendRect(bounds, extendEdgeInsets)
+        return newRect.contains(point)
+    }
+    
+    private func extendRect(_ rect: CGRect, _ edgeInsets: UIEdgeInsets) -> CGRect {
+        let x = rect.minX - edgeInsets.left
+        let y = rect.minY - edgeInsets.top
+        let w = rect.width + edgeInsets.left + edgeInsets.right
+        let h = rect.height + edgeInsets.top + edgeInsets.bottom
+        return CGRect(x: x, y: y, width: w, height: h)
+    }
+}

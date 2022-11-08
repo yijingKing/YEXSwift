@@ -44,7 +44,7 @@ open class YEXBaseViewController: UIViewController {
         super.viewDidLoad()
         print("当前页面:" + "\(self.self)")
         
-        view.backgroundColor = UIColor.yex.hexF2F2F2
+        view.backgroundColor = UIColor.hexF2F2F2
         
         view.addSubview(customNavigationView)
         customNavigationView.snp.makeConstraints { make in
@@ -60,27 +60,16 @@ open class YEXBaseViewController: UIViewController {
     }
     
     @objc func injectionNotifications () {
-        viewDidLoad()
+        if self.view.currentController is Self {
+            
+            viewDidLoad()
+        }
     }
     
     @objc func injected() {
 
     }
 
-    /// 添加控制器
-    public func addChildController(_ childController: UIViewController) {
-        addChild(childController)
-        view.addSubview(childController.view)
-        childController.didMove(toParent: self)
-    }
-    /// 移除添加的控制器
-    public func removeChildController() {
-        guard parent != nil else { return }
-        willMove(toParent: nil)
-        removeFromParent()
-        view.removeFromSuperview()
-    }
-    
     deinit {
         print("--\(self.self)---控制器销毁")
         NotificationCenter.default.removeObserver(self)

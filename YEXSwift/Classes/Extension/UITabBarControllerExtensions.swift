@@ -9,20 +9,20 @@ GitHub:        https://github.com/yijingKing
 import Foundation
 import UIKit
 
-public extension YEXProtocol where T: UITabBarController {
+public extension UITabBarController {
     /// 设置背景颜色
     func setTabbarBgColor(_ color: UIColor) {
         if #available(iOS 13.0, *) {
-            let app = obj.tabBar.standardAppearance.copy()
+            let app = self.tabBar.standardAppearance.copy()
             app.backgroundColor = color
             app.backgroundImage = UIImage.init(color: color, size: CGSize(width: 1, height: 1))
-            obj.tabBar.standardAppearance = app
+            self.tabBar.standardAppearance = app
             if #available(iOS 15.0, *) {
-                obj.tabBar.scrollEdgeAppearance = app
+                self.tabBar.scrollEdgeAppearance = app
             }
         } else {
-            obj.tabBar.barTintColor = color
-            obj.tabBar.shadowImage = UIImage()
+            self.tabBar.barTintColor = color
+            self.tabBar.shadowImage = UIImage()
         }
     }
     
@@ -30,12 +30,12 @@ public extension YEXProtocol where T: UITabBarController {
     func setTabbarTitlePositionAdjustment(offset: UIOffset) {
         
         if #available(iOS 13.0, *) {
-            let app = obj.tabBar.standardAppearance.copy()
+            let app = self.tabBar.standardAppearance.copy()
             app.stackedLayoutAppearance.normal.titlePositionAdjustment = offset
             app.stackedLayoutAppearance.selected.titlePositionAdjustment = offset
-            obj.tabBar.standardAppearance = app
+            self.tabBar.standardAppearance = app
             if #available(iOS 15.0, *) {
-                obj.tabBar.scrollEdgeAppearance = app
+                self.tabBar.scrollEdgeAppearance = app
             }
         } else {
             UITabBarItem.appearance().titlePositionAdjustment = offset

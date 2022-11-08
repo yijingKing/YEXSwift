@@ -10,7 +10,7 @@
 import Foundation
 import UIKit
 
-public extension YEXProtocol where T: UIResponder {
+public extension UIResponder {
     ///InjectionIII
     func hotReload(_ appName: String = "InjectionIII") {
         #if DEBUG

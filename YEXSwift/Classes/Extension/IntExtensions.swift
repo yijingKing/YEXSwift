@@ -8,39 +8,39 @@ GitHub:        https://github.com/yijingKing
 
 import UIKit
 
-public extension YEXProtocol where T == Int {
+public extension Int {
     
     /// 转 Double
-    func double() -> Double { return Double(obj) }
+    func double() -> Double { return Double(self) }
 
     /// 转 Float
-    func float() -> Float { return Float(obj) }
+    func float() -> Float { return Float(self) }
     
     /// 转 Int64
-    func int64() -> Int64 { return Int64(obj) }
+    func int64() -> Int64 { return Int64(self) }
 
     /// 转 CGFloat
-    func cgFloat() -> CGFloat { return CGFloat(obj) }
+    func cgFloat() -> CGFloat { return CGFloat(self) }
 
     /// 转 String
-    func string() -> String { return String(obj) }
+    func string() -> String { return String(self) }
 
     /// 转 UInt
-    func uInt() -> UInt { return UInt(obj) }
+    func uInt() -> UInt { return UInt(self) }
     
     /// 转 range
-    func range() -> CountableRange<Int> { return 0..<obj }
+    func range() -> CountableRange<Int> { return 0..<self }
     
     /// 转换亿的单位
     /// - Parameter scale: 小数点后舍入值的位数，默认 2 位
     /// - Returns: 返回万的字符串
     func toHundredMillion(_ scale: Int = 2) -> String? {
-        if obj < 0 {
+        if self < 0 {
             return nil
-        } else if obj <= 99999999 {
-            return "\(obj)"
+        } else if self <= 99999999 {
+            return "\(self)"
         } else {
-            let doub = CGFloat(obj) / 100000000
+            let doub = CGFloat(self) / 100000000
             let str = String(format: "%.\(scale)f", doub)
             let start_index = str.index(str.endIndex, offsetBy: -1)
             let suffix = String(str[start_index ..< str.endIndex])
@@ -57,12 +57,12 @@ public extension YEXProtocol where T == Int {
     /// - Parameter scale: 小数点后舍入值的位数，默认 2 位
     /// - Returns: 返回万的字符串
     func toTenThousand(_ scale: Int = 2) -> String? {
-        if obj < 0 {
+        if self < 0 {
             return nil
-        } else if obj <= 9999 {
-            return "\(obj)"
+        } else if self <= 9999 {
+            return "\(self)"
         } else {
-            let doub = CGFloat(obj) / 10000
+            let doub = CGFloat(self) / 10000
             let str = String(format: "%.\(scale)f", doub)
             let start_index = str.index(str.endIndex, offsetBy: -1)
             let suffix = String(str[start_index ..< str.endIndex])
@@ -79,12 +79,12 @@ public extension YEXProtocol where T == Int {
     /// - Parameter scale: 小数点后舍入值的位数，默认 2 位
     /// - Returns: 返回万的字符串
     func toThousand(_ scale: Int = 2) -> String? {
-        if obj < 0 {
+        if self < 0 {
             return nil
-        } else if obj <= 999 {
-            return "\(obj)"
+        } else if self <= 999 {
+            return "\(self)"
         } else {
-            let doub = CGFloat(obj) / 1000
+            let doub = CGFloat(self) / 1000
             let str = String(format: "%.\(scale)f", doub)
             let start_index = str.index(str.endIndex, offsetBy: -1)
             let suffix = String(str[start_index ..< str.endIndex])
@@ -101,12 +101,12 @@ public extension YEXProtocol where T == Int {
     /// - Parameter scale: 小数点后舍入值的位数，默认 2 位
     /// - Returns: 返回万的字符串
     func toHundred(_ scale: Int = 2) -> String? {
-        if obj < 0 {
+        if self < 0 {
             return nil
-        } else if obj <= 99 {
-            return "\(obj)"
+        } else if self <= 99 {
+            return "\(self)"
         } else {
-            let doub = CGFloat(obj) / 100
+            let doub = CGFloat(self) / 100
             let str = String(format: "%.\(scale)f", doub)
             let start_index = str.index(str.endIndex, offsetBy: -1)
             let suffix = String(str[start_index ..< str.endIndex])

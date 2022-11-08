@@ -31,10 +31,10 @@ public extension UINavigationController {
     }
 }
 
-public extension YEXProtocol where T: UINavigationController {
+public extension UINavigationController {
     /// 设置导航标题视图(适配iOS16标题视图设置alpha无效)
     func setTitleView(_ titleView: UIView) {
-        obj.titleView = titleView
+        self.titleView = titleView
     }
     
     /// 跳转
@@ -43,8 +43,8 @@ public extension YEXProtocol where T: UINavigationController {
     ///   - deleteClass: 删除控制器
     ///   - compelete: 完成
     func push<T>(vc: UIViewController, deleteClass: T.Type, compelete:(() -> Void)? = nil) {
-        obj.yex.pushViewController(vc) { [weak obj] in
-            guard let this = obj else { return }
+        self.pushViewController(vc) { [weak self] in
+            guard let this = self else { return }
             var list = this.viewControllers
             list.removeAll { ele in
                 return ele is T
@@ -58,8 +58,8 @@ public extension YEXProtocol where T: UINavigationController {
     ///   - deleteClass: 删除控制器
     ///   - compelete: 完成
     func pop<T>(deleteClass: T.Type, compelete:(() -> Void)? = nil) {
-        obj.yex.popViewController(animated: true) { [weak obj] in
-            guard let this = obj else { return }
+        self.popViewController(animated: true) { [weak self] in
+            guard let this = self else { return }
             var list = this.viewControllers
             list.removeAll { ele in
                 return ele is T
@@ -73,8 +73,8 @@ public extension YEXProtocol where T: UINavigationController {
     ///   - deleteClass: 删除控制器
     ///   - compelete: 完成
     func dismiss<T>(deleteClass: T.Type, compelete:(() -> Void)? = nil) {
-        obj.dismiss(animated: true) { [weak obj] in
-            guard let this = obj else { return }
+        self.dismiss(animated: true) { [weak self] in
+            guard let this = self else { return }
             var list = this.viewControllers
             list.removeAll { ele in
                 return ele is T
@@ -87,14 +87,14 @@ public extension YEXProtocol where T: UINavigationController {
     func popViewController(animated: Bool = true, _ completion: (() -> Void)? = nil) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
-        obj.popViewController(animated: animated)
+        self.popViewController(animated: animated)
         CATransaction.commit()
     }
     
     func pushViewController(_ viewController: UIViewController, completion: (() -> Void)? = nil) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
-        obj.pushViewController(viewController, animated: true)
+        self.pushViewController(viewController, animated: true)
         CATransaction.commit()
     }
 }

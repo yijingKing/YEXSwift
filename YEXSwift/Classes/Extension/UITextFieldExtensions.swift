@@ -9,21 +9,14 @@ GitHub:        https://github.com/yijingKing
 import Foundation
 import UIKit
 
-public extension YEXProtocol where T: UITextField {
-    ///标识
-    func identify(_ identify: String) {
-        obj.identify = identify
-    }
-    func identify() -> String {
-        return obj.identify
-    }
+public extension UITextField {
     ///最大字数
     func maxCount(_ count: Int) {
-        obj.maxCount = count
+        self.maxCount = count
     }
     ///占位字颜色
     func placeholderColor(_ color: UIColor) {
-        obj.placeholderColor = color
+        self.placeholderColor = color
     }
     /// 文本距离左右侧的距离
     ///
@@ -34,12 +27,12 @@ public extension YEXProtocol where T: UITextField {
                           _ rightWidth:CGFloat? = nil) {
         //左侧view
         let leftV = UIView(frame: CGRect(x: 0, y: 0, width: leftWidth, height: 5.auto))
-        obj.leftViewMode = .always
-        obj.leftView = leftV
+        self.leftViewMode = .always
+        self.leftView = leftV
         //右侧view
         let rightV = UIView(frame: CGRect(x: 0, y: 0, width: rightWidth!, height: 5.auto))
-        obj.rightViewMode = .always
-        obj.rightView = rightV
+        self.rightViewMode = .always
+        self.rightView = rightV
     }
     /// 添加标题
     ///
@@ -50,7 +43,7 @@ public extension YEXProtocol where T: UITextField {
     func leftView(title: String,
                    titleWidth: CGFloat,
                    color: UIColor = UIColor.black,
-                   font: UIFont = UIFont.yi.regular(size: 16),
+                   font: UIFont = UIFont.regular(size: 16),
                    textAlignment: NSTextAlignment = .left) {
         let label = UILabel()
         label.text = title
@@ -58,13 +51,13 @@ public extension YEXProtocol where T: UITextField {
         label.font = font
         label.textAlignment = textAlignment
         
-        let height = title.yi.getHeight(font, fixedWidth: titleWidth) + 5
+        let height = title.getHeight(font, fixedWidth: titleWidth) + 5
         
         let leftV = UIView(frame: CGRect(x: 0, y: 0, width: titleWidth, height: height))
         label.frame = CGRect(x: 0, y: 0, width: titleWidth , height: height)
         leftV.addSubview(label)
-        obj.leftViewMode = .always
-        obj.leftView = leftV
+        self.leftViewMode = .always
+        self.leftView = leftV
     }
     
     /// 添加左侧icon
@@ -80,8 +73,8 @@ public extension YEXProtocol where T: UITextField {
         button.image = image
         leftV.addSubview(button)
         button.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
-        obj.leftViewMode = .always
-        obj.leftView = leftV
+        self.leftViewMode = .always
+        self.leftView = leftV
     }
     
     /// 添加标题
@@ -99,12 +92,12 @@ public extension YEXProtocol where T: UITextField {
         button.title = title
         button.color = color
         button.font = font
-        button.yex.addTarget(block)
+        button.addTargetAction(block: block, for: .touchUpInside)
         let rightView = UIView(frame: CGRect(x: 0, y: 0, width: titleWidth, height: 30.auto))
         button.frame = CGRect(x: 0, y: 0, width: titleWidth, height: 30.auto)
         rightView.addSubview(button)
-        obj.rightViewMode = .always
-        obj.rightView = rightView
+        self.rightViewMode = .always
+        self.rightView = rightView
     }
     
     /// 添加右侧icon
@@ -117,18 +110,18 @@ public extension YEXProtocol where T: UITextField {
         let rightV = UIView(frame: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         let button = UIButton()
         button.image = image
-        button.yex.addTarget(.touchUpInside, block)
+        button.addTarget(.touchUpInside, block)
         button.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         rightV.addSubview(button)
-        obj.rightViewMode = .always
-        obj.rightView = rightV
+        self.rightViewMode = .always
+        self.rightView = rightV
     }
     /// 方法
     /// - Parameters:
     ///   - event: 事件方式
     ///   - block: 回调
     func addTarget(_ event: UIControl.Event, _ block: ((UITextField)->())?) {
-        obj.allEvent(event, block)
+        self.allEvent(event, block)
     }
     
 }
@@ -160,19 +153,8 @@ private extension UITextField {
 fileprivate extension UITextField {
     private struct YEXRuntimeKey {
         static let maxCount = UnsafeRawPointer.init(bitPattern: "maxCount".hashValue)
-        static let identify = UnsafeRawPointer.init(bitPattern: "identify".hashValue)
         static let placeholderColor = UnsafeRawPointer.init(bitPattern: "placeholderColor".hashValue)
         static let eventBlock = UnsafeRawPointer.init(bitPattern: "eventBlock".hashValue)
-        
-    }
-    ///标识
-    var identify: String {
-        set {
-            objc_setAssociatedObject(self, YEXRuntimeKey.identify!, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        }
-        get {
-            return objc_getAssociatedObject(self, YEXRuntimeKey.identify!) as! String
-        }
     }
     ///最大字数
     var maxCount: Int {

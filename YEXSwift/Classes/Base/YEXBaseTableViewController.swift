@@ -20,7 +20,7 @@ open class YEXBaseTableViewController: YEXBaseViewController,BaseViewProtocol {
     private var isLoading  : Bool = true
     ///数据的类型
     public typealias DataSourceType<T: Any> = T
-    ///数据数组(默认使用二维)
+    ///数据数组
     public var dataSource: [DataSourceType<Any>] = []
     ///设置tableView方式(viewDidLoad前调用)
     public var style: UITableView.Style = .grouped
@@ -55,7 +55,7 @@ open class YEXBaseTableViewController: YEXBaseViewController,BaseViewProtocol {
         tableView.estimatedRowHeight = 44
         tableView.estimatedSectionFooterHeight = 0
         tableView.estimatedSectionHeaderHeight = 0
-        tableView.tableFooterView = UIView().yex.then {
+        tableView.tableFooterView = UIView().then {
             $0.frame = .init(x: 0, y: 0, width: YEXScreenWidth, height: YEXSafeDistanceBottom)
             $0.backgroundColor = UIColor.clear
         }

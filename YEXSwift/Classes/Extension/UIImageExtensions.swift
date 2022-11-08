@@ -14,28 +14,8 @@ import CoreGraphics
 import Accelerate
 import Photos
 
-// MARK:--- 基本的扩展
-public extension YEXProtocol where T: UIImage {
-    ///保存到相册
-    @discardableResult
-    func savedPhotosAlbum(_ result: ((Bool)->())?) -> YEXProtocol {
-        obj.savedPhotosAlbum(result)
-        return self
-    }
-    ///保存到相册
-    @discardableResult
-    func savedPhotosAlbum(completion: @escaping ((Bool, Error?) -> Void)) -> YEXProtocol {
-        PHPhotoLibrary.shared().performChanges {
-            PHAssetChangeRequest.creationRequestForAsset(from: obj)
-        } completionHandler: { (isSuccess: Bool, error: Error?) in
-            completion(isSuccess, error)
-        }
-        return self
-    }
-}
-
 //MARK: --- 图片转换
-public extension YEXProtocol where T: UIImage {
+public extension UIImage {
     
     ///image --> base64
     func toBase64 (_ options: Data.Base64EncodingOptions = []) -> String {
@@ -47,7 +27,7 @@ public extension YEXProtocol where T: UIImage {
     }
     ///image --> color
     var color: UIColor {
-        return UIColor.init(patternImage: obj)
+        return UIColor.init(patternImage: self)
     }
 }
 
@@ -266,7 +246,6 @@ public extension UIImage {
 
 //MARK: --- 保存
 public extension UIImage {
-    
     ///保存到相册
     func savedPhotosAlbum(_ result: ((Bool)->())?) {
         saveBlock = result
@@ -385,37 +364,37 @@ public extension UIImage {
 }
 
 //MARK: --- 图片处理
-public extension YEXProtocol where T: UIImage {
+public extension UIImage {
     ///改变画质
     func quality(_ quality: CGFloat = 1) -> UIImage? {
-        guard let imageData = obj.jpegData(compressionQuality: quality) else { return nil }
+        guard let imageData = self.jpegData(compressionQuality: quality) else { return nil }
         return UIImage.init(data: imageData)
     }
     /// 截取指定Image的rect
     func croping(_ rect: CGRect) -> UIImage {
-        guard rect.size.height < obj.size.height && rect.size.height < obj.size.height else { return obj }
-        guard let image: CGImage = obj.cgImage?.cropping(to: rect) else { return obj }
+        guard rect.size.height < self.size.height && rect.size.height < self.size.height else { return self }
+        guard let image: CGImage = self.cgImage?.cropping(to: rect) else { return self }
         return UIImage(cgImage: image)
     }
     
     /// 旋转指定角度
     func rotate(_ radians: Float) -> UIImage {
-        let rotatedViewBox: UIView = UIView(frame: CGRect(x: 0, y: 0, width: obj.size.width, height: obj.size.height))
+        let rotatedViewBox: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
         let transformation: CGAffineTransform = CGAffineTransform(rotationAngle: CGFloat(radians))
         rotatedViewBox.transform = transformation
         let rotatedSize: CGSize = CGSize(width: Int(rotatedViewBox.frame.size.width), height: Int(rotatedViewBox.frame.size.height))
         UIGraphicsBeginImageContextWithOptions(rotatedSize, false, 0)
         guard let context: CGContext = UIGraphicsGetCurrentContext() else {
             UIGraphicsEndImageContext()
-            return obj
+            return self
         }
         context.translateBy(x: rotatedSize.width / 2, y: rotatedSize.height / 2)
         context.rotate(by: CGFloat(radians))
         context.scaleBy(x: 1.0, y: -1.0)
-        context.draw(obj.cgImage!, in: CGRect(x: -obj.size.width / 2, y: -obj.size.height / 2, width: obj.size.width, height: obj.size.height))
+        context.draw(self.cgImage!, in: CGRect(x: -self.size.width / 2, y: -self.size.height / 2, width: self.size.width, height: self.size.height))
         guard let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext() else {
             UIGraphicsEndImageContext()
-            return obj
+            return self
         }
         UIGraphicsEndImageContext()
         return newImage
@@ -424,19 +403,19 @@ public extension YEXProtocol where T: UIImage {
     ///图片压缩
     func reset(_ maxSizeKB : CGFloat,_ maxWidth : CGFloat? = nil) -> UIImage? {
         let maxSize = maxSizeKB
-        let maxImageSize = maxWidth ?? obj.size.width
+        let maxImageSize = maxWidth ?? self.size.width
         //先调整分辨率
-        var newSize = CGSize.init(width: obj.size.width, height: obj.size.height)
+        var newSize = CGSize.init(width: self.size.width, height: self.size.height)
         let tempHeight = newSize.height / maxImageSize
         let tempWidth = newSize.width / maxImageSize
         if (tempWidth > 1.0 && tempWidth > tempHeight) {
-            newSize = CGSize.init(width: obj.size.width / tempWidth, height: obj.size.height / tempWidth)
+            newSize = CGSize.init(width: self.size.width / tempWidth, height: self.size.height / tempWidth)
         }
         else if (tempHeight > 1.0 && tempWidth < tempHeight) {
-            newSize = CGSize.init(width: obj.size.width / tempHeight, height: obj.size.height / tempHeight)
+            newSize = CGSize.init(width: self.size.width / tempHeight, height: self.size.height / tempHeight)
         }
         UIGraphicsBeginImageContext(newSize)
-        obj.draw(in: CGRect.init(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        self.draw(in: CGRect.init(x: 0, y: 0, width: newSize.width, height: newSize.height))
         
         if let newImage = UIGraphicsGetImageFromCurrentImageContext() {
             UIGraphicsEndImageContext()
@@ -461,7 +440,7 @@ public extension YEXProtocol where T: UIImage {
     func scale(_ w: CGFloat,_ h: CGFloat) -> UIImage? {
         let newSize = CGSize(width: w, height: h)
         UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-        obj.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage
@@ -471,7 +450,7 @@ public extension YEXProtocol where T: UIImage {
      */
     func resetSizeImage(_ reSize:CGSize) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(reSize,false,UIScreen.main.scale)
-        obj.draw(in: CGRect.init(x: 0, y: 0, width: reSize.width, height: reSize.height))
+        self.draw(in: CGRect.init(x: 0, y: 0, width: reSize.width, height: reSize.height))
         guard let reSizeImage = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
         
         UIGraphicsEndImageContext()
@@ -482,13 +461,13 @@ public extension YEXProtocol where T: UIImage {
      *  等比率缩放
      */
     func scaleImage(_ scaleSize:CGFloat) -> UIImage? {
-        let reSize = CGSize(width: obj.size.width * scaleSize, height: obj.size.height * scaleSize)
+        let reSize = CGSize(width: self.size.width * scaleSize, height: self.size.height * scaleSize)
         
         return resetSizeImage(reSize)
     }
     ///点九拉伸     Stretch 拉伸模式   Tile 平铺模式
     func resizableImage(insets: UIEdgeInsets,resizingMode: UIImage.ResizingMode) -> UIImage {
-        return obj.resizableImage(withCapInsets: insets, resizingMode: resizingMode)
+        return self.resizableImage(withCapInsets: insets, resizingMode: resizingMode)
     }
     
     // MARK: 图片的模糊效果（高斯模糊滤镜）
@@ -515,7 +494,7 @@ public extension YEXProtocol where T: UIImage {
     ///   - filterName: 模糊类型
     /// - Returns: 返回模糊后的图片
     private func blurredPicture(fuzzyValue: CGFloat, filterName: String) -> UIImage? {
-        guard let ciImage = CIImage(image: obj) else { return nil }
+        guard let ciImage = CIImage(image: self) else { return nil }
         // 创建高斯模糊滤镜类
         guard let blurFilter = CIFilter(name: filterName) else { return nil }
         // 设置图片
@@ -1064,36 +1043,36 @@ public extension UIImage {
     }
 }
 
-public extension YEXProtocol where T: UIImage {
+public extension UIImage {
     
     // MARK: 设置图片透明度
     /// 设置图片透明度
     /// alpha: 透明度
     /// - Returns: newImage
     func alpha(_ alpha: CGFloat) -> UIImage {
-        UIGraphicsBeginImageContext(obj.size)
+        UIGraphicsBeginImageContext(self.size)
         let context = UIGraphicsGetCurrentContext()
-        let area = CGRect(x: 0, y: 0, width: obj.size.width, height: obj.size.height)
+        let area = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
         context?.scaleBy(x: 1, y: -1)
         context?.translateBy(x: 0, y: -area.height)
         context?.setBlendMode(.multiply)
         context?.setAlpha(alpha)
-        context?.draw(obj.cgImage!, in: area)
+        context?.draw(self.cgImage!, in: area)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return newImage ?? obj
+        return newImage ?? self
     }
 }
 
 // MARK:- UIImage 压缩相关
-public extension YEXProtocol where T: UIImage {
+public extension UIImage {
     
     // MARK: 压缩图片
     /// 压缩图片
     /// - Parameter mode: 压缩模式
     /// - Returns: 压缩后图片
     func compress(mode: CompressionMode = .medium) -> UIImage? {
-        guard let data = resizeIO(resizeSize: mode.resize(obj.size))?.yex.compressDataSize(maxSize: mode.maxDataSize) else { return nil }
+        guard let data = resizeIO(resizeSize: mode.resize(self.size))?.compressDataSize(maxSize: mode.maxDataSize) else { return nil }
         return UIImage(data: data)
     }
     
@@ -1107,10 +1086,10 @@ public extension YEXProtocol where T: UIImage {
         queue.async {
             
             DispatchQueue.main.async {
-                if let data = resizeIO(resizeSize: mode.resize(obj.size))?.yex.compressDataSize(maxSize: mode.maxDataSize) {
-                    complete(UIImage(data: data), mode.resize(obj.size))
+                if let data = self.resizeIO(resizeSize: mode.resize(self.size))?.compressDataSize(maxSize: mode.maxDataSize) {
+                    complete(UIImage(data: data), mode.resize(self.size))
                 } else {
-                    complete(nil, mode.resize(obj.size))
+                    complete(nil, mode.resize(self.size))
                 }
                 
             }
@@ -1133,7 +1112,7 @@ public extension YEXProtocol where T: UIImage {
     func compressDataSize(maxSize: Int = 1024 * 1024 * 2) -> Data? {
         let maxSize = maxSize
         var quality: CGFloat = 0.8
-        var data = obj.jpegData(compressionQuality: quality)
+        var data = self.jpegData(compressionQuality: quality)
         var dataCount = data?.count ?? 0
         
         while (data?.count ?? 0) > maxSize {
@@ -1141,7 +1120,7 @@ public extension YEXProtocol where T: UIImage {
                 break
             }
             quality  = quality - 0.05
-            data = obj.jpegData(compressionQuality: quality)
+            data = self.jpegData(compressionQuality: quality)
             if (data?.count ?? 0) <= dataCount {
                 break
             }
@@ -1155,13 +1134,13 @@ public extension YEXProtocol where T: UIImage {
     /// - Parameter resizeSize: 图片调整Size
     /// - Returns: 调整后图片
     func resizeIO(resizeSize: CGSize) -> UIImage? {
-        if obj.size == resizeSize {
-            return obj
+        if self.size == resizeSize {
+            return self
         }
-        guard let imageData = obj.pngData() else { return nil }
+        guard let imageData = self.pngData() else { return nil }
         guard let imageSource = CGImageSourceCreateWithData(imageData as CFData, nil) else { return nil }
         
-        let maxPixelSize = max(obj.size.width, obj.size.height)
+        let maxPixelSize = max(self.size.width, self.size.height)
         let options = [kCGImageSourceCreateThumbnailWithTransform: true,
                        kCGImageSourceCreateThumbnailFromImageIfAbsent: true,
                        kCGImageSourceThumbnailMaxPixelSize: maxPixelSize]  as CFDictionary
@@ -1178,10 +1157,10 @@ public extension YEXProtocol where T: UIImage {
     /// - Parameter resizeSize: 图片调整Size
     /// - Returns: 调整后图片
     func resizeCG(resizeSize: CGSize) -> UIImage? {
-        if obj.size == resizeSize {
-            return obj
+        if self.size == resizeSize {
+            return self
         }
-        guard  let cgImage = obj.cgImage else { return nil }
+        guard  let cgImage = self.cgImage else { return nil }
         guard  let colorSpace = cgImage.colorSpace else { return nil }
         guard let context = CGContext(data: nil,
                                       width: Int(resizeSize.width),
@@ -1280,7 +1259,7 @@ public enum printDataType: String {
     case tiff   = "tiff"
     case defaultType
 }
-public extension YEXProtocol where T: UIImage {
+public extension UIImage {
     
     // MARK: 验证资源的格式，返回资源格式（png/gif/jpeg...）
     /// 验证资源的格式，返回资源格式（png/gif/jpeg...）
@@ -1559,7 +1538,7 @@ public extension YEXProtocol where T: UIImage {
 }
 
 // MARK:- 图片旋转的一些操作
-public extension YEXProtocol where T: UIImage {
+public extension UIImage {
     
     // MARK: 图片旋转 (角度)
     /// 图片旋转 (角度)
@@ -1575,10 +1554,10 @@ public extension YEXProtocol where T: UIImage {
     /// - Parameter radians: 弧度 0 -- 2π
     /// - Returns: 旋转后的图片
     func imageRotated(radians: CGFloat) -> UIImage? {
-        guard let weakCGImage = obj.cgImage else {
+        guard let weakCGImage = self.cgImage else {
             return nil
         }
-        let rotateViewBox = UIView(frame: CGRect(origin: CGPoint.zero, size: obj.size))
+        let rotateViewBox = UIView(frame: CGRect(origin: CGPoint.zero, size: self.size))
         let transform: CGAffineTransform = CGAffineTransform(rotationAngle: radians)
         rotateViewBox.transform = transform
         UIGraphicsBeginImageContext(rotateViewBox.frame.size)
@@ -1589,7 +1568,7 @@ public extension YEXProtocol where T: UIImage {
         context.translateBy(x: rotateViewBox.frame.width / 2, y: rotateViewBox.frame.height / 2)
         context.rotate(by: radians)
         context.scaleBy(x: 1, y: -1)
-        let rect = CGRect(x: -obj.size.width / 2, y: -obj.size.height / 2, width: obj.size.width, height: obj.size.height)
+        let rect = CGRect(x: -self.size.width / 2, y: -self.size.height / 2, width: self.size.width, height: self.size.height)
         context.draw(weakCGImage, in: rect)
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -1599,49 +1578,49 @@ public extension YEXProtocol where T: UIImage {
     // MARK: 水平翻转
     /// 水平翻转
     /// - Returns: 返回水平翻转的图片
-    func flipHorizontal() -> UIImage? {
+    var flipHorizontal: UIImage? {
         return self.rotate(orientation: .upMirrored)
     }
     
     // MARK: 垂直翻转
     /// 垂直翻转
     /// - Returns: 返回垂直翻转的图片
-    func flipVertical() -> UIImage? {
+    var flipVertical: UIImage? {
         return self.rotate(orientation: .downMirrored)
     }
     
     // MARK: 向下翻转
     /// 向下翻转
     /// - Returns: 向下翻转后的图片
-    func flipDown() -> UIImage? {
+    var flipDown: UIImage? {
         return self.rotate(orientation: .down)
     }
     
     // MARK: 向左翻转
     /// 向左翻转
     /// - Returns: 向左翻转后的图片
-    func flipLeft() -> UIImage? {
+    var flipLeft: UIImage? {
         return self.rotate(orientation: .left)
     }
     
     // MARK: 镜像向左翻转
     /// 镜像向左翻转
     /// - Returns: 镜像向左翻转后的图片
-    func flipLeftMirrored() -> UIImage? {
+    var flipLeftMirrored: UIImage? {
         return self.rotate(orientation: .leftMirrored)
     }
     
     // MARK: 向右翻转
     /// 向右翻转
     /// - Returns: 向右翻转后的图片
-    func flipRight() -> UIImage? {
+    var flipRight: UIImage? {
         return self.rotate(orientation: .right)
     }
     
     // MARK: 镜像向右翻转
     /// 镜像向右翻转
     /// - Returns: 镜像向右翻转后的图片
-    func flipRightMirrored() -> UIImage? {
+    var flipRightMirrored: UIImage? {
         return self.rotate(orientation: .rightMirrored)
     }
     
@@ -1651,7 +1630,7 @@ public extension YEXProtocol where T: UIImage {
     /// - Returns: 平铺后的图片
     func imageTile(size: CGSize) -> UIImage? {
         let tempView = UIView(frame: CGRect(origin: CGPoint.zero, size: size))
-        tempView.backgroundColor = UIColor(patternImage: obj)
+        tempView.backgroundColor = UIColor(patternImage: self)
         UIGraphicsBeginImageContext(size)
         guard let context = UIGraphicsGetCurrentContext() else {
             UIGraphicsEndImageContext()
@@ -1668,7 +1647,7 @@ public extension YEXProtocol where T: UIImage {
     /// - Parameter orientation: 翻转类型
     /// - Returns: 翻转后的图片
     private func rotate(orientation: UIImage.Orientation) -> UIImage? {
-        guard let imageRef = obj.cgImage else {
+        guard let imageRef = self.cgImage else {
             return nil
         }
         let rect = CGRect(x: 0, y: 0, width: imageRef.width, height: imageRef.height)
@@ -1677,7 +1656,7 @@ public extension YEXProtocol where T: UIImage {
         
         switch orientation {
         case .up:
-            return obj
+            return self
         case .upMirrored:
             // 图片左平移width个像素
             transform = CGAffineTransform(translationX: rect.size.width, y: 0)
@@ -1750,7 +1729,7 @@ public extension YEXProtocol where T: UIImage {
 /**
  Core Image 是一个强大的滤镜处理框架。它除了可以直接给图片添加各种内置滤镜，还能精确地修改鲜艳程度, 色泽, 曝光等，下面通过两个样例演示如何给 UIImage 添加滤镜
  */
-public extension YEXProtocol where T: UIImage {
+public extension UIImage {
     /// 滤镜类型
     enum YIImageFilterType: String {
         /// 棕褐色复古滤镜（老照片效果），有点复古老照片发黄的效果）
@@ -1766,7 +1745,7 @@ public extension YEXProtocol where T: UIImage {
     ///   - alpha: 透明度
     /// - Returns: 添加滤镜后的图片
     func filter(filterType: YIImageFilterType, alpha: CGFloat?) -> UIImage? {
-        guard let imageData = obj.pngData() else {
+        guard let imageData = self.pngData() else {
             return nil
         }
         let inputImage = CoreImage.CIImage(data: imageData)
@@ -1793,7 +1772,7 @@ public extension YEXProtocol where T: UIImage {
             return nil
         }
         let context = CIContext(options: nil)
-        let inputImage = CIImage(image: obj)
+        let inputImage = CIImage(image: self)
         filter.setValue(inputImage, forKey: kCIInputImageKey)
         if value != nil {
             // 值越大马赛克就越大(使用默认)
@@ -1807,7 +1786,7 @@ public extension YEXProtocol where T: UIImage {
     // MARK: 检测人脸的frame
     // 检测人脸的frame
     func detectFace() -> [CGRect]? {
-        guard let inputImage = CIImage(image: obj) else {
+        guard let inputImage = CIImage(image: self) else {
             return nil
         }
         let context = CIContext(options: nil)
@@ -1842,7 +1821,7 @@ public extension YEXProtocol where T: UIImage {
     /// 检测人脸并打马赛克
     /// - Returns: 打马赛克后的人脸
     func detectAndPixFace() -> UIImage? {
-        guard let inputImage = CIImage(image: obj) else {
+        guard let inputImage = CIImage(image: self) else {
             return nil
         }
         let context = CIContext(options: nil)
@@ -1904,7 +1883,7 @@ public extension YEXProtocol where T: UIImage {
 }
 
 // MARK:- 动态图片的使用
-public extension YEXProtocol where T: UIImage {
+public extension UIImage {
 
     // MARK: 深色图片和浅色图片切换 （深色模式适配）
     /// 深色图片和浅色图片切换 （深色模式适配）
@@ -1940,12 +1919,8 @@ public extension UIImage {
     }
 }
 
-
-
-extension UIImage {
-    var color: UIColor {
-        return UIColor(patternImage: self)
-    }
+public extension UIImage {
+    
     func tint(color: UIColor,_ blendMode: CGBlendMode = .normal) -> UIImage {
         let drawRect = CGRect.init(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
