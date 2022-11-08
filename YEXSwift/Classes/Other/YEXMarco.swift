@@ -38,7 +38,7 @@ public var YEXTabBarHeight: Double {
     return UIDevice.tabBarHeight
 }
 
-func YEXPrint(_ text: Any?) {
+public func YEXPrint(_ text: Any?) {
     print("""
     ╔═══════ 🎈 YEXSwift 🎈 ═══════
     ║ \((text as? NSObject)?.json ?? "")
