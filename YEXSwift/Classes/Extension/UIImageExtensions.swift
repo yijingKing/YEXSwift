@@ -265,61 +265,15 @@ public extension UIImage {
 
 //MARK: --- 渐变
 public extension UIImage {
-    /// 渐变色方向
-    enum Direction {
-        ///垂直
-        case vertical
-        ///水平
-        case level
-        ///左上到右下
-        case leftTop
-        ///左下到右上
-        case leftBottom
-    }
     ///线性渐变
     convenience init?(gradient size: CGSize,
-                      direction: Direction,
-                      locations: Array<CGFloat> = [0.0,1.0] ,
+                      direction: YEXGradientDirection,
+                      locations: Array<NSNumber> = [0.0,1.0] ,
                       colors: [UIColor]) {
-        UIGraphicsBeginImageContext(size)
-        guard let context = UIGraphicsGetCurrentContext() else {
-            return nil
-        }
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        var cgColors = [CGColor]()
-        colors.forEach { (colo) in
-            cgColors.append(colo.cgColor)
-        }
         
-        guard let gradient = CGGradient.init(colorsSpace: colorSpace, colors: cgColors as CFArray, locations: locations) else { return nil}
-        
-        var start = CGPoint()
-        var end = CGPoint()
-        switch direction {
-            case .vertical:
-                start = CGPoint.init(x: 0, y: 0)
-                end = CGPoint.init(x: 0, y: size.height)
-                break
-            case .level:
-                start = CGPoint.init(x: 0, y: 0)
-                end = CGPoint.init(x: size.width, y: 0)
-                break
-            case .leftTop:
-                start = CGPoint.init(x: 0, y: 0)
-                end = CGPoint.init(x: size.width, y: size.height)
-                break
-            case .leftBottom:
-                start = CGPoint.init(x: size.width, y: 0)
-                end = CGPoint.init(x: 0, y: size.height)
-                break
-        }
-        
-        context.drawLinearGradient(gradient, start: start, end: end, options: .drawsBeforeStartLocation)
-        guard let image = UIGraphicsGetImageFromCurrentImageContext() else {
-            return nil
-        }
-        UIGraphicsEndImageContext()
-        guard let cgImage = image.cgImage else {
+        let view = UIView()
+        view.gradientLayer(direction: direction, colors: colors,size: size, locations: locations)
+        guard let cgImage = view.toImage.cgImage else {
             return nil
         }
         self.init(cgImage: cgImage)

@@ -10,6 +10,20 @@ import UIKit
 import Foundation
 import QuartzCore
 
+/// 渐变色方向
+public enum YEXGradientDirection {
+    ///垂直
+    case vertical
+    ///水平
+    case level
+    ///左上到右下
+    case leftTop
+    ///左下到右上
+    case leftBottom
+    /// 自定义
+    case custom(start: CGPoint, end: CGPoint)
+}
+
 //MARK: --- 框线
 public extension UIView {
     /// 单边边框线
@@ -41,10 +55,13 @@ public extension UIView {
         }
     }
     /// 渐变色
-    func gradientLayer (direction: UIView.GradientDirection,locations: Array<NSNumber> = [0.0,1.0] ,colors: [UIColor]) {
-        self.layoutIfNeeded()
+    func gradientLayer (direction: YEXGradientDirection,colors: [UIColor],size: CGSize? = nil,locations: Array<NSNumber> = [0.0,1.0]) {
         let gradientLayer = CAGradientLayer.init()
-        gradientLayer.frame = self.bounds
+        if let s = size {
+            gradientLayer.frame = CGRect(x: 0, y: 0, width: s.width, height: s.height)
+        } else {
+            gradientLayer.frame = self.bounds
+        }
         var cgColors = [CGColor]()
         colors.forEach { (colo) in
             cgColors.append(colo.cgColor)
@@ -52,23 +69,28 @@ public extension UIView {
         gradientLayer.colors = cgColors
         gradientLayer.locations = locations
         switch direction {
-        case .vertical:
-            gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
-            gradientLayer.endPoint = CGPoint.init(x: 0, y: 1.0)
-            break
-        case .level:
-            gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
-            gradientLayer.endPoint = CGPoint.init(x: 1.0, y: 0)
-            break
-        case .leftTop:
-            gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
-            gradientLayer.endPoint = CGPoint.init(x: 1.0, y: 1.0)
-            break
-        case .leftBottom:
-            gradientLayer.startPoint = CGPoint.init(x: 0, y: 1.0)
-            gradientLayer.endPoint = CGPoint.init(x: 1.0, y: 0.0)
-            break
+            case .vertical:
+                gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
+                gradientLayer.endPoint = CGPoint.init(x: 0, y: 1.0)
+                break
+            case .level:
+                gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
+                gradientLayer.endPoint = CGPoint.init(x: 1.0, y: 0)
+                break
+            case .leftTop:
+                gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
+                gradientLayer.endPoint = CGPoint.init(x: 1.0, y: 1.0)
+                break
+            case .leftBottom:
+                gradientLayer.startPoint = CGPoint.init(x: 0, y: 1.0)
+                gradientLayer.endPoint = CGPoint.init(x: 1.0, y: 0.0)
+                break
+            case .custom(let startpoint,let endpoint):
+                gradientLayer.startPoint = startpoint
+                gradientLayer.endPoint = endpoint
+                break
         }
+        
         self.layer.insertSublayer(gradientLayer, at: 0)
     }
     /// 添加多个视图
@@ -297,17 +319,7 @@ public extension UIView {
 }
 
 public extension UIView {
-    /// 渐变色方向
-    enum GradientDirection: Int {
-        ///垂直
-        case vertical
-        ///水平
-        case level
-        ///左上到右下
-        case leftTop
-        ///左下到右上
-        case leftBottom
-    }
+    
     enum ViewSide: Int {
         case top
         case right
