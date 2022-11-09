@@ -221,24 +221,24 @@ public extension UIView {
         self.layer.masksToBounds = true
     }
     ///边框-上
-    func addBorderTop(_ size: CGFloat,_ padding: CGFloat = 0,_ color: UIColor = .black) {
-        self._addBorderUtility(x: padding, y: 0, width: self.frame.width - padding * 2, height: size, color: color)
+    func addBorderTop(width: CGFloat,  color: UIColor = .black, padding: CGFloat = 0) {
+        self._addBorderUtility(x: padding, y: 0, width: self.frame.width - padding * 2, height: width, color: color)
     }
     ///边框-下
-    func addBorderBottom(_ size: CGFloat,_ padding: CGFloat = 0,_ color: UIColor = .black) {
-        self._addBorderUtility(x: padding, y: self.frame.height - size, width: self.frame.width - padding * 2, height: size, color: color)
+    func addBorderBottom(width: CGFloat,  color: UIColor = .black, padding: CGFloat = 0) {
+        self._addBorderUtility(x: padding, y: self.frame.height - width, width: self.frame.width - padding * 2, height: width, color: color)
     }
     ///边框-左
-    func addBorderLeft(_ size: CGFloat,_ padding: CGFloat = 0,_ color: UIColor = .black) {
-        self._addBorderUtility(x: 0, y: padding, width: size, height: self.frame.height - padding * 2, color: color)
+    func addBorderLeft(width: CGFloat,  color: UIColor = .black, padding: CGFloat = 0) {
+        self._addBorderUtility(x: 0, y: padding, width: width, height: self.frame.height - padding * 2, color: color)
     }
     ///边框-右
-    func addBorderRight(_ size: CGFloat,_ padding: CGFloat = 0,_ color: UIColor = .black) {
-        self._addBorderUtility(x: self.frame.width - size, y: padding, width: size, height: self.frame.height - padding * 2, color: color)
+    func addBorderRight(width: CGFloat,  color: UIColor = .black, padding: CGFloat = 0) {
+        self._addBorderUtility(x: self.frame.width - width, y: padding, width: width, height: self.frame.height - padding * 2, color: color)
     }
     //MARK: --- 绘画
     ///画圆
-    func drawCircle(fillColor: UIColor,_ strokeColor: UIColor = .black, strokeWidth: CGFloat) {
+    func drawCircle(fillColor: UIColor, strokeColor: UIColor = .black, strokeWidth: CGFloat) {
         let path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: self.width, height: self.width), cornerRadius: self.width / 2)
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = path.cgPath

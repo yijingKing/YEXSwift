@@ -16,7 +16,7 @@ open class YEXBasePopController: YEXBaseViewController {
     
     lazy var bgBtn: UIButton = {
         let tmp = UIButton(type: .custom)
-        tmp.backgroundColor = UIColor.init(white: 0, alpha: 0.8)
+        tmp.backgroundColor = .clear
         tmp.addTarget(self, action: #selector(hide), for: .touchUpInside)
         return tmp
     }()

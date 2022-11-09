@@ -22,7 +22,7 @@ public extension String {
         self.init(format: "%@",total)
     }
     ///float -> string
-    init?(_ float: Float?,_ significand: Int? = nil) {
+    init?(_ float: Float?,significand: Int? = nil) {
         if let i = significand {
             self.init(String(format: "%.\(i)f", float ?? 0.00))
         } else {
@@ -30,7 +30,7 @@ public extension String {
         }
     }
     ///double -> string
-    init?(_ double: Double?,_ significand: Int? = nil) {
+    init?(_ double: Double?,significand: Int? = nil) {
         if let i = significand {
             self.init(String(format: "%.\(i)f", double ?? 0.00))
         } else {
