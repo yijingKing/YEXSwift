@@ -16,26 +16,8 @@ Pod::Spec.new do |s|
     
     # 主库，包含所有代码
     s.source_files = 'YEXSwift/Classes/**/*'
-    
-    # 分模块定义 subspecs
-    s.subspec 'Base' do |base|
-        s.dependency 'MJRefresh'
+    s.dependency 'MJRefresh'
         s.dependency 'SnapKit'
         s.dependency 'RxSwift'
         s.dependency 'RxCocoa'
-        base.source_files = 'YEXSwift/Classes/Base/**/*'
-    end
-    
-    s.subspec 'Extension' do |ext|
-        ext.source_files = 'YEXSwift/Classes/Extension/**/*'
-    end
-    s.subspec 'Other' do |other|
-        other.source_files = 'YEXSwift/Classes/Other/**/*'
-    end
-    s.subspec 'Utilities' do |util|
-        util.source_files = [
-        'YEXSwift/Classes/Extension/**/*',
-        'YEXSwift/Classes/Other/**/*'
-        ]
-    end
 end
